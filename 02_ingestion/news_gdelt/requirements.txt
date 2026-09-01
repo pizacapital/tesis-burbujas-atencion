@@ -1,0 +1,3 @@
+# Noticias y earnings: GDELT se consulta en la consola de BigQuery (sin
+# cliente local) y los earnings corren en el JupyterHub de WRDS.
+wrds

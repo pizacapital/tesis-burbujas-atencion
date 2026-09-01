@@ -1,0 +1,8 @@
+# Dependencias del padron maestro. Versiones fijadas = entorno real del
+# apendice G de la tesis; las no fijadas no quedaron registradas ahi.
+# Los scripts de CRSP/Compustat corren en el JupyterHub de WRDS con la
+# biblioteca wrds de esa plataforma.
+pandas==2.3.3
+requests
+yfinance
+wrds

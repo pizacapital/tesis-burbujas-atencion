@@ -1,0 +1,4 @@
+numpy==2.3.5
+pandas==2.3.3
+lifelines==0.30.3
+zstandard==0.24.0

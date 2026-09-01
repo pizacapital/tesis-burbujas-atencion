@@ -1,0 +1,6 @@
+# StockTwits: careos en la M3 y clasificacion masiva NYU en el Mac Studio.
+numpy==2.3.5
+pandas==2.3.3
+torch==2.13.0
+# transformers: 5.14.1 en la M3 y 5.15.0 en el Studio (apendice G)
+transformers

@@ -1,0 +1,14 @@
+# Clasificador: anotacion con 4 LLMs, fine-tuning y evaluacion.
+numpy==2.3.5
+pandas==2.3.3
+scikit-learn==1.7.2
+scipy
+torch==2.13.0
+# transformers: 5.14.1 en la M3 y 5.15.0 en el Studio (apendice G)
+transformers
+datasets
+anthropic
+openai
+python-dotenv
+lifelines==0.30.3
+zstandard==0.24.0
