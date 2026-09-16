@@ -1,0 +1,13 @@
+tabla,contraste,HR,lo,hi
+I2 (integrada),"silencio contra perfil de codificacion (D = 0.5, B = 0): el HR de la dummy",1.8656670068722603,1.5758088873224791,2.2088423339494674
+I2 (integrada),"silencio contra dia equilibrado real (D = 1, B = 0)",1.4255749647723348,1.162839926793954,1.7476730316517108
+I2 (integrada),"silencio contra dia mediano con direccionales (D = 0.31, B = 1.25)",2.5250089571197067,2.1298484377674733,2.993485414491645
+I2 (integrada),"silencio contra coro alcista 3:0 (D = 0, B = 1.39)",3.0435872923405887,2.5493113607855395,3.6336964360613457
+I2 (integrada),"silencio contra coro bajista 0:3 (D = 0, B = -1.39)",1.958712268545273,1.4373965410797258,2.6690990560391037
+I2 (integrada),"silencio contra dia dividido 2:1 (D = 0.67, B = 0.41)",1.8191929912964724,1.526674864942507,2.1677589744734793
+F11 (solo sentimiento),"silencio contra perfil de codificacion (D = 0.5, B = 0): el HR de la dummy",1.175498627424342,1.0073253632856585,1.371748467217598
+F11 (solo sentimiento),"silencio contra dia equilibrado real (D = 1, B = 0)",0.8795591607206454,0.7270584002783522,1.0640470104071782
+F11 (solo sentimiento),"silencio contra dia mediano con direccionales (D = 0.30, B = 1.25)",1.4412213274110748,1.2384151774988261,1.6772395496473231
+F11 (solo sentimiento),"silencio contra coro alcista 3:0 (D = 0, B = 1.39)",1.7312856320608967,1.4787160213237065,2.0269949716899345
+F11 (solo sentimiento),"silencio contra coro bajista 0:3 (D = 0, B = -1.39)",1.4255736789883302,1.0590696231237022,1.9189109666182442
+F11 (solo sentimiento),"silencio contra dia dividido 2:1 (D = 0.67, B = 0.41)",1.0979336159890087,0.9352872537855113,1.2888641647148407

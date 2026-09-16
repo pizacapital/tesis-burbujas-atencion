@@ -1,0 +1,3 @@
+lifelines 0.30.3; CoxTimeVaryingFitter.fit(robust=True) sobre el modelo I2:
+FALLA: NotImplementedError: Not available yet.
+CoxPHFitter (modelos estaticos) si acepta cluster_col; por eso la dependencia del modelo start-stop se trata con bootstrap por conglomerados.

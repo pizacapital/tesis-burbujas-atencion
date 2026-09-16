@@ -1,0 +1,8 @@
+especificacion,ajuste,empates,varianza_reportada,unidad_agrupacion_bootstrap,replicas,semilla,estratos,eventos,filas
+Solo sentimiento (F11),CoxTimeVaryingFitter (start-stop),Efron,inversa del Hessiano (independencia entre filas),ticker (1012 conglomerados) y trimestre de encendido (26 bloques),200,42,ninguno,2791,45882
+I1,CoxTimeVaryingFitter (start-stop),Efron,inversa del Hessiano (independencia entre filas),ticker (954 conglomerados) y trimestre de encendido (26 bloques),200,42,ninguno,2636,39979
+I2,CoxTimeVaryingFitter (start-stop),Efron,inversa del Hessiano (independencia entre filas),ticker (954 conglomerados) y trimestre de encendido (26 bloques),200,42,ninguno,2636,39979
+I3 (estratos de anio),CoxTimeVaryingFitter (start-stop),Efron,inversa del Hessiano (independencia entre filas),ticker (954 conglomerados) y trimestre de encendido (26 bloques),200,42,anio,2636,39979
+I2-tv,CoxTimeVaryingFitter (start-stop),Efron,inversa del Hessiano (independencia entre filas),ticker (954 conglomerados) y trimestre de encendido (26 bloques),200,42,ninguno,2636,39979
+Modelo A (conocido al encendido),CoxPHFitter (una fila por episodio),Efron,inversa del Hessiano; sandwich agrupado por ticker (cluster_col),no aplica (sandwich por ticker),0,,ninguno,,
+Modelo B (+ realizadas),CoxPHFitter (una fila por episodio),Efron,inversa del Hessiano; sandwich agrupado por ticker (cluster_col),no aplica (sandwich por ticker),0,,ninguno,,
