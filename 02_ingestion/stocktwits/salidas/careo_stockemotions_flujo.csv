@@ -1,0 +1,13 @@
+paso,n
+importados en los cuatro CSV,60281
+processed_stockemo (poblacion de evaluacion),50281
+particiones train/val/test (subconjunto balanceado anotado),10000
+ids de las particiones presentes en processed,0
+textos de las particiones presentes en processed,9992
+"excluidos: las particiones, por duplicar textos de processed",10000
+processed sin etiqueta nativa,0
+processed sin texto,0
+processed con texto duplicado (id distinto; se conservan ambos),2
+evaluados (con texto y etiqueta nativa compra/venta),50281
+   de compra,43518
+   de venta,6763

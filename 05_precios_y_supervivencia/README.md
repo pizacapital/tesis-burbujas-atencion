@@ -8,3 +8,4 @@ El cruce con el mercado y los modelos de duración del capítulo 5.
 - `celda_S6.py` - proporcionalidad por interacciones con log(t) y Weibull AFT.
 - `celda_S7.py` / `celda_S8.py` - Cox por poblaciones: nativas vs earnings, y la partición a tres bandas con la etiqueta institucional v2.
 - `sensibilidad_error_clasificador.py` - sensibilidad del Cox integrado al error de clasificación de v2b (sección 6.4, Tabla 6.3): reconstruye B y D con los conteos diarios corregidos por tres matrices de confusión medidas (inversión) y con error añadido en 20 réplicas, y reestima la especificación I2. Su salida, `sensibilidad_error_clasificador.csv`, se versiona porque es la tabla que el manuscrito reporta.
+- `cox_subpoblacion_precio.py` - el Cox integrado I2 reestimado por subpoblación de trayectoria de precio (sección 6.9, Tabla 6.4): episodios con subida y caída de precio contra su complemento. Salida versionada: `cox_subpoblacion_precio.csv`.
