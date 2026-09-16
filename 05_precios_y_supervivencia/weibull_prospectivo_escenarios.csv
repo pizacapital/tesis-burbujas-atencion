@@ -1,0 +1,17 @@
+modelo,escenario,mediana_restante,mediana_total,C_dentro,C_fuera,n_tren,n_prueba
+prospectivo (dia 3),mediano en todo,9.773621130344985,12.773621130344985,,,,
+prospectivo (dia 3),"D alto (0.8), B en su mediana",6.255447999346483,9.255447999346483,,,,
+prospectivo (dia 3),"D bajo (0.15), B en su mediana",12.008259622067436,15.008259622067436,,,,
+prospectivo (dia 3),"B bajo (0.5), D en su mediana",11.633001707387663,14.633001707387663,,,,
+prospectivo (dia 3),"B alto (2.0), D en su mediana",7.981435843842867,10.981435843842867,,,,
+prospectivo (dia 3),"conjunto S6: debate temprano (D 0.8, B 0.5)",7.454078481963641,10.454078481963641,,,,
+prospectivo (dia 3),"conjunto S6: coro unanime (D 0.15, B 2.0)",9.81224829536294,12.81224829536294,,,,
+prospectivo (dia 3),validacion temporal,,,0.6199728705088519,0.618606793664002,1732.0,654.0
+retrospectivo de referencia (S6 + truncamiento),mediano en todo,11.042115985842676,14.042115985842676,,,,
+retrospectivo de referencia (S6 + truncamiento),"D alto (0.8), B en su mediana",6.9318791167222695,9.93187911672227,,,,
+retrospectivo de referencia (S6 + truncamiento),"D bajo (0.15), B en su mediana",13.683781501753717,16.683781501753717,,,,
+retrospectivo de referencia (S6 + truncamiento),"B bajo (0.5), D en su mediana",13.319456269963926,16.319456269963926,,,,
+retrospectivo de referencia (S6 + truncamiento),"B alto (2.0), D en su mediana",8.876410871822602,11.876410871822602,,,,
+retrospectivo de referencia (S6 + truncamiento),"conjunto S6: debate temprano (D 0.8, B 0.5)",8.375384330438827,11.375384330438827,,,,
+retrospectivo de referencia (S6 + truncamiento),"conjunto S6: coro unanime (D 0.15, B 2.0)",11.009495870387454,14.009495870387454,,,,
+retrospectivo de referencia (S6 + truncamiento),validacion temporal,,,0.6263253452053842,0.629226227624397,1732.0,654.0
