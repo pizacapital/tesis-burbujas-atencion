@@ -119,7 +119,7 @@ fila('X_dias_ventana', 'x', 'dias-ventana de la serie multiplataforma (50 insign
 
 # --- 7. precios: panel por fuente, flujo y causas de los 116 -----------------------------------------------------------
 print('== 7. precios')
-pp = pd.read_csv(EV / 'panel_precios_2020_2026.csv', usecols=['ticker', 'date', 'close', 'fuente']); pp['date'] = pd.to_datetime(pp.date)
+pp = pd.read_csv(EV / 'panel_precios_2020_2026.csv', usecols=['ticker', 'date', 'close', 'ret', 'fuente']); pp['date'] = pd.to_datetime(pp.date)
 for fu, g in pp.groupby('fuente'):
     fila(f'PX_{fu}', 'precios', f'filas ticker-dia del panel con fuente {fu}', 'filas', len(g), '-', len(g), f'{g.date.min().date()} a {g.date.max().date()}; {g.ticker.nunique()} tickers', 'panel_precios_2020_2026.csv')
 cat = pd.read_csv(EV / 'eventos_atencion_v2_principal_final.csv'); cp = pd.read_csv(EV / 'eventos_con_precios.csv')
@@ -190,25 +190,29 @@ fila('POND_perdidos', 'ponderada', 'eventos base sin traslape (perdidos)', 'even
 fila('POND_nuevos', 'ponderada', 'eventos ponderados sin traslape (nuevos)', 'eventos', len(pon) - pon_con, len(pon), len(pon) - pon_con, f'{pon_con} con contraparte', 'comparacion_eventos_nuevos.csv')
 
 # --- 10. arco de precios de las 50 insignia --------------------------------------------------------------------------
-print('== 10. arco de las 50 insignia (base 100 = cierre de la primera sesion del evento; alterna: ultimo cierre previo)')
+# Version 024: el indice acumula la columna ret del panel (ajustada por eventos corporativos), la misma convencion de la
+# Figura 4.3 y de 10_figuras_manuscrito/figuras_manuscrito.py; hasta la version 023 usaba el cociente de cierres crudos.
+print('== 10. arco de las 50 insignia (indice acumulando ret; base 100 = cierre de la primera sesion del evento; alterna: ultimo cierre previo)')
 top = pd.read_csv(EV / 'acciones_principales_top50.csv').ticker.tolist()
 insig = cat[cat.ticker.isin(top)].sort_values('menciones_evento', ascending=False).drop_duplicates('ticker')
 rows = []
 for r in insig.itertuples():
     g = por_ticker.get(r.ticker); ini = pd.Timestamp(r.fecha_inicio); fin = pd.Timestamp(r.fecha_fin)
     if g is None: continue
-    pre = g.loc[ini - pd.Timedelta(days=30): ini - pd.Timedelta(days=1)]; ev_ = g.loc[ini: fin]
+    ev_ = g.loc[ini: fin]
     if len(ev_) < 2: continue
-    def arco_con(p0):
-        cum = ev_.close / p0 * 100 - 100; mx, fn = cum.max(), cum.iloc[-1]
+    def arco_con(indice):
+        cum = indice - 100; mx, fn = cum.max(), cum[-1]
         return round(mx, 1), round(fn, 1), round(mx - fn, 1), (round((mx - fn) / mx, 3) if mx > 0 else np.nan)
-    a = arco_con(ev_.close.iloc[0]); b = arco_con(pre.close.iloc[-1]) if len(pre) else (np.nan,) * 4
-    pos = (ev_.close.pct_change().dropna() > 0).mean()
+    rets = ev_.ret.fillna(0.0).values
+    a = arco_con(100 * np.cumprod(np.r_[1.0, 1.0 + rets[1:]]))          # base 100 al cierre de la primera sesion del evento
+    b = arco_con(100 * np.cumprod(1.0 + rets)) if pd.notna(ev_.ret.iloc[0]) else (np.nan,) * 4   # alterna: base = ultimo cierre previo (incluye el ret de la primera sesion)
+    pos = (ev_.ret.iloc[1:].dropna() > 0).mean()
     rows.append({'ticker': r.ticker, 'fecha_inicio': r.fecha_inicio, 'fecha_fin': r.fecha_fin, 'sesiones': len(ev_), 'pct_dias_positivos': round(100 * pos, 1),
                  'max_pts': a[0], 'cierre_pts': a[1], 'caida_desde_max_pts': a[2], 'fraccion_devuelta': a[3],
                  'alt_max_pts': b[0], 'alt_cierre_pts': b[1], 'alt_caida_pts': b[2], 'alt_fraccion_devuelta': b[3]})
 arco = pd.DataFrame(rows); arco.to_csv(EV / 'arco_insignia.csv', index=False)
-fila('ARCO_n', 'arco', 'insignia con arco calculable', 'eventos', len(arco), 50, len(arco), 'evento de mas menciones de cada uno de los 50 tickers principales; retorno acumulado sobre el cierre de la primera sesion del evento', 'arco_insignia.csv')
+fila('ARCO_n', 'arco', 'insignia con arco calculable', 'eventos', len(arco), 50, len(arco), 'evento de mas menciones de cada uno de los 50 tickers principales; indice que acumula la columna ret (ajustada) con base 100 al cierre de la primera sesion del evento', 'arco_insignia.csv')
 fila('ARCO_dias_pos', 'arco', 'mediana del % de sesiones con retorno positivo dentro del evento', '%', '-', '-', round(arco.pct_dias_positivos.median(), 1), f'p10 {round(arco.pct_dias_positivos.quantile(.1),1)}, p90 {round(arco.pct_dias_positivos.quantile(.9),1)}', 'arco_insignia.csv')
 fila('ARCO_max_mediano', 'arco', 'mediana del maximo intra-evento (puntos de retorno acumulado)', 'puntos', '-', '-', round(arco.max_pts.median(), 1), '', 'arco_insignia.csv')
 fila('ARCO_cierre_mediano', 'arco', 'mediana del cierre del evento (puntos)', 'puntos', '-', '-', round(arco.cierre_pts.median(), 1), '', 'arco_insignia.csv')
