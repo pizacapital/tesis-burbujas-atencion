@@ -14,7 +14,8 @@ import pandas as pd
 from pathlib import Path
 from lifelines import CoxPHFitter
 
-MATRIX = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix')
+import os
+MATRIX = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Matrix'
 EV = MATRIX / 'eventos'
 
 CATALOGOS = {

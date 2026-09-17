@@ -13,7 +13,7 @@
 # Conteos de los prospectivos y de los Weibull: se recuentan aqui con la misma construccion de prospectivo.py,
 # prospectivo_elegible.py y weibull_prospectivo.py (antes estaban escritos a mano y quedaban desactualizados al rehacer el cruce).
 # Corre en iTerm (lifelines; unos 8 minutos, casi todos en reconstruir las tres tablas de K3):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 fichas_especificaciones.py
 import numpy as np
 import pandas as pd
@@ -22,7 +22,8 @@ from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 warnings.filterwarnings('ignore')
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 CLF = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'
 EV = MATRIX / 'eventos'

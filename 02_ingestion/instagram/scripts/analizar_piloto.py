@@ -16,7 +16,8 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 PILOTO = BASE / 'Code' / 'instagram' / 'data' / 'piloto'
 PADRON = (BASE / 'Desarrollo' / 'Metodologia' / 'Lista Maestra de Tickers' /
           'Lista maestra V2' / 'padron_vigencias_2020_2026_ver03_1.csv')

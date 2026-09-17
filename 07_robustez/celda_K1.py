@@ -18,7 +18,8 @@ from pathlib import Path
 # autosuficiencia: si el kernel no viene de E1, cargar matriz y lineas base aqui
 if 'gc' not in globals():
     print('kernel sin E1: cargando matriz global y lineas base (1-2 min)...')
-    BASE = Path('/Users/ppizam/Claude/Master Thesis')
+    import os
+    BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
     MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
     VENTANA, MIN_P, S_OFF = 30, 15, 1.0
     g = pd.read_csv(MATRIX / 'maestras' / 'matriz_global_2020_2026.csv',

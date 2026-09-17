@@ -7,7 +7,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 from scipy.stats import binomtest
 
-CLAS = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador')
+import os
+CLAS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Clasificador'
 MAX_TOKENS = 256
 disp = 'mps' if torch.backends.mps.is_available() else 'cpu'
 

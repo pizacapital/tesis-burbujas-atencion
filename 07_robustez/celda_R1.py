@@ -20,7 +20,8 @@ from pathlib import Path
 from lifelines import CoxPHFitter
 from lifelines.statistics import proportional_hazard_test
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 

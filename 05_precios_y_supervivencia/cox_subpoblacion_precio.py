@@ -4,7 +4,7 @@
 # operativo de la literatura (subida pronunciada y caida posterior)?
 #
 # Corre en iTerm (entorno con lifelines, el de supervivencia_eventos.ipynb):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 cox_subpoblacion_precio.py
 #
 # Que hace: parte de la misma tabla start-stop del Cox integrado I2 (celda S5:
@@ -22,7 +22,8 @@ import pandas as pd
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 

@@ -4,14 +4,15 @@
 #   supervivencia/cox_integrado.csv (HR e IC de I1, I2 e I3, celda_S5.py).
 # Salidas: Figuras/figura_km_acoplamiento_v2.png y Figuras/figura_forest_cox_v2.png (300 ppp).
 # Corre en iTerm (M3, segundos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 figuras_supervivencia.py
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from pathlib import Path
 from lifelines import KaplanMeierFitter
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); SUP = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos' / 'supervivencia'; FIG = BASE / 'Figuras'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); SUP = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos' / 'supervivencia'; FIG = BASE / 'Figuras'
 VERDE, AZUL, ROJO, GRIS = '#00684A', '#2C6A9E', '#B3402A', '#6E6E6E'
 plt.rcParams.update({'font.family': 'DejaVu Sans', 'axes.spines.top': False, 'axes.spines.right': False})
 

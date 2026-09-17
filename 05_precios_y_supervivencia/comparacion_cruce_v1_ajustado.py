@@ -5,7 +5,7 @@
 # tres tablas: la anterior, la corregida restringida a los mismos eventos de la anterior, y la corregida completa.
 # Sustituye a cox_integrado_crsp_v2.py, que comparaba paneles con el cierre crudo en ambos.
 # Corre en iTerm (M3, unos 10 segundos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 comparacion_cruce_v1_ajustado.py
 # Salidas en supervivencia/: comparacion_cruce_v1_ajustado.csv (HR por covariable, modelo y tabla),
 #   comparacion_cruce_v1_ajustado_conteos.csv, comparacion_cruce_v1_ajustado_covariables.csv (eventos cuyas covariables cambian).
@@ -14,7 +14,8 @@ import numpy as np, pandas as pd
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 warnings.filterwarnings('ignore')
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'; SUP_V1 = EV / 'supervivencia_v1_crudo'
 t0 = time.time()
 def leer(r, **kw): return pd.read_csv(r, keep_default_na=False, na_values=[''], **kw)

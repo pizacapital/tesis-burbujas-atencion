@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 # Carga las variables del archivo kimi.env que esta en esta misma carpeta
-load_dotenv("/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/APIS/kimi.env")
+load_dotenv(os.path.join(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'), 'Desarrollo/Metodologia/APIS/kimi.env'))
 
 api_key = os.environ.get("MOONSHOT_API_KEY")
 if not api_key or api_key.startswith("PEGA-AQUI"):

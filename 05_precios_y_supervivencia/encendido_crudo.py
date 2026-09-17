@@ -10,7 +10,7 @@
 # Los conteos y las medianas de los eventos sin precios se calculan aqui (antes estaban escritos a mano: 116, 18.5 dias, z 45).
 # Requiere eventos/eventos_atencion_v2.csv (catalogo crudo de la celda E2) y supervivencia/tabla_supervivencia.csv.
 # Corre en iTerm (lifelines; segundos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 encendido_crudo.py
 # Salida: supervivencia/encendido_crudo.csv.
 import numpy as np
@@ -19,7 +19,8 @@ from pathlib import Path
 from lifelines import CoxPHFitter, KaplanMeierFitter
 from lifelines.utils import concordance_index
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 CORTE = '2024-01-01'; N_PERM = 500; RNG = np.random.default_rng(42)

@@ -24,7 +24,8 @@ from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CLF = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'

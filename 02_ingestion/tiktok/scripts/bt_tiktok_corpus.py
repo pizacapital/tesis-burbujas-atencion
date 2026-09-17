@@ -25,7 +25,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CODE = BASE / 'Code' / 'tiktok'
 DATA = CODE / 'data'
 DOCS = BASE / 'Desarrollo' / 'Plataformas' / '04 TikTok'

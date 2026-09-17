@@ -4,7 +4,7 @@
 # sentimiento temprano) y no aisla la aportacion del sentimiento. Aqui se aisla.
 #
 # Corre en iTerm (entorno con lifelines, el de supervivencia_eventos.ipynb):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 h2_anidado.py
 #
 # Que hace: sobre la MISMA tabla start-stop del Cox integrado I2 (celda S5: tabla_startstop_bt.csv
@@ -27,7 +27,8 @@ from pathlib import Path
 from scipy import stats
 from lifelines import CoxTimeVaryingFitter
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 REPLICAS = 100

@@ -4,7 +4,7 @@
 # escenarios plausibles de error".
 #
 # Corre en iTerm (entorno con lifelines, el mismo de supervivencia_eventos.ipynb):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 sensibilidad_error_clasificador.py
 #
 # Que hace:
@@ -30,7 +30,8 @@ import pandas as pd
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 FECHA_CENSURA = pd.Timestamp('2026-06-30')

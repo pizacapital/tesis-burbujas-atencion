@@ -4,7 +4,7 @@
 # de cero sin media ni intervalos, y "por plataforma" estaba medido en otra variable.
 #
 # Corre en iTerm (entorno de supervivencia_eventos.ipynb; solo numpy, pandas y scipy):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 h6_desfase_bootstrap.py
 #
 # Definicion (celda X4 de cruce_eventos_precios.ipynb): desfase_precio_dias = fecha del cierre maximo en
@@ -19,7 +19,8 @@ import pandas as pd
 from pathlib import Path
 from scipy import stats
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 RNG = np.random.default_rng(2026)

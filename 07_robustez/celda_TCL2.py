@@ -12,7 +12,8 @@ import pandas as pd
 from pathlib import Path
 from lifelines import KaplanMeierFitter, CoxTimeVaryingFitter
 
-MX = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix')
+import os
+MX = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Matrix'
 EV = MX / 'eventos'
 FIN = pd.Timestamp('2026-06-30')
 

@@ -6,7 +6,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 XDATA = BASE / 'Code' / 'x' / 'data' / 'ventanas'
 SALIDA = MATRIX / 'eventos' / 'serie_multiplataforma.csv'

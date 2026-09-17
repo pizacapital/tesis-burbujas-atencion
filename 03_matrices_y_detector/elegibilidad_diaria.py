@@ -11,13 +11,14 @@
 #   3. Verificaciones impresas: el catalogo reconstruido coincide con el oficial; cuantas fusiones ocurrieron;
 #      confirmacion - fin; distribucion del dia de las 300 menciones y del dia de elegibilidad.
 # Corre en iTerm (solo numpy y pandas; ~1 minuto):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 elegibilidad_diaria.py
 import numpy as np
 import pandas as pd
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 EV = MATRIX / 'eventos'
 # parametros identicos a E1/E2

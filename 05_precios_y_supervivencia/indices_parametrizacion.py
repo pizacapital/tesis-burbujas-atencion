@@ -15,7 +15,7 @@
 #      perfiles reales (dia equilibrado D = 1, dia mediano, coro alcista) con intervalo conjunto de la matriz de varianzas.
 # Requiere: panel_bt_eventos.csv, supervivencia/tabla_startstop_bt.csv, tabla_supervivencia.csv, eventos_atencion_v2_principal_final.csv.
 # Corre en iTerm (lifelines; uno o dos minutos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 indices_parametrizacion.py
 # Salidas en supervivencia/: indices_parametrizacion.csv (careo anidado), indices_parametrizacion_unidades.csv,
 #   indices_parametrizacion_contrastes.csv, indices_parametrizacion_signo.csv.
@@ -27,7 +27,8 @@ from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 warnings.filterwarnings('ignore')
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 BASE_COLS = ['evento_id', 'start', 'stop', 'evento_muerte']

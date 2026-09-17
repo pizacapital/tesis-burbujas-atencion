@@ -24,7 +24,8 @@ from pathlib import Path
 from lifelines import CoxPHFitter, CoxTimeVaryingFitter
 from lifelines.utils import concordance_index
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 CORTE = '2024-01-01'

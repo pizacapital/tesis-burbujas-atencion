@@ -2,7 +2,8 @@
 import pandas as pd
 from pathlib import Path
 
-CLAS = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador')
+import os
+CLAS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Clasificador'
 
 ent = pd.read_csv(CLAS / 'muestra_grande_etiquetada.csv')   # entrenamiento (trio 2/3)
 oro = pd.read_csv(CLAS / 'piloto_etiquetado_final.csv')     # vara de oro (validada por Pedro)

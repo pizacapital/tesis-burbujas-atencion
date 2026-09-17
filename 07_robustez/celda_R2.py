@@ -31,11 +31,13 @@ import zstandard as zstd
 MODO_PILOTO = len(sys.argv) > 1 and sys.argv[1] == 'piloto'
 
 # ============ 1. configuracion y rutas (identico a M1) ============
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 # rutas candidatas de los dumps (la local de la Studio primero; la de Drive,
 # que fue la de la corrida original desde la laptop, despues)
 _DRIVE = 'Library/CloudStorage/GoogleDrive-pizacapital@gmail.com/Other computers/My Mac RRG/data/reddit'
 _CANDIDATOS = [
+    *([Path(os.environ['REDDIT_DATA'])] if os.environ.get('REDDIT_DATA') else []),
     Path('/Users/ppizam/data/reddit'),
     Path('/Users/ppizaphoto/data/reddit'),
     Path.home() / 'data' / 'reddit',

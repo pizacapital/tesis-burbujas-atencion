@@ -21,7 +21,8 @@ import re
 import sys
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 RANKING = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos' / 'ranking_tickers_eventos.csv'
 PADRONES = [BASE / 'Desarrollo' / 'Metodologia' / 'Lista Maestra de Tickers' / 'Lista maestra V2' / 'padron_vigencias_2020_2026_ver03_1.csv',
             BASE / 'Phyton Tesis' / 'padron_vigencias_2020_2024.csv',

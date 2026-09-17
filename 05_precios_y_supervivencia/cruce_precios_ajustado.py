@@ -14,14 +14,15 @@
 #   4. Compara evento por evento contra el cruce anterior (eventos_con_precios_v1_crudo.csv, respaldo que hace
 #      rehacer_supervivencia.py) y deja el detalle en cruce_ajustado_diferencias.csv.
 # Corre en iTerm (M3, menos de un minuto):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 cruce_precios_ajustado.py
 # Salidas en eventos/: eventos_con_precios.csv (mismas columnas que X4), splits_detectados.csv, cruce_ajustado_diferencias.csv.
 import time, sys
 import numpy as np, pandas as pd
 from pathlib import Path
 t0 = time.time()
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 PANEL = EV / 'panel_precios_2020_2026.csv'; UMBRAL_SPLIT = 0.20
 SALIDA = EV / 'eventos_con_precios.csv'; PREVIO = EV / 'eventos_con_precios_v1_crudo.csv'
 

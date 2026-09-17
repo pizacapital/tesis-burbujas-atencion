@@ -18,7 +18,8 @@ import pandas as pd
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter, WeibullAFTFitter
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 

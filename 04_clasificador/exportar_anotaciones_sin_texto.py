@@ -7,14 +7,15 @@
 # auditoria a ciegas) sin acceso al texto. El piloto (piloto_etiquetado_final.csv y los duelos) no guardaba el id: se
 # recupera uniendo por texto, ticker y metadatos con muestra_piloto_1000.csv, y el script comprueba que la union es 1 a 1.
 # Corre en la M3 (segundos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Clasificador"
 #   python3 exportar_anotaciones_sin_texto.py
 # Salidas en Repositorio/tesis-burbujas-atencion/04_clasificador/anotaciones/ (mas leaderboard_5_proveedores.csv y
 # comparativo_finetune.csv copiados tal cual, que no contienen texto).
 import hashlib, shutil
 import pandas as pd, openpyxl
 from pathlib import Path
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); CLAS = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); CLAS = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'
 OUT = BASE / 'Repositorio' / 'tesis-burbujas-atencion' / '04_clasificador' / 'anotaciones'; OUT.mkdir(exist_ok=True)
 def leer(f): return pd.read_csv(CLAS / f, keep_default_na=False, na_values=[''])
 def sha(t): return hashlib.sha256(str(t).encode('utf-8')).hexdigest()

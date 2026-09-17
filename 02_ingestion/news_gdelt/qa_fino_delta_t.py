@@ -15,7 +15,8 @@ from pathlib import Path
 from datetime import date, timedelta
 from statistics import median
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 if not BASE.exists():
     BASE = Path.home() / 'mnt' / 'Master Thesis'
 G = BASE / 'Code/auxiliary/news/data/gdelt_oficial'

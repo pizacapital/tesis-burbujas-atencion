@@ -3,7 +3,8 @@
 from pathlib import Path
 import pandas as pd
 
-CLAS = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador')
+import os
+CLAS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Clasificador'
 exec(open(CLAS / 'finetune_lib.py').read())
 
 # sembrar el comparativo con la fila de v1 (ya entrenado y evaluado) si no existe

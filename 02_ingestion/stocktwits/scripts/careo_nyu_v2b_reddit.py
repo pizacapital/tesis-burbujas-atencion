@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 if not BASE.exists():
     BASE = Path.home() / 'mnt' / 'Master Thesis'
 CODE = BASE / 'Code' / 'stocktwits'

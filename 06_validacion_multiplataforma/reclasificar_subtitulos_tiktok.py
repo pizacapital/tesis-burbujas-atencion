@@ -16,7 +16,7 @@
 #   careo_whisper_subtitulos.csv; los JSON de Bright Data en Desarrollo/Plataformas/04 TikTok (captions);
 #   Clasificador/modelo_finetune_v2b; Matrix/eventos/panel_bt_eventos.csv y eventos_atencion_v2_principal_final.csv.
 # Corre en iTerm del M3 (torch + transformers; 5 a 10 minutos, casi todo en clasificar unas 7,700 versiones):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 reclasificar_subtitulos_tiktok.py
 # Salidas: Code/tiktok/data/reclasificacion_subtitulos.csv (por par), Code/tiktok/data/muestra_anotacion_semantica.csv,
 #   Matrix/eventos/careo_fuentes_tiktok_eventos.csv y careo_fuentes_tiktok_resumen.csv.
@@ -27,7 +27,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CODE = BASE / 'Code' / 'tiktok'
 DATA = CODE / 'data'
 DOCS = BASE / 'Desarrollo' / 'Plataformas' / '04 TikTok'

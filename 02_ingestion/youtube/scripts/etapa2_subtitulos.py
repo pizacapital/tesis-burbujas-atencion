@@ -42,7 +42,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CODE = BASE / 'Code' / 'youtube'
 DATA = CODE / 'data'
 SUBS = DATA / 'subtitulos'

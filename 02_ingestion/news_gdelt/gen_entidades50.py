@@ -16,7 +16,8 @@ import csv
 import re
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 INSIGNIA = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'figuras_eventos' / 'formas_50_insignia.csv'
 PADRONES = [BASE / 'Phyton Tesis' / 'padron_vigencias_2020_2024.csv',
             BASE / 'Wharton' / 'padron_vigencias_2020_2024.csv']

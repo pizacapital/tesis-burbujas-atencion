@@ -11,7 +11,7 @@
 #      (evento, start, stop), mismo numero de mensajes rezagado, y acuerdo de B y D en el brazo v2b.
 #   5. Estima el Cox de sentimiento en los tres brazos sobre filas identicas: oficial (F11), v2b reconstruido, v1 reconstruido.
 # Corre en iTerm (torch, lifelines; dos a cinco minutos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Clasificador"
 #   python3 robustez_v1_alineada.py
 # Salidas: Matrix/eventos/supervivencia/robustez_v1_alineada.csv y robustez_v1_alineada_verificacion.txt.
 import numpy as np
@@ -21,7 +21,8 @@ from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 warnings.filterwarnings('ignore')
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CLF = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'

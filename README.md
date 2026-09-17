@@ -20,9 +20,9 @@ El orden de las carpetas sigue el orden del pipeline (capítulos 3 a 7 de la tes
 | `08_caso_trump/` | El finfluencer presidencial: archivo de Truth Social, detección y filtrado de menciones y event study contra tasa base | 7 |
 | `09_exploraciones_historicas/` | Cuadernos del arranque del proyecto, conservados como historial | - |
 | `datos_derivados/` | Catálogo de eventos, panel diario B(t)/D(t), tabla start-stop y tabla de supervivencia con covariables: los agregados con los que se reproducen los capítulos 5 y 6 sin datos crudos | 5, 6 |
-| `herramientas/` | Inventario de dumps, conciliación de cifras del manuscrito e inventarios del entorno de ejecución | - |
+| `herramientas/` | Inventario de dumps, conciliación de cifras del manuscrito, inventarios de los entornos de ejecución, bitácoras de costos y generador del manifiesto de artefactos | - |
 
-Cada carpeta incluye un README breve con el papel de cada archivo.
+Cada carpeta incluye un README breve con el papel de cada archivo. Dos documentos de la raíz atan el repositorio al manuscrito: `MAPA.md` (para cada tabla y figura de la tesis, el script y el archivo que la producen, y qué hace falta para reproducirla) y `MANIFIESTO.md` (todos los artefactos del proyecto con su huella sha256 y su nivel de acceso: repositorio, Hugging Face o local bajo solicitud; las huellas de los archivos versionados están en `MANIFIESTO_ARTEFACTOS.csv`).
 
 ## Qué no contiene este repositorio
 
@@ -33,7 +33,7 @@ Cada carpeta incluye un README breve con el papel de cada archivo.
 
 ## Notas de ejecución
 
-Cada script documenta en su encabezado dónde corre (máquina local, JupyterHub de WRDS o consola de BigQuery), sus insumos, sus salidas y su tiempo estimado; los procesos largos son reanudables y dejan bitácora. Las rutas de datos se configuran localmente (constantes `BASE` al inicio de cada script, con la ruta de la máquina del autor como valor por omisión). Con `datos_derivados/` y los CSV versionados de cada carpeta, los modelos de los capítulos 5 y 6 se reproducen desde un entorno limpio sin acceso a Reddit ni a WRDS; la ingestión, las matrices de menciones y el cruce de precios sí requieren las fuentes originales. El entorno de cómputo con versiones exactas está en el apéndice G de la tesis; las dependencias por módulo van en su `requirements.txt`.
+Cada script documenta en su encabezado dónde corre (máquina local, JupyterHub de WRDS o consola de BigQuery), sus insumos, sus salidas y su tiempo estimado; los procesos largos son reanudables y dejan bitácora. Las rutas se configuran con dos variables de entorno: `TESIS_BASE`, la raíz de la carpeta del proyecto (por omisión la de la máquina del autor, `/Users/ppizam/Claude/Master Thesis`, de modo que sin definirla todo corre igual en esa máquina), y `REDDIT_DATA`, la carpeta con los dumps crudos de Reddit (por omisión la copia del autor en Google Drive); cada script las lee al inicio (`os.environ.get`) y cuelga de ellas sus rutas, y `herramientas/rutas_reescritas_ver023.csv` registra cada ruta sustituida. Los scripts esperan la estructura de carpetas del proyecto bajo `TESIS_BASE` (`Desarrollo/Metodologia/Matrix`, `.../Clasificador`, `Code/<plataforma>`, `Figuras`), que es donde leen sus insumos y escriben sus salidas; los archivos versionados aquí son copias de esas salidas. Con `datos_derivados/` y los CSV versionados de cada carpeta, los modelos de los capítulos 5 y 6 se reproducen desde un entorno limpio sin acceso a Reddit ni a WRDS; la ingestión, las matrices de menciones y el cruce de precios sí requieren las fuentes originales. El entorno de cómputo con versiones exactas está en el apéndice G de la tesis y en los inventarios de `herramientas/`; las dependencias por módulo van en su `requirements.txt`, fijadas con esos inventarios (los módulos que corrieron en la MacBook Air y en el Mac Studio llevan marcadores `python_version` para instalar el juego de versiones de cada máquina). Los costos de los datos de pago están en `herramientas/costos/`.
 
 ## Cómo citar
 

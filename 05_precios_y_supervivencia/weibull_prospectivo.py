@@ -12,7 +12,7 @@
 #   - concordancia dentro de muestra y validacion temporal (ajuste < 2024-01-01, prueba 2024-2026);
 #   - como referencia, el Weibull retrospectivo de S6 reestimado sobre la misma poblacion y con el mismo truncamiento.
 # Corre en iTerm (entorno con lifelines):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 weibull_prospectivo.py
 # Salidas: supervivencia/weibull_prospectivo.csv (coeficientes) y weibull_prospectivo_escenarios.csv.
 import numpy as np
@@ -21,7 +21,8 @@ from pathlib import Path
 from lifelines import WeibullAFTFitter
 from lifelines.utils import concordance_index
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 DIA = 3

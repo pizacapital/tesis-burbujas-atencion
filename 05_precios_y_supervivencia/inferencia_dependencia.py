@@ -16,7 +16,7 @@
 #   6. Ficha por especificacion: manejo de empates, estimador de varianza, unidad de agrupacion, replicas y semilla.
 # Requiere: supervivencia/tabla_startstop_bt.csv, supervivencia/tabla_supervivencia.csv, eventos_atencion_v2_principal_final.csv.
 # Corre en iTerm (lifelines; 10 a 20 minutos, casi todo en las 400 replicas):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 inferencia_dependencia.py
 # Salidas en supervivencia/: inferencia_dependencia.csv, inferencia_dependencia_tv.csv, inferencia_dependencia_estaticos.csv,
 #   inferencia_dependencia_ficha.csv, inferencia_dependencia_robust.txt.
@@ -29,7 +29,8 @@ from pathlib import Path
 from lifelines import CoxTimeVaryingFitter, CoxPHFitter
 warnings.filterwarnings('ignore')
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 REPLICAS = 200

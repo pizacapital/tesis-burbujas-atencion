@@ -14,7 +14,7 @@
 #      exacto (documenta la limitacion de implementacion, no del metodo).
 # Requiere: supervivencia/tabla_startstop_bt.csv, supervivencia/tabla_supervivencia.csv, eventos_atencion_v2_principal_final.csv.
 # Corre en iTerm (lifelines; dos o tres minutos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 cox_tv_final.py
 # Salidas: supervivencia/cox_tv_final.csv, cox_tv_final_edades.csv, cox_tv_probabilidades.csv, cox_tv_schoenfeld.txt.
 import numpy as np
@@ -24,7 +24,8 @@ import lifelines
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 EDADES = [3, 7, 14, 30]

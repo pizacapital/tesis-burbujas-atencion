@@ -22,7 +22,7 @@
 # Requiere: supervivencia/tabla_startstop_bt.csv, tabla_supervivencia.csv, eventos_atencion_v2_principal_final.csv,
 #           detector_diario.csv, panel_bt_eventos.csv.
 # Corre en iTerm (lifelines; 20 a 30 minutos, casi todo en el bootstrap y los placebos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 evaluacion_predictiva.py
 # Salidas (supervivencia/): benchmark_detector.csv, benchmark_detector_bootstrap.csv, validacion_temporal_limpia.csv,
 #   placebos_temporal.csv, calibracion_weibull.csv, concordancias_evento.csv.
@@ -35,7 +35,8 @@ from lifelines.utils import concordance_index
 from scipy.stats import chi2
 warnings.filterwarnings('ignore')
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 CORTE = pd.Timestamp('2024-01-01'); DEMORA = 5; N_BOOT = 100; N_PERM = 300; RNG = np.random.default_rng(42)

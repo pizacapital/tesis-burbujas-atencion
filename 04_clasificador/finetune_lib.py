@@ -13,7 +13,8 @@ from datasets import Dataset
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           Trainer, TrainingArguments, DataCollatorWithPadding)
 
-CLAS = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador')
+import os
+CLAS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Clasificador'
 MAX_TOKENS = 256
 SEMILLA = 44
 ETIQUETAS = ['compra', 'venta', 'neutral']

@@ -5,7 +5,7 @@
 # y las covariables de conversacion del dia anterior (volumen, silencio, optimismo B, desacuerdo D).
 #
 # Corre en iTerm (entorno con lifelines):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 prospectivo.py
 #
 # Que hace:
@@ -26,7 +26,8 @@ from pathlib import Path
 from scipy import stats
 from lifelines import CoxTimeVaryingFitter
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 CORTE = '2024-01-01'

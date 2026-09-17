@@ -21,7 +21,7 @@
 # Requiere: panel_bt_eventos.csv, eventos_atencion_v2_principal_final.csv, supervivencia/tabla_supervivencia.csv,
 #   logs/log_2020.csv a log_2026.csv y Clasificador/clasif_eventos/clasif_AAAA_MM.csv.
 # Corre en iTerm (lifelines; 10 a 15 minutos, la mitad en leer los 78 archivos mensuales):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 sensibilidad_direccional.py
 # Salidas en supervivencia/: sensibilidad_direccional.csv, sensibilidad_direccional_replicas.csv, remocion_comunidad_era.csv,
 #   remocion_comunidad_era_mezcla.csv, robustez_censura_comunidad.csv.
@@ -33,7 +33,8 @@ from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 warnings.filterwarnings('ignore')
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 CLF = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador' / 'clasif_eventos'
 EV = MX / 'eventos'

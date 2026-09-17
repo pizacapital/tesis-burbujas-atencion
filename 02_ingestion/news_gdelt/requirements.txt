@@ -1,3 +1,5 @@
+# Versiones capturadas del entorno real de ejecucion (apendice G de la tesis):
+#   MacBook Air M3, Python 3.13.9: herramientas/entorno_m3_2026-09-16.txt (+ entorno_m3_conda_2026-09-16.txt)
 # Noticias y earnings: GDELT se consulta en la consola de BigQuery (sin
 # cliente local) y los earnings corren en el JupyterHub de WRDS.
 wrds

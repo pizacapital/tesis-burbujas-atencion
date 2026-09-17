@@ -11,7 +11,7 @@
 # Requiere: supervivencia/tabla_startstop_bt.csv y tabla_supervivencia.csv, eventos_atencion_v2_principal_final.csv,
 #   panel_precios_2020_2026.csv, panel_precios_2020_2026_v1_yahoo25.csv.
 # Corre en iTerm (lifelines; uno o dos minutos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 cox_integrado_crsp_v2.py
 # Salidas en supervivencia/: cox_integrado_crsp_v2.csv (HR por covariable, modelo y panel), cox_integrado_crsp_v2_conteos.csv,
 #   cox_integrado_crsp_v2_covariables.csv (diferencias de covariables por evento, 2025-2026).
@@ -20,7 +20,8 @@ import numpy as np, pandas as pd
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 warnings.filterwarnings('ignore')
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'; SUP = EV / 'supervivencia'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'; SUP = EV / 'supervivencia'
 t0 = time.time()
 def leer(r, **kw): return pd.read_csv(r, keep_default_na=False, na_values=[''], **kw)
 cat = leer(EV / 'eventos_atencion_v2_principal_final.csv'); cat['fecha_inicio'] = pd.to_datetime(cat.fecha_inicio); cat['fecha_pico'] = pd.to_datetime(cat.fecha_pico); cat['fecha_fin'] = pd.to_datetime(cat.fecha_fin)

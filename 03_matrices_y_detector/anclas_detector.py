@@ -7,7 +7,7 @@
 # codificada en el notebook es 2021-01-28 (celda E7), para localizar el evento de GME en la tabla de sensibilidad.
 # Requiere: eventos/eventos_atencion_v2_principal_final.csv y maestras/matriz_global_2020_2026.csv.
 # Corre en iTerm (M3, unos 10 segundos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 anclas_detector.py
 # Salidas en eventos/: anclas_detector.csv (una fila por hecho), anclas_detector_eventos.csv (todos los eventos del
 #   catalogo de los doce tickers) y anclas_detector_series.csv (menciones diarias de -7 a +7 dias alrededor de cada hecho).
@@ -15,7 +15,8 @@ import time
 import numpy as np, pandas as pd
 from pathlib import Path
 t0 = time.time()
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 EV = MATRIX / 'eventos'; MAESTRAS = MATRIX / 'maestras'
 
 # Las doce anclas de la celda E3, en su orden.

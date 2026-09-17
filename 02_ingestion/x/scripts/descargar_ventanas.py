@@ -36,7 +36,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from x_client import build_query, collect, normalize_tweet, USD_PER_TWEET  # noqa: E402
 
 MODULE_ROOT = Path(__file__).parent.parent
-BASE_TESIS = Path('/Users/ppizam/Claude/Master Thesis')
+BASE_TESIS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EVENTOS = BASE_TESIS / 'Desarrollo/Metodologia/Matrix/eventos'
 MARGEN = 7
 

@@ -11,7 +11,7 @@
 #      abajo, muertes y eventos en riesgo por edad.
 # Requiere: supervivencia/tabla_startstop_bt.csv, supervivencia/tabla_supervivencia.csv, eventos_atencion_v2_principal_final.csv.
 # Corre en iTerm (lifelines, matplotlib; uno o dos minutos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 perfil_temporal_D.py
 # Salidas: supervivencia/perfil_temporal_D.csv (curva con banda), perfil_temporal_D_tramos.csv, perfil_temporal_D_riesgo.csv,
 #          perfil_temporal_D_modelos.csv y Figuras/figura_perfil_hr_desacuerdo_v2.png.
@@ -23,7 +23,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 FIG = BASE / 'Figuras'

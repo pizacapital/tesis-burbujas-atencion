@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 # Configuracion
 # ---------------------------------------------------------------------------
 
-CARPETA_APIS = "/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/APIS"
+CARPETA_APIS = os.path.join(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'), 'Desarrollo/Metodologia/APIS')
 
 # Modelo por defecto de cada proveedor. Puedes cambiarlos aqui o pasar
 # modelo_exacto=... en la llamada a preguntar().

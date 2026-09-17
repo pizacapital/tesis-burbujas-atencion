@@ -28,7 +28,8 @@ import torch
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 DATA = BASE / 'Code' / 'instagram' / 'data'
 DOCS = BASE / 'Desarrollo' / 'Plataformas' / '03 Instagram'
 MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'

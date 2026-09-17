@@ -6,7 +6,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-MATRIX = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix')
+import os
+MATRIX = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Matrix'
 serie = pd.read_csv(MATRIX / 'eventos' / 'serie_multiplataforma.csv',
                     keep_default_na=False, na_values=[''])
 serie['reddit_menciones'] = pd.to_numeric(serie.reddit_menciones, errors='coerce')

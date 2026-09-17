@@ -7,7 +7,8 @@ from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
 
-CLAS = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador')
+import os
+CLAS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Clasificador'
 MODELO_FINAL = CLAS / 'modelo_finetune_v1'
 MAX_TOKENS = 256
 

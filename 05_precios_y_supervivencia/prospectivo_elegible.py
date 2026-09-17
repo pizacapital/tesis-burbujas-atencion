@@ -18,7 +18,7 @@
 #   3. Weibull prospectivo con entrada en max(3, dia_300 + 1) y las covariables conocidas entonces (z, base previa,
 #      B y D de los dias 0-2): coeficientes, concordancia y validacion temporal.
 # Corre en iTerm (lifelines; 30 a 40 minutos por el bootstrap y los placebos):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 prospectivo_elegible.py
 # Salidas: supervivencia/prospectivo_elegible.csv, prospectivo_elegible_bootstrap.csv, prospectivo_elegible_fuera_muestra.csv,
 #          weibull_elegible.csv.
@@ -29,7 +29,8 @@ from scipy import stats
 from lifelines import CoxTimeVaryingFitter, WeibullAFTFitter
 from lifelines.utils import concordance_index
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 EV = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos'
 SUP = EV / 'supervivencia'
 CORTE = '2024-01-01'; REPLICAS = 100; N_PERM = 300

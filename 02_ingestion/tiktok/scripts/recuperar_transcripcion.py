@@ -22,7 +22,8 @@ import time
 import traceback
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 DATA = BASE / 'Code' / 'tiktok' / 'data'
 TRANS = DATA / 'transcripciones'
 TMP = DATA / 'videos_corpus_tmp'

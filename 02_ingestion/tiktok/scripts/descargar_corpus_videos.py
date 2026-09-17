@@ -38,7 +38,8 @@ from datetime import datetime, timezone
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 DOCS = BASE / 'Desarrollo' / 'Plataformas' / '04 TikTok'
 CODE = BASE / 'Code' / 'tiktok'
 DATA = CODE / 'data'

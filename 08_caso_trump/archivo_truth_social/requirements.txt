@@ -1,3 +1,5 @@
-requests
-beautifulsoup4
-tqdm
+# Versiones capturadas del entorno real de ejecucion (apendice G de la tesis):
+#   MacBook Air M3, Python 3.13.9: herramientas/entorno_m3_2026-09-16.txt (+ entorno_m3_conda_2026-09-16.txt)
+requests==2.32.5
+beautifulsoup4==4.13.5
+tqdm==4.67.1

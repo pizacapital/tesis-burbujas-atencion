@@ -21,7 +21,7 @@
 #   eventos_atencion_v2_principal_final.csv; Code/youtube/data/etapa2_subtitulos_clasificados.csv;
 #   Code/auxiliary/news/data/qa_fino_insignia.csv; Code/tiktok/data/careo_whisper_subtitulos.csv.
 # Corre en iTerm (sin lifelines; dos o tres minutos, casi todo en los bootstraps):
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 careo_plataformas_kappa.py
 # Salidas en eventos/: careo_plataformas_kappa.csv, careo_plataformas_matrices.csv, leadlag_eventos.csv,
 #   careo_titulo_audio_matriz.csv, careo_prensa_resumen.csv.
@@ -31,7 +31,8 @@ import pandas as pd
 from math import comb
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 EV = MX / 'eventos'
 CODE = BASE / 'Code'

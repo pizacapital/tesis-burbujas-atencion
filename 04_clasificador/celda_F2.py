@@ -6,7 +6,8 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-CLAS = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Clasificador')
+import os
+CLAS = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Clasificador'
 MODELO_BASE = 'StephanAkkerman/FinTwitBERT'   # plan B: 'distilroberta-base' (cambiar solo esta linea)
 MAX_TOKENS = 256
 SEMILLA = 44

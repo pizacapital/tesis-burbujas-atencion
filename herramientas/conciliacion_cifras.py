@@ -12,7 +12,7 @@ import glob, json, time, collections, os
 import numpy as np, pandas as pd
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'; EV = MX / 'eventos'; MAE = MX / 'maestras'
 CLAS = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'; CODE = BASE / 'Code'
 IG = BASE / 'Desarrollo' / 'Plataformas' / '03 Instagram'

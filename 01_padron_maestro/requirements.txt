@@ -1,8 +1,10 @@
+# Versiones capturadas del entorno real de ejecucion (apendice G de la tesis):
+#   MacBook Air M3, Python 3.13.9: herramientas/entorno_m3_2026-09-16.txt (+ entorno_m3_conda_2026-09-16.txt)
 # Dependencias del padron maestro. Versiones fijadas = entorno real del
 # apendice G de la tesis; las no fijadas no quedaron registradas ahi.
 # Los scripts de CRSP/Compustat corren en el JupyterHub de WRDS con la
 # biblioteca wrds de esa plataforma.
 pandas==2.3.3
-requests
-yfinance
+requests==2.32.5
+yfinance==1.5.1
 wrds

@@ -23,7 +23,8 @@ import pandas as pd
 from pathlib import Path
 from lifelines import CoxTimeVaryingFitter
 
-MATRIX = Path('/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix')
+import os
+MATRIX = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Desarrollo/Metodologia/Matrix'
 EV = MATRIX / 'eventos'
 FECHA_CENSURA = pd.Timestamp('2026-06-30')
 

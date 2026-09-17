@@ -26,7 +26,8 @@ import sys
 import time
 from pathlib import Path
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CODE = BASE / 'Code' / 'instagram'
 DATA = CODE / 'data'
 VIDEOS = DATA / 'piloto' / 'videos'

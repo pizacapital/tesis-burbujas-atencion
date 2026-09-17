@@ -12,7 +12,7 @@
 # Corre en iTerm (M3, en el entorno base con lifelines; entre 30 y 60 minutos, la mayor parte en inferencia_dependencia,
 # evaluacion_predictiva, h6_desfase_bootstrap y las sensibilidades). Se puede relanzar: los pasos ya hechos se repiten
 # (son deterministas con semilla) y los respaldos no se sobreescriben.
-#   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
+#   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 rehacer_supervivencia.py
 # Salidas: eventos/rehacer_supervivencia_bitacora.csv (paso, inicio, segundos, codigo de salida, archivos escritos) y
 #   eventos/rehacer_supervivencia_huellas.csv (archivo, md5 anterior, md5 nuevo, cambio).
@@ -20,7 +20,8 @@ import subprocess, sys, time, json, hashlib, shutil, io, contextlib
 from datetime import datetime
 from pathlib import Path
 import pandas as pd
-BASE = Path('/Users/ppizam/Claude/Master Thesis'); MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
 EV = MATRIX / 'eventos'; SUP = EV / 'supervivencia'; SUP_V1 = EV / 'supervivencia_v1_crudo'
 PY = sys.executable; T0 = time.time(); bit = []
 def md5(p):
@@ -62,7 +63,7 @@ assert len(S) == 4, 'no se encontraron las cuatro celdas S1 a S4'
 ns = {}; salida = io.StringIO(); codigo = 0
 try:
     with contextlib.redirect_stdout(salida):
-        for src in S: exec(compile(src.replace('plt.show()', 'plt.close()').replace("Path('/Users/ppizam/Claude/Master Thesis')", f"Path('{BASE}')"), 'supervivencia_eventos.ipynb', 'exec'), ns)
+        for src in S: exec(compile(src.replace('plt.show()', 'plt.close()').replace("Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))", f"Path('{BASE}')"), 'supervivencia_eventos.ipynb', 'exec'), ns)
 except Exception as e:
     codigo = 1; salida.write(f'\nERROR: {type(e).__name__}: {e}')
 (EV / 'rehacer_logs' / 'celdas_S1_S4.log').write_text(salida.getvalue()); print(salida.getvalue()[-2500:]); registrar('celdas S1-S4', t, codigo)

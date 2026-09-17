@@ -34,7 +34,8 @@ import pandas as pd
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CODE = BASE / 'Code' / 'youtube'
 DATA = CODE / 'data'
 MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'

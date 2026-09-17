@@ -13,11 +13,11 @@ from pathlib import Path
 from datetime import datetime, timezone
 import zstandard as zstd
 
-BASE = Path('/Users/ppizam/Claude/Master Thesis')
+import os
+BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 CLAS = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'
 MATRIX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'
-DATA = Path('/Users/ppizam/Library/CloudStorage/GoogleDrive-pizacapital@gmail.com/'
-            'Other computers/My Mac RRG/data/reddit')
+DATA = Path(os.environ.get('REDDIT_DATA', '/Users/ppizam/Library/CloudStorage/GoogleDrive-pizacapital@gmail.com/Other computers/My Mac RRG/data/reddit'))
 SALIDA = CLAS / 'mensajes_eventos'
 SALIDA.mkdir(exist_ok=True)
 

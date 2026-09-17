@@ -15,6 +15,7 @@ except ImportError:
     sys.exit('falta el modulo zstandard: correr antes  pip install zstandard  y relanzar')
 
 CANDIDATOS = [
+    *([Path(os.environ['REDDIT_DATA'])] if os.environ.get('REDDIT_DATA') else []),
     Path('/Users/ppizam/Library/CloudStorage/GoogleDrive-pizacapital@gmail.com/Other computers/My Mac RRG/data/reddit'),
     Path.home() / 'mnt' / 'reddit',
 ]
