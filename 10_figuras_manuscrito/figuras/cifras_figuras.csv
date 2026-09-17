@@ -1,0 +1,59 @@
+figura,cifra,valor
+2.1,eventos insignia,50
+2.1,primer y ultimo encendido,2020-02-12 a 2026-03-31
+3.2,AAL media / maximo / asimetria,1.1 / 763 / 40.4
+3.2,GME media / maximo / asimetria,157.4 / 33524 / 20.4
+4.2,"pico (fecha, menciones)","2021-01-28, 141,957"
+4.2,duracion / menciones acumuladas (catalogo),"23 / 865,463"
+4.2,menciones acumuladas en la ventana encendido-extincion (serie),"865,463"
+4.2,base previa mu,"1,143"
+4.3,eventos con trayectoria,50
+4.3,cierre mediano (puntos),18.2
+4.3,maximo intra-evento mediano (puntos),56.0
+4.3,cierran >= 10 puntos bajo su maximo,36 de 50
+5.1,mes maximo,2021-01 con 320 encendidos
+5.1,total,2791
+5.6,cocientes (seccion 5.5),"Reddit 4.2, TikTok 5.9, YouTube 6.0, StockTwits 6.9, X 8.8, Instagram 14.6"
+6.1,"HR de D, kappa 0.10","1.42 [1.09, 1.85]"
+6.1,"HR de D, kappa 0.25","1.74 [1.35, 2.24]"
+6.1,"HR de D, kappa 0.50","2.67 [1.88, 3.78]"
+E.1,A asimetria,8.4
+E.1,AA asimetria,9.0
+E.1,AAC asimetria,17.9
+E.1,AACG asimetria,36.2
+E.1,AACI asimetria,25.8
+E.1,AACQ asimetria,20.6
+E.1,AACT asimetria,48.7
+E.1,AADI asimetria,25.8
+E.1,AAGR asimetria,32.2
+E.1,AAIC asimetria,34.4
+E.1,AAL asimetria,40.4
+E.1,AAM asimetria,15.7
+E.1,AAMC asimetria,27.3
+E.1,AAME asimetria,47.4
+E.1,AAN asimetria,29.6
+E.1,AAOI asimetria,12.2
+E.1,AAON asimetria,20.0
+E.1,AAP asimetria,10.8
+E.1,AAPL asimetria,11.2
+E.1,AAQC asimetria,7.4
+E.2,GME asimetria,20.4
+E.2,AMC asimetria,19.1
+E.2,TSLA asimetria,5.2
+E.2,RDDT asimetria,15.6
+E.2,NVDA asimetria,6.0
+E.2,TWTR asimetria,11.1
+E.2,NOK asimetria,28.5
+E.2,PLTR asimetria,14.7
+E.2,MSFT asimetria,8.6
+E.2,AMD asimetria,7.7
+E.2,BBBY asimetria,17.1
+E.2,INTC asimetria,7.8
+E.2,NFLX asimetria,16.1
+E.2,HOOD asimetria,12.9
+E.2,SPCE asimetria,11.8
+E.2,SNDL asimetria,21.5
+E.2,NIO asimetria,8.6
+E.2,RKT asimetria,30.4
+E.2,BABA asimetria,5.8
+E.3,eventos graficados,50

@@ -19,6 +19,7 @@ El orden de las carpetas sigue el orden del pipeline (capítulos 3 a 7 de la tes
 | `07_robustez/` | Batería del capítulo 6: cotas de la definición de extinción (κ), serie título+cuerpo, censura endógena, par GOOG/GOOGL, validación fuera de muestra con placebos y el método alterno de bandas | 6 |
 | `08_caso_trump/` | El finfluencer presidencial: archivo de Truth Social, detección y filtrado de menciones y event study contra tasa base | 7 |
 | `09_exploraciones_historicas/` | Cuadernos del arranque del proyecto, conservados como historial | - |
+| `10_figuras_manuscrito/` | Script que regenera las diez figuras del manuscrito que se habían producido sin script (2.1, 3.2, 4.2, 4.3, 5.1, 5.6, 6.1, E.1, E.2, E.3) y sus PNG | 2 a 6, E |
 | `datos_derivados/` | Catálogo de eventos, panel diario B(t)/D(t), tabla start-stop y tabla de supervivencia con covariables: los agregados con los que se reproducen los capítulos 5 y 6 sin datos crudos | 5, 6 |
 | `herramientas/` | Inventario de dumps, conciliación de cifras del manuscrito, inventarios de los entornos de ejecución, bitácoras de costos y generador del manifiesto de artefactos | - |
 

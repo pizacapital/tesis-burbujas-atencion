@@ -2,7 +2,7 @@
 
 Para cada tabla y figura de la tesis (Ver023), el script que la produce, el archivo de datos del que se lee y qué hace falta para reproducirla (comentario 25; apéndice H). Los insumos de `datos_derivados/` bastan para todo el capítulo 5, el capítulo 6 y el apéndice E; lo que requiere los dumps de Reddit, el corpus de texto o el panel de precios de CRSP se marca como "local" (véase `MANIFIESTO.md`, sección 3). Las rutas de los scripts son relativas a la raíz del repositorio; los CSV de resultados viven junto a su script salvo que se indique otra carpeta.
 
-Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un artefacto no redistribuido; **compilada** = tabla armada a mano desde cifras de otras tablas o de la prosa, sin cálculo propio; **diagrama** = elaboración propia sin datos; **sin script** = la figura se generó en una sesión de trabajo a partir del archivo indicado y el script no se conservó (se declara como límite de reproducibilidad).
+Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un artefacto no redistribuido; **compilada** = tabla armada a mano desde cifras de otras tablas o de la prosa, sin cálculo propio; **diagrama** = elaboración propia sin datos; **sin script** = generada en una sesión de trabajo sin conservar el script (se declara como límite de reproducibilidad).
 
 ## Tablas
 
@@ -44,23 +44,23 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 
 | Figura | Contenido | Script | Archivo(s) | Estado |
 |---|---|---|---|---|
-| 2.1 | Línea de tiempo de los 50 eventos insignia | - | eventos insignia del catálogo (`datos_derivados/eventos_atencion_v2_principal_final.csv`; la lista de los 50 con su encendido está en `herramientas/costos/x_resumen_presupuesto.csv`) | sin script |
+| 2.1 | Línea de tiempo de los 50 eventos insignia | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `datos_derivados/eventos_atencion_v2_principal_final.csv` y `03_matrices_y_detector/acciones_principales_top50.csv`; escribe `10_figuras_manuscrito/figuras/figura_2_1.png` | repo |
 | 3.1 | Estructura de la matriz de menciones | - | - | diagrama |
-| 3.2 | Las menciones diarias no son normales | - | `03_matrices_y_detector/series/series_hist_submissions.csv` | sin script |
+| 3.2 | Las menciones diarias no son normales | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/series_hist_submissions.csv`; escribe `figuras/figura_3_2.png` | repo |
 | 4.1 | Arquitectura del pipeline | - | - | diagrama |
-| 4.2 | Anatomía de un evento: GameStop 2021 | - | `03_matrices_y_detector/series/serie_gme_submissions.csv`, `serie_gme_comments.csv` | sin script |
-| 4.3 | Trayectorias de precio de las 50 insignia | - | `Figuras/trayectorias_insignia.csv` (local, derivado de CRSP) | sin script; local |
+| 4.2 | Anatomía de un evento: GameStop 2021 | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/serie_gme_submissions.csv`, `serie_gme_comments.csv` y el catálogo; escribe `figuras/figura_4_2.png` | repo |
+| 4.3 | Trayectorias de precio de las 50 insignia | `10_figuras_manuscrito/figuras_manuscrito.py` | lee el panel local `Matrix/eventos/panel_precios_2020_2026.csv` (columna ret acumulada, base 100 al cierre del encendido) y el catálogo; escribe `figuras/figura_4_3.png` | local |
 | 4.4 | Embudo de la destilación | - | cifras del apéndice F | diagrama |
-| 5.1 | Estacionalidad: encendidos por mes | - | catálogo (`datos_derivados/eventos_atencion_v2_principal_final.csv`) | sin script |
+| 5.1 | Estacionalidad: encendidos por mes | `10_figuras_manuscrito/figuras_manuscrito.py` | lee el catálogo; escribe `figuras/figura_5_1.png` | repo |
 | 5.2 | Kaplan-Meier por acoplamiento | `05_precios_y_supervivencia/figuras_supervivencia.py` | lee `tabla_supervivencia.csv`; escribe `05_precios_y_supervivencia/figuras/figura_km_acoplamiento_v2.png` | repo |
 | 5.3 | Forest del Cox integrado | ídem | lee `cox_integrado.csv`; escribe `figuras/figura_forest_cox_v2.png` | repo |
 | 5.4 | Perfil temporal del HR de D | `05_precios_y_supervivencia/perfil_temporal_D.py` | escribe `figuras/figura_perfil_hr_desacuerdo_v2.png` y `perfil_temporal_D.csv` | repo |
 | 5.5 | Acuerdo observado y esperado por plataforma | `herramientas/conciliacion_cifras.py` | lee `06_validacion_multiplataforma/careo_plataformas_kappa.csv`; escribe `06_validacion_multiplataforma/figuras/figura_5_5_acuerdo_plataformas_v2.png` | repo (la figura); local (rehacer el careo) |
-| 5.6 | Asimetría optimista en seis plataformas | - | cocientes compra/venta de la sección 5.5 (prosa) | sin script; compilada |
-| 6.1 | HR del desacuerdo bajo tres definiciones de evento | - | `07_robustez/robustez_kappa_integrado.csv` | sin script |
-| E.1 | Histogramas, muestra alfabética | - | `03_matrices_y_detector/series/series_hist_submissions.csv` | sin script |
-| E.2 | Histogramas, top 20 | - | ídem | sin script |
-| E.3 | Arcos de las 50 insignia (dos paneles) | - | `Figuras/trayectorias_insignia.csv` (local) | sin script; local |
+| 5.6 | Asimetría optimista en seis plataformas | `10_figuras_manuscrito/figuras_manuscrito.py` | cocientes compra/venta de la sección 5.5, literales en el script; escribe `figuras/figura_5_6.png` | compilada (el script dibuja las cifras del texto) |
+| 6.1 | HR del desacuerdo bajo tres definiciones de evento | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `07_robustez/robustez_kappa_integrado.csv`; escribe `figuras/figura_6_1.png` | repo |
+| E.1 | Histogramas, muestra alfabética | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/series_hist_submissions.csv` (primeras 20 columnas); escribe `figuras/figura_E1.png` | repo |
+| E.2 | Histogramas, top 20 | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem (columnas 21 a 40); escribe `figuras/figura_E2.png` | repo |
+| E.3 | Arcos de las 50 insignia (dos paneles) | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem 4.3; escribe `figuras/figura_E3_a.png` y `figura_E3_b.png` | local |
 | I.1 | Algoritmo del detector | - | - | diagrama |
 
-Balance: de las 31 tablas, 17 se reproducen desde el clon con `datos_derivados/`, 7 requieren artefactos locales, 6 son compiladas y 1 (E.1) tiene sus datos en el repositorio pero no el script de sus estadísticos; de las 18 figuras, 4 tienen script en el repositorio, 4 son diagramas y 10 se generaron en sesión sin conservar el script (7 de ellas desde archivos que sí están en el repositorio, 2 desde un archivo local y 1 desde cifras de la prosa). Cerrar esa brecha (un script por figura de datos y por la Tabla E.1) queda como pendiente declarado.
+Balance: de las 31 tablas, 17 se reproducen desde el clon con `datos_derivados/`, 7 requieren artefactos locales, 6 son compiladas y 1 (E.1) tiene sus datos en el repositorio pero no el script de sus estadísticos; de las 18 figuras, 14 tienen script en el repositorio (las diez que hasta la versión 023 carecían de él las regenera `10_figuras_manuscrito/figuras_manuscrito.py`, dos de ellas desde el panel de precios local) y 4 son diagramas de elaboración propia. Las versiones de las figuras incrustadas en el manuscrito son las generadas en agosto de 2026; las del script reproducen su contenido y sus cifras anotadas, y sustituirán a las incrustadas en la siguiente versión del documento.
