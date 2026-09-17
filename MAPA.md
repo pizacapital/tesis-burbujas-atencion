@@ -22,6 +22,7 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | 6.3 | Sensibilidad al error de clasificación | `sensibilidad_error_clasificador.py` (05) | `sensibilidad_error_clasificador.csv` | repo |
 | 6.4 | Cox por subpoblación de trayectoria de precio | `cox_subpoblacion_precio.py` (05) | `cox_subpoblacion_precio.csv` | repo |
 | 8.1 | Estado de las hipótesis | - | - | compilada (veredictos de los capítulos 5 y 6) |
+| C.1 | Registro de correcciones sustantivas | - | bitácora del proyecto (documento de trabajo del autor, bajo solicitud) | compilada |
 | B.1 | Anclas del detector | `03_matrices_y_detector/anclas_detector.py` | `anclas_detector.csv`, `anclas_detector_eventos.csv`, `anclas_detector_series.csv` | repo (las series de las anclas están en el CSV; recalcularlas desde cero requiere la matriz global) |
 | E.1 | Estadística por ticker, top 20 | - (las series son columnas extraídas de la matriz maestra de submissions; los estadísticos se calcularon en sesión) | `03_matrices_y_detector/series/series_hist_submissions.csv` | sin script para los estadísticos (el CSV está en el repo) |
 | E.2 | Cox estáticos A y B | celda S4 de `supervivencia_eventos.ipynb` (05) | `cox_modelo_A_predictivo.csv`, `cox_modelo_B_descriptivo.csv` | repo |
@@ -62,4 +63,4 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | E.3 | Arcos de las 50 insignia (dos paneles) | - | `Figuras/trayectorias_insignia.csv` (local) | sin script; local |
 | I.1 | Algoritmo del detector | - | - | diagrama |
 
-Balance: de las 30 tablas, 17 se reproducen desde el clon con `datos_derivados/`, 7 requieren artefactos locales, 5 son compiladas y 1 (E.1) tiene sus datos en el repositorio pero no el script de sus estadísticos; de las 18 figuras, 4 tienen script en el repositorio, 4 son diagramas y 10 se generaron en sesión sin conservar el script (7 de ellas desde archivos que sí están en el repositorio, 2 desde un archivo local y 1 desde cifras de la prosa). Cerrar esa brecha (un script por figura de datos y por la Tabla E.1) queda como pendiente declarado.
+Balance: de las 31 tablas, 17 se reproducen desde el clon con `datos_derivados/`, 7 requieren artefactos locales, 6 son compiladas y 1 (E.1) tiene sus datos en el repositorio pero no el script de sus estadísticos; de las 18 figuras, 4 tienen script en el repositorio, 4 son diagramas y 10 se generaron en sesión sin conservar el script (7 de ellas desde archivos que sí están en el repositorio, 2 desde un archivo local y 1 desde cifras de la prosa). Cerrar esa brecha (un script por figura de datos y por la Tabla E.1) queda como pendiente declarado.
