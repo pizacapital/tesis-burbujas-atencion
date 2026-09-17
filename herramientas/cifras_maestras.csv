@@ -39,12 +39,11 @@ PX_crsp,precios,filas ticker-dia del panel con fuente crsp,filas,935089,-,935089
 PX_crsp_v2,precios,filas ticker-dia del panel con fuente crsp_v2,filas,163777,-,163777,2025-01-02 a 2025-12-31; 667 tickers,panel_precios_2020_2026.csv
 PX_yahoo,precios,filas ticker-dia del panel con fuente yahoo,filas,33744,-,33744,2025-01-02 a 2026-06-30; 244 tickers,panel_precios_2020_2026.csv
 FL_catalogo,flujo,eventos del catalogo principal,eventos,2791,-,2791,,eventos_atencion_v2_principal_final.csv
-FL_con_precios,flujo,eventos con cruce de precios,eventos,2675,2791,2675,cruce: >= 5 sesiones en los 30 dias previos y >= 2 dentro del evento,eventos_con_precios.csv
-FL_covariables,flujo,eventos con covariables completas (modelo integrado),eventos,2636,2675,2636,39 sin retorno encendido-pico (pico sin cierre asignable),eventos_con_precios.csv
-FL_sin_precio_simbolo_con_menos_de,flujo,"eventos sin cruce de precios: simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas",eventos,96,116,96,,eventos_sin_precio_causas.csv
-FL_sin_precio_con_precios_en_el_pa,flujo,eventos sin cruce de precios: con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2),eventos,12,116,12,,eventos_sin_precio_causas.csv
-FL_sin_precio_episodio_sin_dos_ses,flujo,eventos sin cruce de precios: episodio sin dos sesiones bursatiles (fin de semana o feriado),eventos,5,116,5,,eventos_sin_precio_causas.csv
-FL_sin_precio_hueco_de_precios_en_,flujo,eventos sin cruce de precios: hueco de precios en los 30 dias previos,eventos,3,116,3,,eventos_sin_precio_causas.csv
+FL_con_precios,flujo,eventos con cruce de precios,eventos,2687,2791,2687,cruce: >= 5 sesiones en los 30 dias previos y >= 2 dentro del evento,eventos_con_precios.csv
+FL_covariables,flujo,eventos con covariables completas (modelo integrado),eventos,2648,2687,2648,39 sin retorno encendido-pico (pico sin cierre asignable),eventos_con_precios.csv
+FL_sin_precio_simbolo_con_menos_de,flujo,"eventos sin cruce de precios: simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas",eventos,96,104,96,,eventos_sin_precio_causas.csv
+FL_sin_precio_episodio_sin_dos_ses,flujo,eventos sin cruce de precios: episodio sin dos sesiones bursatiles (fin de semana o feriado),eventos,5,104,5,,eventos_sin_precio_causas.csv
+FL_sin_precio_hueco_de_precios_en_,flujo,eventos sin cruce de precios: hueco de precios en los 30 dias previos,eventos,3,104,3,,eventos_sin_precio_causas.csv
 INS_cat_11,instrumentos,eventos del catalogo por instrumento: accion comun (shrcd 11),eventos,2303,2791,2303,,catalogo_instrumentos.csv
 INS_cat_12,instrumentos,eventos del catalogo por instrumento: accion comun de emisora incorporada fuera de EE.UU. (12),eventos,291,2791,291,,catalogo_instrumentos.csv
 INS_cat_31,instrumentos,eventos del catalogo por instrumento: ADR (31),eventos,130,2791,130,,catalogo_instrumentos.csv
@@ -62,16 +61,16 @@ POND_pares,ponderada,"pares uno a uno (mismo ticker, ventanas traslapadas, inici
 POND_base_contraparte,ponderada,eventos base con al menos un traslape (sin exclusividad),eventos,2187,2791,78.4,23 con mas de un traslape,detector_ponderado.py
 POND_perdidos,ponderada,eventos base sin traslape (perdidos),eventos,604,2791,604,,comparacion_eventos_perdidos.csv
 POND_nuevos,ponderada,eventos ponderados sin traslape (nuevos),eventos,657,2861,657,2204 con contraparte,comparacion_eventos_nuevos.csv
-ARCO_n,arco,insignia con arco calculable,eventos,50,50,50,evento de mas menciones de cada uno de los 50 tickers principales; retorno acumulado sobre el cierre de la primera sesion del evento,arco_insignia.csv
-ARCO_dias_pos,arco,mediana del % de sesiones con retorno positivo dentro del evento,%,-,-,52.9,"p10 37.4, p90 71.8",arco_insignia.csv
+ARCO_n,arco,insignia con arco calculable,eventos,50,50,50,evento de mas menciones de cada uno de los 50 tickers principales; indice que acumula la columna ret (ajustada) con base 100 al cierre de la primera sesion del evento,arco_insignia.csv
+ARCO_dias_pos,arco,mediana del % de sesiones con retorno positivo dentro del evento,%,-,-,53.3,"p10 37.4, p90 71.8",arco_insignia.csv
 ARCO_max_mediano,arco,mediana del maximo intra-evento (puntos de retorno acumulado),puntos,-,-,56.0,,arco_insignia.csv
-ARCO_cierre_mediano,arco,mediana del cierre del evento (puntos),puntos,-,-,15.6,,arco_insignia.csv
-ARCO_10pts,arco,episodios que cierran al menos 10 puntos porcentuales bajo su maximo,eventos,37,50,37,bajo el maximo en cualquier magnitud: 43,arco_insignia.csv
-ARCO_fraccion_devuelta,arco,mediana por episodio de (maximo - cierre) / maximo,fraccion,-,-,0.584,"p25 0.219, p75 0.94, n con maximo > 0: 44",arco_insignia.csv
-ARCO_dos_medianas,arco,"(mediana del maximo - mediana del cierre) / mediana del maximo, la operacion de versiones anteriores",fraccion,-,-,0.722,no es la fraccion devuelta del episodio tipico,arco_insignia.csv
-ARCO_alt,arco,convencion alterna (base = ultimo cierre antes del encendido): mediana del maximo / cierre / >= 10 pts / fraccion devuelta,varios,-,-,64.6 / 36.9 / 36 de 49 / 0.474,,arco_insignia.csv
-CRUCE_v1,precios,eventos con cruce usando el panel v1 (CRSP 2020-2024 + Yahoo 2025-2026),eventos,2675,2791,2675,coinciden con eventos_con_precios.csv: 2675 de 2675,panel_precios_2020_2026_v1_yahoo25.csv
-CRUCE_v2,precios,eventos con cruce usando el panel con CRSP 2025 (crsp_v2) + Yahoo,eventos,2687,2791,2687,nuevos respecto del oficial: 12,panel_precios_2020_2026.csv
+ARCO_cierre_mediano,arco,mediana del cierre del evento (puntos),puntos,-,-,18.2,,arco_insignia.csv
+ARCO_10pts,arco,episodios que cierran al menos 10 puntos porcentuales bajo su maximo,eventos,36,50,36,bajo el maximo en cualquier magnitud: 43,arco_insignia.csv
+ARCO_fraccion_devuelta,arco,mediana por episodio de (maximo - cierre) / maximo,fraccion,-,-,0.538,"p25 0.199, p75 0.89, n con maximo > 0: 44",arco_insignia.csv
+ARCO_dos_medianas,arco,"(mediana del maximo - mediana del cierre) / mediana del maximo, la operacion de versiones anteriores",fraccion,-,-,0.675,no es la fraccion devuelta del episodio tipico,arco_insignia.csv
+ARCO_alt,arco,convencion alterna (base = ultimo cierre antes del encendido): mediana del maximo / cierre / >= 10 pts / fraccion devuelta,varios,-,-,62.6 / 35.2 / 36 de 50 / 0.453,,arco_insignia.csv
+CRUCE_v1,precios,eventos con cruce usando el panel v1 (CRSP 2020-2024 + Yahoo 2025-2026),eventos,2675,2791,2675,coinciden con eventos_con_precios.csv: 2675 de 2687,panel_precios_2020_2026_v1_yahoo25.csv
+CRUCE_v2,precios,eventos con cruce usando el panel con CRSP 2025 (crsp_v2) + Yahoo,eventos,2687,2791,2687,nuevos respecto del oficial: 0,panel_precios_2020_2026.csv
 CRUCE_dif_ret_encendido_pico,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_encendido_pico (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 20.6397,"n 458; con diferencia > 0.05: 5 (CVNA, GOLD, HCTI, OTLY, RIME); correlacion 0.7628",eventos_con_precios_crsp_v2.csv
 CRUCE_dif_vol_ratio_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de vol_ratio_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 56.86,"n 458; con diferencia > 0.5: 13 (ARBE, BYND, CVNA, FUBO, GCTK, GDC, NFLX, OTLY, RIME, SCWO, SXTP, TLRY, UPC); correlacion 0.9874",eventos_con_precios_crsp_v2.csv
 CRUCE_dif_ret_max_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_max_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 91.1764,"n 458; con diferencia > 0.05: 12 (CNSP, CVNA, DVLT, GOLD, HCTI, NCNA, NVNI, OTLY, RIME, SUNE, YAAS); correlacion 0.2307",eventos_con_precios_crsp_v2.csv

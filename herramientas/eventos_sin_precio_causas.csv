@@ -91,24 +91,12 @@ DJT,2024-03-26,2024-04-01,7,"simbolo con menos de 30 dias de cotizacion al encen
 DXYZ,2024-03-27,2024-04-09,14,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
 KDLY,2024-05-31,2024-08-29,91,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
 SEGG,2025-01-07,2025-04-25,109,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
-DAWN,2025-01-16,2025-02-13,29,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-BRK,2025-02-22,2025-04-14,52,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-PHX,2025-02-25,2025-03-06,10,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-HTBK,2025-03-04,2025-03-11,8,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-HTBK,2025-03-20,2025-03-24,5,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
 CRWV,2025-03-27,2025-04-02,7,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
 NMAX,2025-03-31,2025-04-02,3,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
-DAY,2025-04-02,2025-04-10,9,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-PHX,2025-04-07,2025-04-24,18,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
 CCAQ,2025-04-21,2025-05-23,33,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
-WOLF,2025-04-24,2025-05-13,20,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
 BRK,2025-05-03,2025-05-05,3,episodio sin dos sesiones bursatiles (fin de semana o feriado)
 CRCL,2025-06-05,2025-06-30,26,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
-WOLF,2025-07-01,2025-07-09,9,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-CLBR,2025-07-07,2025-07-16,10,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
-SHOT,2025-10-02,2025-10-06,5,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
 NKLR,2025-10-10,2025-10-22,13,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
-BRK,2025-10-14,2025-11-26,44,con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2)
 CVX,2026-01-03,2026-01-05,3,episodio sin dos sesiones bursatiles (fin de semana o feriado)
 VCX,2026-03-19,2026-03-27,9,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
 GLND,2026-03-26,2026-04-17,23,"simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas"
