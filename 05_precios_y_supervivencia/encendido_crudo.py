@@ -6,7 +6,8 @@
 # duracion real, corta), con validacion temporal y placebos; y se compara con el catalogo principal.
 # Tres poblaciones: los 2,675 del catalogo principal con expediente de precios (la poblacion exacta del modelo de
 # encendido del manuscrito, celda S4 v2 sobre tabla_supervivencia.csv), los 2,791 del catalogo principal completo
-# (incluye los 116 sin cobertura de precios, que son largos, violentos y de base previa cero) y los 10,417 crudos.
+# (incluye los eventos sin cobertura de precios, que son largos, violentos y de base previa cero) y los 10,417 crudos.
+# Los conteos y las medianas de los eventos sin precios se calculan aqui (antes estaban escritos a mano: 116, 18.5 dias, z 45).
 # Requiere eventos/eventos_atencion_v2.csv (catalogo crudo de la celda E2) y supervivencia/tabla_supervivencia.csv.
 # Corre en iTerm (lifelines; segundos):
 #   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
@@ -30,6 +31,7 @@ c['principal'] = c.principal.astype(str).str.lower().eq('true')
 sup = pd.read_csv(SUP / 'tabla_supervivencia.csv', usecols=['ticker', 'fecha_inicio'])
 c['con_precios'] = c.set_index(['ticker', 'fecha_inicio']).index.isin(sup.set_index(['ticker', 'fecha_inicio']).index) & c.principal
 COVS = ['log_z_inicio', 'log_base_previa']
+sp = c[c.principal & ~c.con_precios]; n_sp = len(sp)
 print(f'encendidos crudos: {len(c):,} | principales: {int(c.principal.sum()):,} (con precios: {int(c.con_precios.sum()):,}) | excluidos: {int((~c.principal).sum()):,} '
       f'(duracion < 3: {int((c.duracion_dias < 3).sum()):,}; menciones < 300: {int((c.menciones_evento < 300).sum()):,})')
 km = KaplanMeierFitter()
@@ -38,7 +40,7 @@ for nombre, df in [('crudo', c), ('principal', c[c.principal]), ('excluidos', c[
 
 res = []
 for nombre, df in [('catalogo principal con precios (como el manuscrito, S4 v2)', c[c.con_precios]),
-                   ('catalogo principal completo (incluye 116 sin precios)', c[c.principal]),
+                   (f'catalogo principal completo (incluye {n_sp} sin precios)', c[c.principal]),
                    ('catalogo crudo (todos los encendidos)', c)]:
     d = df[['fecha_inicio', 'duracion_dias', 'evento_observado'] + COVS].dropna()
     cph = CoxPHFitter().fit(d[['duracion_dias', 'evento_observado'] + COVS], duration_col='duracion_dias', event_col='evento_observado')
@@ -66,5 +68,6 @@ print(f'\nriesgo predicho al encendido (modelo crudo): mediana en principales {n
 pd.DataFrame(res).to_csv(SUP / 'encendido_crudo.csv', index=False)
 print('\nguardado: supervivencia/encendido_crudo.csv')
 print('lectura: la concordancia del catalogo crudo es la unica cifra "desde el primer dia" que no hereda filtros retrospectivos; '
-      'la del catalogo principal con precios (0.606) queda como concordancia entre episodios que resultaron elegibles. '
-      'Los 116 sin precios (mediana 18.5 dias, z mediano 45, base previa cero en su mayoria) explican la diferencia entre 1.556 y 1.369 en el HR del z.')
+      f'la del catalogo principal con precios ({res[0]["C_dentro"]:.3f}) queda como concordancia entre episodios que resultaron elegibles. '
+      f'Los {n_sp} sin precios (mediana {sp.duracion_dias.median():.1f} dias, z mediano {sp.z_inicio.median():.0f}, base previa cero en {(sp.base_previa_mu == 0).mean():.0%}) '
+      f'explican la diferencia entre {res[0]["HR_z"]:.3f} y {res[1]["HR_z"]:.3f} en el HR del z.')

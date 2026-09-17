@@ -1,5 +1,5 @@
 pieza,n_tren,n_prueba,muertes_prueba,mejora_verosimilitud_por_muerte,placebo_mejora_media,placebo_mejora_p95,p_empirico_mejora,C_startstop_dentro,C_startstop_fuera,placebo_C_media,placebo_C_p95,p_empirico_C,HR
-"I1 dinamico prospectivo, betas congeladas 2020-2023",1900.0,736.0,730.0,0.17154062831723235,-0.1450412853671332,-0.11211601864110278,0.0,0.693273343877963,0.7152887031253669,0.5154733838964942,0.5348105055533379,0.0,
+"I1 dinamico prospectivo, betas congeladas 2020-2023",1900.0,748.0,742.0,0.1678869386584348,-0.14576364382410717,-0.1089614837769252,0.0,0.693273343877963,0.7132307272809901,0.5153485929539131,0.5340888347749686,0.0,
 beta congelada log1p_n_lag,,,,,,,,,,,,,1.3379186719376441
 beta congelada sin_direccion_lag,,,,,,,,,,,,,1.3482434865032944
 beta congelada b_duro_lag,,,,,,,,,,,,,0.9097021825871319

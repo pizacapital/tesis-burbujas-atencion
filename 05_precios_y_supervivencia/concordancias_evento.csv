@@ -1,4 +1,4 @@
 modelo,n,muertes,instante,tipo,C
-"Cox estatico predictivo (S4, modelo A)",2675,2669,encendido (dia 0),"Harrell a nivel evento, riesgo parcial vs duracion",0.6063506435093867
-"Cox estatico descriptivo (S4, modelo B)",2636,2630,cierre del evento (retrospectivo),Harrell a nivel evento,0.6290609037897092
-Weibull AFT retrospectivo (S6): estaticas de B + B y D de los dias 0 a 2,2636,2630,cierre del evento (retrospectivo),"Harrell a nivel evento, mediana predicha vs duracion (lifelines concordance_index_)",0.6462540807020392
+"Cox estatico predictivo (S4, modelo A)",2687,2681,encendido (dia 0),"Harrell a nivel evento, riesgo parcial vs duracion",0.6061064218649973
+"Cox estatico descriptivo (S4, modelo B)",2648,2642,cierre del evento (retrospectivo),Harrell a nivel evento,0.6432672456933224
+Weibull AFT retrospectivo (S6): estaticas de B + B y D de los dias 0 a 2,2648,2642,cierre del evento (retrospectivo),"Harrell a nivel evento, mediana predicha vs duracion (lifelines concordance_index_)",0.6544786876777572

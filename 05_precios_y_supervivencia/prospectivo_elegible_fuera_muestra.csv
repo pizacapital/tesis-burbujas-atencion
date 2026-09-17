@@ -1,5 +1,5 @@
 pieza,n_tren,n_prueba,muertes_prueba,mejora_verosimilitud_por_muerte,placebo_mejora_media,placebo_mejora_p95,p_empirico_mejora,C_startstop_dentro,C_startstop_fuera,placebo_C_media,placebo_C_p95,p_empirico_C,HR
-"I1 con entrada retardada, betas congeladas 2020-2023",1588.0,598.0,593.0,0.07134429408177873,-0.0457607312518381,-0.02451114661377885,0.0,0.6015764733854906,0.6102718723399891,0.5491821096856018,0.5669635623378355,0.0,
+"I1 con entrada retardada, betas congeladas 2020-2023",1588.0,609.0,604.0,0.06728103378557893,-0.04578958743405342,-0.024294831684034793,0.0,0.6015764733854906,0.6074856236367242,0.5486737722255272,0.5655810033710094,0.0,
 beta congelada log1p_n_lag,,,,,,,,,,,,,1.2093897363074249
 beta congelada sin_direccion_lag,,,,,,,,,,,,,1.0714492115820782
 beta congelada b_duro_lag,,,,,,,,,,,,,0.857466498307945

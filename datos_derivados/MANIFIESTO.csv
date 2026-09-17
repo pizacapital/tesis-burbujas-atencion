@@ -1,0 +1,6 @@
+archivo,bytes,filas,sha256,manuscrito,fecha,origen
+eventos_atencion_v2_principal_final.csv,245429,2791,3d070ad55154a6e4a5f1ff841333543ba7aa5c2b8fa89fd9da1d39316d6259ae,Ver022,2026-09-16,03_matrices_y_detector/eventos_atencion.ipynb
+panel_bt_eventos.csv,10905827,84956,43951b45eba9adc9b96afb125c9071446e992a0ab563a3df38017acf7581fd17,Ver022,2026-09-16,04_clasificador (celda F11)
+tabla_startstop_bt.csv,5171836,45882,199c10327f8f93292a7155b846a16e66197fffcd419780c53d6fc7043bf5a7d3,Ver022,2026-09-16,04_clasificador (celda F11)
+tabla_supervivencia.csv,317325,2687,f1237d0fb67243ef06b44d8a4cc1f8c75e0ac95231d2592e9270278442d53430,Ver022,2026-09-16,05_precios_y_supervivencia/supervivencia_eventos.ipynb (celda S1) sobre eventos_con_precios.csv
+eventos_con_precios.csv,232178,2687,766c2114f1778cc12f2d771dd09ecac39d7528e919dd6854197af74fe5aeb5b3,Ver022,2026-09-16,05_precios_y_supervivencia/cruce_precios_ajustado.py

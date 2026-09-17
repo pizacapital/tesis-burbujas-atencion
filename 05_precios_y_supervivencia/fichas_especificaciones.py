@@ -10,6 +10,8 @@
 #    eventos de cada cota sin par, que es la seleccion que introduce el cambio de definicion.
 # Requiere los archivos de Matrix/eventos/ y supervivencia/ que se citan abajo; si falta alguno, la ficha correspondiente
 # se marca "no disponible" y el script continua.
+# Conteos de los prospectivos y de los Weibull: se recuentan aqui con la misma construccion de prospectivo.py,
+# prospectivo_elegible.py y weibull_prospectivo.py (antes estaban escritos a mano y quedaban desactualizados al rehacer el cruce).
 # Corre en iTerm (lifelines; unos 8 minutos, casi todos en reconstruir las tres tablas de K3):
 #   cd '/Users/ppizam/Claude/Master Thesis/Desarrollo/Metodologia/Matrix'
 #   python3 fichas_especificaciones.py
@@ -74,7 +76,7 @@ if bt is not None and cat is not None and sup is not None:
     s2['desacoplado'] = (s2.acoplamiento != 'sincronico').astype(int); s2['anio'] = pd.to_datetime(s2.fecha_inicio).dt.year
     integ = bt.merge(s2[['evento_id', 'anio'] + ENC + REAL], on='evento_id', how='inner').dropna(subset=ENC + REAL)
     integ['log_t'] = np.log(integ.stop)
-    m1 = ajustar(integ, DIN + ENC); ficha('I1 (sentimiento + conocido al encendido)', 'Tabla 5.2', 'B, D, silencio, volumen (t-1); log z, log base previa', 'ninguna', 'ninguno', integ, hr_d(m1), origen='celda_S5.py; cox_integrado.csv', nota='2,636 eventos con cruce completo de precios')
+    m1 = ajustar(integ, DIN + ENC); ficha('I1 (sentimiento + conocido al encendido)', 'Tabla 5.2', 'B, D, silencio, volumen (t-1); log z, log base previa', 'ninguna', 'ninguno', integ, hr_d(m1), origen='celda_S5.py; cox_integrado.csv', nota=f'{integ.evento_id.nunique():,} eventos con cruce completo de precios')
     m2 = ajustar(integ, DIN + ENC + REAL); ficha('I2 (completo con realizadas)', 'Tabla 5.2, 6.3, 6.4, E.2', 'I1 + log amplitud, log razon de volumen, retorno encendido-pico, desacoplado', 'ninguna', 'ninguno', integ, hr_d(m2), origen='celda_S5.py; cox_integrado.csv')
     m3 = ajustar(integ, DIN + ENC + REAL, strata='anio'); ficha('I3 (I2 estratificado por anio)', 'Tabla 5.2', 'las de I2', 'ninguna', 'anio de inicio', integ, hr_d(m3), origen='celda_S5.py; cox_integrado.csv')
     tv = integ.copy(); inter = []
@@ -85,15 +87,22 @@ if bt is not None and cat is not None and sup is not None:
 
 # ================= 3. prospectivos y entrada retardada (de sus CSV) =================
 print('== prospectivos (prospectivo_elegible.csv)')
-pe = leer(SUP / 'prospectivo_elegible.csv')
-if pe is not None:
+pe = leer(SUP / 'prospectivo_elegible.csv'); eleg = leer(EV / 'elegibilidad_eventos.csv')
+muertes_pro = {}
+if integ is not None and eleg is not None:
+    # misma construccion que prospectivo.py (poblacion de I2) y prospectivo_elegible.py (filas posteriores al dia de elegibilidad)
+    eleg = eleg[eleg.principal.astype(str).str.lower() == 'true'][['evento_id', 'dia_elegibilidad', 'dia_300_menciones']]
+    ret = integ.merge(eleg, on='evento_id', how='inner'); ret = ret[ret.dia_evento > ret.dia_elegibilidad]
+    muertes_pro = {'sin': (integ.evento_id.nunique(), len(integ), int(integ.evento_muerte.sum())), 'con': (ret.evento_id.nunique(), len(ret), int(ret.evento_muerte.sum()))}
+if pe is not None and muertes_pro:
     for _, r in pe.dropna(subset=['modelo']).iterrows():
         if 'referencia' in str(r.modelo): continue
-        dis = 'con entrada retardada al dia siguiente de la elegibilidad' if 'CON' in str(r.diseno) else 'sin entrada retardada'
+        clave = 'con' if 'CON' in str(r.diseno) else 'sin'; dis = 'con entrada retardada al dia siguiente de la elegibilidad' if clave == 'con' else 'sin entrada retardada'
+        ev_, fi_, mu_ = muertes_pro[clave]; assert (ev_, fi_) == (int(r.eventos), int(r.filas)), f'{r.modelo}: conteos recontados {ev_}/{fi_} distintos de los guardados {r.eventos}/{r.filas}'
         hr = f"{r.HR_d_duro_lag:.3f} [{r.lo_d_duro_lag:.2f}, {r.hi_d_duro_lag:.2f}]" if pd.notna(r.get('HR_d_duro_lag', np.nan)) else ''
         ficha(f'{r.modelo}, {dis}', 'Tabla 5.3', 'volumen (t-1), log z, log base previa' + (' + silencio' if 'P1' in r.modelo or 'P2' in r.modelo else '') + (' + B y D' if 'P2' in r.modelo else ''), 'ninguna', 'ninguno',
-              hr=hr, eventos=int(r.eventos), filas=int(r.filas), muertes=(2630 if 'sin' in dis else 2181), origen='prospectivo.py / prospectivo_elegible.py; prospectivo_anidado.csv, prospectivo_elegible.csv',
-              nota='muertes tomadas de la salida impresa de los scripts (2,630 y 2,181)')
+              hr=hr, eventos=ev_, filas=fi_, muertes=mu_, origen='prospectivo.py / prospectivo_elegible.py; prospectivo_anidado.csv, prospectivo_elegible.csv',
+              nota='muertes recontadas con la construccion de los scripts (poblacion de I2; filas posteriores al dia de elegibilidad)')
 
 # ================= 4. robustez kappa (K3), reconstruida, y cohorte comun =================
 print('== K3, robustez kappa: reconstruccion de las tres tablas (varios minutos)')
@@ -191,7 +200,7 @@ sens = leer(SUP / 'sensibilidad_error_clasificador.csv')
 if sens is not None:
     for _, r in sens.iterrows():
         if str(r.escenario).startswith('E4 replica') and not str(r.escenario).startswith('E4 replica 01'): continue
-        ficha(f'Sensibilidad al error: {r.escenario}', 'Tabla 6.3', 'las de I2, con B y D reconstruidos', 'ninguna', 'ninguno', hr=f'{r.HR_d_duro_lag:.3f}' if pd.notna(r.HR_d_duro_lag) else '', eventos=int(r.eventos), filas=int(r.filas), muertes=2630, origen='sensibilidad_error_clasificador.py; sensibilidad_error_clasificador.csv', nota='muertes = las de I2 (misma tabla); E4 tiene 20 replicas, se lista la primera')
+        ficha(f'Sensibilidad al error: {r.escenario}', 'Tabla 6.3', 'las de I2, con B y D reconstruidos', 'ninguna', 'ninguno', hr=f'{r.HR_d_duro_lag:.3f}' if pd.notna(r.HR_d_duro_lag) else '', eventos=int(r.eventos), filas=int(r.filas), muertes=(int(integ.evento_muerte.sum()) if integ is not None else None), origen='sensibilidad_error_clasificador.py; sensibilidad_error_clasificador.csv', nota='muertes = las de I2 (misma tabla); E4 tiene 20 replicas, se lista la primera')
 sub = leer(SUP / 'cox_subpoblacion_precio.csv')
 if sub is not None:
     for _, r in sub.iterrows():
@@ -210,10 +219,19 @@ print('== Weibull a nivel evento')
 if panel is not None and sup is not None and cat is not None:
     temprano = panel[(panel.fase == 'evento') & (panel.dia_evento <= 2)].groupby('evento_id').agg(b_temprano=('b_duro', 'mean'), d_temprano=('d_duro', 'mean'))
     dw = s2.set_index('evento_id').join(temprano, how='inner').reset_index(); dw = dw.dropna(subset=REAL + ENC + ['b_temprano']); dw = dw[dw.duracion_dias > 0]
-    ficha('Weibull AFT retrospectivo (S6)', 'texto 5.4', 'las seis estaticas de I2 + B y D promedio de los dias 0 a 2', 'ninguna', 'ninguno', hr='AFT: d_temprano (weibull_aft.csv)', eventos=len(dw), filas=len(dw), muertes=int(dw.evento_observado.sum()), origen='celda_S6.py; weibull_aft.csv', nota='una fila por evento; forma 1.32')
-wp = leer(SUP / 'weibull_prospectivo.csv')
-ficha('Weibull AFT prospectivo al dia 3', 'Tabla 5.4', 'log z, log base previa, B y D de los dias 0 a 2, sin direccionales tempranos', 'ninguna', 'ninguno', hr='AFT: d_temprano 0.378', eventos=2386, filas=2386, muertes=2380, origen='weibull_prospectivo.py; weibull_prospectivo.csv', nota='entrada (truncamiento) en el dia 3; conteos de la salida impresa del script')
-ficha('Weibull AFT con entrada en la elegibilidad', 'texto 5.6', 'las del prospectivo al dia 3', 'ninguna', 'ninguno', hr='AFT: d_temprano 0.339', eventos=2220, filas=2220, muertes=2215, origen='prospectivo_elegible.py; weibull_elegible.csv', nota='entrada en max(3, dia de las 300 menciones + 1); conteos de la salida impresa del script')
+    wa = leer(SUP / 'weibull_aft.csv'); rho_aft = float(wa[wa.param == 'rho_']['exp(coef)'].iloc[0]) if wa is not None else np.nan
+    ficha('Weibull AFT retrospectivo (S6)', 'texto 5.4', 'las seis estaticas de I2 + B y D promedio de los dias 0 a 2', 'ninguna', 'ninguno', hr='AFT: d_temprano (weibull_aft.csv)', eventos=len(dw), filas=len(dw), muertes=int(dw.evento_observado.sum()), origen='celda_S6.py; weibull_aft.csv', nota=f'una fila por evento; forma {rho_aft:.2f}')
+    # poblaciones de weibull_prospectivo.py (vivos al cierre del dia 3) y del Weibull con entrada en la elegibilidad (prospectivo_elegible.py, parte 3)
+    temp3 = panel[(panel.fase == 'evento') & (panel.dia_evento <= 2)].groupby('evento_id').agg(b_temprano=('b_duro', 'mean'), d_temprano=('d_duro', 'mean'))
+    d3b = s2.set_index('evento_id').join(temp3, how='inner').reset_index(); d3b['b_temprano'] = d3b.b_temprano.fillna(0.0); d3b['d_temprano'] = d3b.d_temprano.fillna(0.5)
+    d3 = d3b.dropna(subset=ENC + REAL); d3 = d3[d3.duracion_dias > 3]   # el prospectivo al dia 3 exige tambien las realizadas (las usa el retrospectivo de referencia)
+    wp = leer(SUP / 'weibull_prospectivo.csv'); hr_wp = f"AFT: d_temprano {float(wp[(wp.modelo.str.startswith('prospectivo')) & (wp.covariable == 'd_temprano')].exp_coef.iloc[0]):.3f}" if wp is not None else ''
+    ficha('Weibull AFT prospectivo al dia 3', 'Tabla 5.4', 'log z, log base previa, B y D de los dias 0 a 2, sin direccionales tempranos', 'ninguna', 'ninguno', hr=hr_wp, eventos=len(d3), filas=len(d3), muertes=int(d3.evento_observado.sum()), origen='weibull_prospectivo.py; weibull_prospectivo.csv', nota='entrada (truncamiento) en el dia 3; poblacion recontada con la construccion del script')
+    if eleg is not None:
+        we = d3b.dropna(subset=ENC).merge(eleg, on='evento_id', how='inner'); we['entrada'] = np.maximum(3, we.dia_300_menciones.astype(float) + 1)
+        we = we.dropna(subset=['entrada']); we = we[we.duracion_dias > we.entrada]   # el Weibull con entrada en la elegibilidad no usa las realizadas
+        wel = leer(SUP / 'weibull_elegible.csv'); hr_we = f"AFT: d_temprano {float(wel[wel.covariable == 'd_temprano'].exp_coef.iloc[0]):.3f}" if wel is not None else ''
+        ficha('Weibull AFT con entrada en la elegibilidad', 'texto 5.6', 'las del prospectivo al dia 3', 'ninguna', 'ninguno', hr=hr_we, eventos=len(we), filas=len(we), muertes=int(we.evento_observado.sum()), origen='prospectivo_elegible.py; weibull_elegible.csv', nota='entrada en max(3, dia de las 300 menciones + 1); poblacion recontada con la construccion del script')
 
 f = pd.DataFrame(fichas); f.to_csv(SUP / 'fichas_especificaciones.csv', index=False)
 print(f'\nguardado: supervivencia/fichas_especificaciones.csv ({len(f)} fichas) y supervivencia/kappa_cohorte_comun.csv')

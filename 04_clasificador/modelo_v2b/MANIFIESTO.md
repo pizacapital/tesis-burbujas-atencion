@@ -21,7 +21,7 @@ Modelo local oficial de la tesis (sección 4.4, apéndice F): DistilRoBERTa afin
 | training_args.bin | 5,265 | 599b09fb4db6c608a13b786c618157e6203ca61b81da33d95e23430961187e29 | este directorio y Hugging Face |
 | model.safetensors | 328,495,356 | d67174c60a21e725200a23a21c3579d862ca4db5e501abf59f64415180f14454 | Hugging Face (`pizacapital/tesis-burbujas-atencion-v2b`); copia local en `Desarrollo/Metodologia/Clasificador/modelo_finetune_v2b/` |
 
-Los pesos no se versionan en este repositorio por su tamaño; se distribuyen en Hugging Face Hub con la tarjeta `README_huggingface.md` de este directorio, y la huella de arriba permite comprobar que la copia descargada es la que produjo los resultados de la tesis. Los modelos v1 (FinTwitBERT afinado, robustez de la sección 6.4), v2a y v2c quedan locales, con la misma estructura de archivos.
+Los pesos no se versionan en este repositorio por su tamaño; se distribuyen en Hugging Face Hub con la tarjeta `README_huggingface.md` de este directorio (publicados el 16 de septiembre de 2026 en https://huggingface.co/pizacapital/tesis-burbujas-atencion-v2b, commit `072ab470c5b549935a381297c7752c80475ad140`, seis archivos: los cinco de la tabla más la tarjeta como `README.md`), y la huella de arriba permite comprobar que la copia descargada es la que produjo los resultados de la tesis. Los modelos v1 (FinTwitBERT afinado, robustez de la sección 6.4), v2a y v2c quedan locales, con la misma estructura de archivos.
 
 ## Métricas de referencia (apéndice F, Tabla 6.2)
 - Patrón de referencia (946 mensajes): exactitud 70.2%, F1 macro 0.690; acuerdo direccional 82.7% (n = 519).
