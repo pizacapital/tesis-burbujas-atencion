@@ -1,0 +1,9 @@
+# Anotaciones del clasificador, sin el texto de los mensajes
+
+Copias publicables de los archivos de anotación del apéndice F. Cada fila conserva el identificador de Reddit del mensaje (`id`), su fecha (`created_utc`), subreddit, tipo, ticker y una huella `sha256_texto` del texto (para verificar que un mensaje reconstruido desde los dumps es el mismo), más todas las etiquetas; el texto del mensaje no se redistribuye por los términos de uso de Reddit. Con estos archivos se reproduce cada cifra del apéndice F sin acceso al texto. Los genera `../exportar_anotaciones_sin_texto.py` desde los archivos locales.
+
+- `piloto_etiquetado_final_sin_texto.csv` - los 948 mensajes del piloto con la etiqueta de cada proveedor (DeepSeek, Mistral, Claude, Kimi), el consenso, sus votos, la etiqueta final y su procedencia (`consenso_4de4`, `mayoria_3de4`, `pedro_adjudicacion`; dos filas sin etiqueta final).
+- `duelo_v1_v2b_oro_sin_texto.csv`, `duelo_v2b_v2c_oro_sin_texto.csv`, `evaluacion_oro_finetune_v1_sin_texto.csv` - los 946 con etiqueta final más las predicciones de los modelos afinados (careos de la sección 4.4 y del apéndice F).
+- `muestra_grande_etiquetada_sin_texto.csv` - los 11,941 mensajes del conjunto de entrenamiento con las etiquetas de Claude, DeepSeek y GPT-4o-mini, la etiqueta de equipo por mayoría, los votos y la bandera de empate.
+- `revision_manual_discrepantes_sin_texto.csv` (123) y `revision_manual_auditoria_sin_texto.csv` (60) - las dos hojas de `revision_manual_piloto.xlsx`: la adjudicación del autor en los mensajes donde los cuatro modelos se dividieron, y la auditoría a ciegas del núcleo unánime (85.0% de acuerdo), con la etiqueta del autor y sus notas.
+- `leaderboard_5_proveedores.csv` y `comparativo_finetune.csv` - copiados tal cual (no contienen texto): precisión de los cinco proveedores contra la etiqueta final y la comparación de los cuatro afinados.

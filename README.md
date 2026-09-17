@@ -19,7 +19,8 @@ El orden de las carpetas sigue el orden del pipeline (capítulos 3 a 7 de la tes
 | `07_robustez/` | Batería del capítulo 6: cotas de la definición de extinción (κ), serie título+cuerpo, censura endógena, par GOOG/GOOGL, validación fuera de muestra con placebos y el método alterno de bandas | 6 |
 | `08_caso_trump/` | El finfluencer presidencial: archivo de Truth Social, detección y filtrado de menciones y event study contra tasa base | 7 |
 | `09_exploraciones_historicas/` | Cuadernos del arranque del proyecto, conservados como historial | - |
-| `herramientas/` | Utilidades de inventario de dumps | - |
+| `datos_derivados/` | Catálogo de eventos, panel diario B(t)/D(t), tabla start-stop y tabla de supervivencia con covariables: los agregados con los que se reproducen los capítulos 5 y 6 sin datos crudos | 5, 6 |
+| `herramientas/` | Inventario de dumps, conciliación de cifras del manuscrito e inventarios del entorno de ejecución | - |
 
 Cada carpeta incluye un README breve con el papel de cada archivo.
 
@@ -27,11 +28,12 @@ Cada carpeta incluye un README breve con el papel de cada archivo.
 
 - **Datos crudos.** Los dumps de Reddit, los archivos de plataforma y los datos de CRSP/Compustat (WRDS) se obtienen de sus fuentes originales, documentadas en el capítulo 3 de la tesis; los términos de uso de varias fuentes no permiten redistribuirlos.
 - **Credenciales.** Las claves de API viven exclusivamente en archivos `.env` locales excluidos del control de versiones; los módulos que las requieren incluyen una plantilla `.env.example`.
-- **Modelos entrenados.** El clasificador v2b (DistilRoBERTa afinado) se reproduce con `04_clasificador/` a partir de la muestra anotada.
+- **Pesos del modelo.** El clasificador v2b (DistilRoBERTa afinado, 328 MB) se distribuye en Hugging Face Hub como `pizacapital/tesis-burbujas-atencion-v2b`; `04_clasificador/modelo_v2b/` conserva su configuración, tokenizador, argumentos de entrenamiento y el manifiesto con la huella sha256 de cada archivo, y `04_clasificador/anotaciones/` las etiquetas (sin texto) con las que se afinó y evaluó.
+- **Texto de los mensajes.** Las anotaciones se publican con el id de Reddit y una huella del texto, no con el texto; quien tenga los dumps puede reconstruirlo y verificarlo.
 
 ## Notas de ejecución
 
-Cada script documenta en su encabezado dónde corre (máquina local, JupyterHub de WRDS o consola de BigQuery), sus insumos, sus salidas y su tiempo estimado; los procesos largos son reanudables y dejan bitácora. Las rutas de datos se configuran localmente (constantes `BASE` al inicio de cada script). El entorno de cómputo con versiones exactas está en el apéndice G de la tesis; las dependencias por módulo van en su `requirements.txt`.
+Cada script documenta en su encabezado dónde corre (máquina local, JupyterHub de WRDS o consola de BigQuery), sus insumos, sus salidas y su tiempo estimado; los procesos largos son reanudables y dejan bitácora. Las rutas de datos se configuran localmente (constantes `BASE` al inicio de cada script, con la ruta de la máquina del autor como valor por omisión). Con `datos_derivados/` y los CSV versionados de cada carpeta, los modelos de los capítulos 5 y 6 se reproducen desde un entorno limpio sin acceso a Reddit ni a WRDS; la ingestión, las matrices de menciones y el cruce de precios sí requieren las fuentes originales. El entorno de cómputo con versiones exactas está en el apéndice G de la tesis; las dependencias por módulo van en su `requirements.txt`.
 
 ## Cómo citar
 

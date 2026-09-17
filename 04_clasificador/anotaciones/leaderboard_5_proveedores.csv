@@ -1,0 +1,7 @@
+clasificador,precision_global,en_oro,en_mayoria,en_dificiles,en_direccionales
+claude,91.5,100.0,88.7,57.7,91.2
+kimi,87.1,100.0,73.4,54.5,85.6
+deepseek,83.7,100.0,74.6,26.0,79.6
+mistral,82.6,100.0,63.3,39.8,81.5
+openai,80.3,94.1,70.6,35.8,75.3
+reglas_v2,49.4,56.0,41.1,35.0,51.1
