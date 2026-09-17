@@ -1,0 +1,10 @@
+particion,poblacion,covariable,nombre,cociente,coc_lo,coc_hi,dentro_de_1/1.25_a_1.25,dentro_de_1/1.5_a_1.5,dentro_de_1/2.0_a_2.0
+S7 (etiqueta earnings),earnings,b_duro_lag,B: optimismo (t-1),0.9403053417970568,0.7181998108704911,1.2310977007086932,0,1,1
+S7 (etiqueta earnings),earnings,d_duro_lag,D: desacuerdo (t-1),1.0821927543428578,0.49451003643112756,2.3682859219689276,0,0,0
+S7 (etiqueta earnings),earnings,sin_direccion_lag,Sin direccion (t-1),0.5598427644311382,0.2969703334741987,1.055404818451772,0,0,0
+S8 (etiqueta v2),institucional,b_duro_lag,B: optimismo (t-1),1.5872066972148173,1.0432866876217395,2.414700704584237,0,0,0
+S8 (etiqueta v2),institucional,d_duro_lag,D: desacuerdo (t-1),2.4202022774406533,0.6904874278540135,8.482962654270546,0,0,0
+S8 (etiqueta v2),institucional,sin_direccion_lag,Sin direccion (t-1),0.8041749817213454,0.29017956010895507,2.22861114333383,0,0,0
+S8 (etiqueta v2),earnings,b_duro_lag,B: optimismo (t-1),0.9649361142262447,0.7354550639783244,1.2660212025754523,0,1,1
+S8 (etiqueta v2),earnings,d_duro_lag,D: desacuerdo (t-1),1.157316308340462,0.5241746399269291,2.5552190730507442,0,0,0
+S8 (etiqueta v2),earnings,sin_direccion_lag,Sin direccion (t-1),0.52597547940625,0.27756386634208574,0.996708284051912,0,0,0
