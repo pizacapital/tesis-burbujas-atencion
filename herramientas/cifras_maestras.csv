@@ -1,0 +1,80 @@
+id,bloque,definicion,unidad,numerador,denominador,valor,filtro,archivo
+M_dias_submissions,matrices,dias (filas) de la matriz submissions,dias,2373,-,2373,2020-01-01 a 2026-06-30,maestra_submissions_2020_2026.csv
+M_tickers_submissions,matrices,tickers (columnas sin fecha) de la matriz submissions,tickers,7919,-,7919,,maestra_submissions_2020_2026.csv
+M_dias_comments,matrices,dias (filas) de la matriz comments,dias,2373,-,2373,2020-01-01 a 2026-06-30,maestra_comments_2020_2026.csv
+M_tickers_comments,matrices,tickers (columnas sin fecha) de la matriz comments,tickers,8792,-,8792,,maestra_comments_2020_2026.csv
+M_dias_global,matrices,dias (filas) de la matriz global,dias,2373,-,2373,2020-01-01 a 2026-06-30,matriz_global_2020_2026.csv
+M_tickers_global,matrices,tickers (columnas sin fecha) de la matriz global,tickers,8812,-,8812,,matriz_global_2020_2026.csv
+M_dias_submissions_tc,matrices,dias (filas) de la matriz submissions_tc,dias,2373,-,2373,2020-01-01 a 2026-06-30,maestra_submissions_tc_2020_2026.csv
+M_tickers_submissions_tc,matrices,tickers (columnas sin fecha) de la matriz submissions_tc,tickers,8520,-,8520,,maestra_submissions_tc_2020_2026.csv
+M_union,matrices,union de tickers de submissions y comments,tickers,8812,-,8812,"global == union: True; solo submissions 20, solo comments 893",maestras
+M_dias_calendario,matrices,dias naturales inclusivos del 1-ene-2020 al 30-jun-2026,dias,2373,-,2373,,calendario
+MSG_filas,mensajes,filas mensaje-ticker en ventanas de eventos (7 dias antes del encendido a 7 despues de la extincion),filas,7856262,-,7856262,"texto: submissions titulo + cuerpo, comments cuerpo; truncado a 800 caracteres; [removed]/[deleted] excluidos",Clasificador/mensajes_eventos/*.csv (celda_F8.py)
+MSG_pares_unicos,mensajes,"pares (id, ticker) unicos",pares,7856262,-,7856262,igual a filas si no hay duplicados,mensajes_eventos
+MSG_unicos,mensajes,mensajes unicos (ids distintos),mensajes,6953100,-,6953100,ids compartidos entre tipos: 0,mensajes_eventos
+MSG_submissions_filas,mensajes,filas de submissions,filas,809666,-,809666,,mensajes_eventos
+MSG_submissions_unicas,mensajes,submissions unicas,mensajes,683185,-,683185,,mensajes_eventos
+MSG_comments_filas,mensajes,filas de comments,filas,7046596,-,7046596,,mensajes_eventos
+MSG_comments_unicos,mensajes,comments unicos,mensajes,6269915,-,6269915,,mensajes_eventos
+MSG_filas_por_mensaje,mensajes,filas por mensaje unico,razon,7856262,6953100,1.1299,,mensajes_eventos
+YT_canales,youtube,canales censados,canales,38,-,38,"nucleo 34, benchmark 4",censo_youtube_videos.csv
+YT_videos_censo,youtube,videos del censo (38 canales),videos,141574,-,141574,,censo_youtube_videos.csv
+YT_videos_ventana,youtube,videos en ventana 2020-01 a 2026-06,videos,128108,-,128108,"nucleo 60573, benchmark 67535",censo_youtube_videos.csv
+YT_pares,youtube,pares video-ticker detectados (ambos estratos),pares,26698,-,26698,"nucleo 15905, benchmark 10793",pares_youtube_ticker.csv
+YT_videos_con_ticker,youtube,videos unicos con al menos un ticker (ambos estratos),videos,22223,-,22223,nucleo 13150,pares_youtube_ticker.csv
+YT_pct_videos_ticker,youtube,videos con ticker sobre videos en ventana (ambos estratos),%,22223,128108,17.35,,pares / censo
+YT_pct_pares_ventana,youtube,pares sobre videos en ventana (no es una fraccion de videos),%,26698,128108,20.84,,pares / censo
+YT_pct_nucleo,youtube,videos del nucleo con ticker sobre videos del nucleo en ventana,%,13150,60573,21.71,careo por evento usa solo el nucleo,pares / censo
+IG_padron_v11,instagram,cuentas del padron final v11 (nucleo + benchmark mediatico),cuentas,23,-,23,"nucleo 17, benchmark 6, excluidas con razon 12",Padron Instagram - v11.xlsx
+IG_censo_cuentas,instagram,"cuentas enviadas al censo de Bright Data (padron v6, 2-ago-2026)",cuentas,22,-,22,"nucleo final incluido: 17; excluidas despues: ['kashwill__', 'jaw_trades', 'thaflipking', 'jduntrades', 'timothysykes']; benchmark censado: 0",input_censo_instagram.csv
+IG_registros,instagram,registros devueltos por el censo,registros,23252,-,23252,23249 publicaciones + 3 registros de error,censo_padron_brightdata.json
+IG_cuentas_con_datos,instagram,cuentas del input con al menos una publicacion,cuentas,22,22,22,"publicaciones por cuenta: wall_street_trapper 4991, billy_invests 117, bdon_trades 146, roadto100kportfolio 82, mrmtrades 815, russellckai 169, thedailystockmarket 1518, joe.investss 86, stasserfes 2752, thetraderdaddy 469, johnnylixf 231, ericnomics 841, kashwill__ 355, jaw_trades 562, thaflipking 636, chrisstockdads 969, opulent_ventures 806, tomtalksinvesting 1477, andy_invests 656, jduntrades 1218, tradeinvestsimplify 2784, timothysykes 682",censo_padron_brightdata.json
+IG_colaboraciones,instagram,registros de cuentas ajenas al input (colaboraciones y etiquetas),registros,887,23249,3.82,porcentaje sobre publicaciones,censo_padron_brightdata.json
+IG_pares_top50,instagram,pares publicacion-ticker de los 50 principales,pares,4381,-,4381,cuentas: 17,menciones_censo_top50.csv
+TT_gme_pico,tiktok,"dia con mas videos de TikTok sobre GME (ventana ene-feb 2021, fechas UTC)",fecha,-,-,2021-01-28,7 videos ese dia; pico de Reddit 2021-01-28 (132037 mensajes),bt_tiktok_gme.csv (tiktok_bt_gme.py)
+TT_gme_corr,tiktok,correlacion de log(1+videos) con log(1+mensajes de Reddit),corr,-,-,0.642,17 dias con senal de TikTok de 37 de la ventana; 34 videos,bt_tiktok_gme.csv
+X_dias_con_tweets,x,dias-ventana con tweets (filas de bt_x_ventanas),dias,2374,-,2374,"846,799 tweets con B/D",bt_x_ventanas.csv
+X_dias_ventana,x,dias-ventana de la serie multiplataforma (50 insignia),dias,2412,-,2412,"846,799 tweets",serie_multiplataforma.csv
+PX_crsp,precios,filas ticker-dia del panel con fuente crsp,filas,935089,-,935089,2020-01-02 a 2024-12-31; 987 tickers,panel_precios_2020_2026.csv
+PX_crsp_v2,precios,filas ticker-dia del panel con fuente crsp_v2,filas,163777,-,163777,2025-01-02 a 2025-12-31; 667 tickers,panel_precios_2020_2026.csv
+PX_yahoo,precios,filas ticker-dia del panel con fuente yahoo,filas,33744,-,33744,2025-01-02 a 2026-06-30; 244 tickers,panel_precios_2020_2026.csv
+FL_catalogo,flujo,eventos del catalogo principal,eventos,2791,-,2791,,eventos_atencion_v2_principal_final.csv
+FL_con_precios,flujo,eventos con cruce de precios,eventos,2675,2791,2675,cruce: >= 5 sesiones en los 30 dias previos y >= 2 dentro del evento,eventos_con_precios.csv
+FL_covariables,flujo,eventos con covariables completas (modelo integrado),eventos,2636,2675,2636,39 sin retorno encendido-pico (pico sin cierre asignable),eventos_con_precios.csv
+FL_sin_precio_simbolo_con_menos_de,flujo,"eventos sin cruce de precios: simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas",eventos,96,116,96,,eventos_sin_precio_causas.csv
+FL_sin_precio_con_precios_en_el_pa,flujo,eventos sin cruce de precios: con precios en el panel actual pero sin cruce en eventos_con_precios.csv (cruce anterior al panel crsp_v2),eventos,12,116,12,,eventos_sin_precio_causas.csv
+FL_sin_precio_episodio_sin_dos_ses,flujo,eventos sin cruce de precios: episodio sin dos sesiones bursatiles (fin de semana o feriado),eventos,5,116,5,,eventos_sin_precio_causas.csv
+FL_sin_precio_hueco_de_precios_en_,flujo,eventos sin cruce de precios: hueco de precios en los 30 dias previos,eventos,3,116,3,,eventos_sin_precio_causas.csv
+INS_cat_11,instrumentos,eventos del catalogo por instrumento: accion comun (shrcd 11),eventos,2303,2791,2303,,catalogo_instrumentos.csv
+INS_cat_12,instrumentos,eventos del catalogo por instrumento: accion comun de emisora incorporada fuera de EE.UU. (12),eventos,291,2791,291,,catalogo_instrumentos.csv
+INS_cat_31,instrumentos,eventos del catalogo por instrumento: ADR (31),eventos,130,2791,130,,catalogo_instrumentos.csv
+INS_cat_nan,instrumentos,eventos del catalogo por instrumento: sin codigo (cola del padron),eventos,35,2791,35,,catalogo_instrumentos.csv
+INS_cat_18,instrumentos,eventos del catalogo por instrumento: REIT (18),eventos,32,2791,32,,catalogo_instrumentos.csv
+INS_otc,instrumentos,"eventos con exchcd fuera de NYSE/AMEX/NASDAQ (1, 2, 3)",eventos,0,2791,0,,catalogo_instrumentos.csv
+INS_sinrdq_12,instrumentos,sin etiqueta de earnings por instrumento: accion comun de emisora incorporada fuera de EE.UU. (12),eventos,265,572,265,gvkey nulo en 265,catalogo_instrumentos.csv
+INS_sinrdq_31,instrumentos,sin etiqueta de earnings por instrumento: ADR (31),eventos,130,572,130,gvkey nulo en 130,catalogo_instrumentos.csv
+INS_sinrdq_11,instrumentos,sin etiqueta de earnings por instrumento: accion comun (shrcd 11),eventos,110,572,110,gvkey nulo en 87,catalogo_instrumentos.csv
+INS_sinrdq_nan,instrumentos,sin etiqueta de earnings por instrumento: sin codigo (cola del padron),eventos,35,572,35,gvkey nulo en 35,catalogo_instrumentos.csv
+INS_sinrdq_18,instrumentos,sin etiqueta de earnings por instrumento: REIT (18),eventos,32,572,32,gvkey nulo en 32,catalogo_instrumentos.csv
+POND_base,ponderada,eventos del catalogo base,eventos,2791,-,2791,,eventos_atencion_v2_principal_final.csv
+POND_ponderada,ponderada,eventos del catalogo ponderado,eventos,2861,-,2861,,eventos_atencion_ponderada.csv
+POND_pares,ponderada,"pares uno a uno (mismo ticker, ventanas traslapadas, inicio mas cercano, cada ponderado usado una vez)",pares,2181,2791,78.1,% sobre base,detector_ponderado.py
+POND_base_contraparte,ponderada,eventos base con al menos un traslape (sin exclusividad),eventos,2187,2791,78.4,23 con mas de un traslape,detector_ponderado.py
+POND_perdidos,ponderada,eventos base sin traslape (perdidos),eventos,604,2791,604,,comparacion_eventos_perdidos.csv
+POND_nuevos,ponderada,eventos ponderados sin traslape (nuevos),eventos,657,2861,657,2204 con contraparte,comparacion_eventos_nuevos.csv
+ARCO_n,arco,insignia con arco calculable,eventos,50,50,50,evento de mas menciones de cada uno de los 50 tickers principales; retorno acumulado sobre el cierre de la primera sesion del evento,arco_insignia.csv
+ARCO_dias_pos,arco,mediana del % de sesiones con retorno positivo dentro del evento,%,-,-,52.9,"p10 37.4, p90 71.8",arco_insignia.csv
+ARCO_max_mediano,arco,mediana del maximo intra-evento (puntos de retorno acumulado),puntos,-,-,56.0,,arco_insignia.csv
+ARCO_cierre_mediano,arco,mediana del cierre del evento (puntos),puntos,-,-,15.6,,arco_insignia.csv
+ARCO_10pts,arco,episodios que cierran al menos 10 puntos porcentuales bajo su maximo,eventos,37,50,37,bajo el maximo en cualquier magnitud: 43,arco_insignia.csv
+ARCO_fraccion_devuelta,arco,mediana por episodio de (maximo - cierre) / maximo,fraccion,-,-,0.584,"p25 0.219, p75 0.94, n con maximo > 0: 44",arco_insignia.csv
+ARCO_dos_medianas,arco,"(mediana del maximo - mediana del cierre) / mediana del maximo, la operacion de versiones anteriores",fraccion,-,-,0.722,no es la fraccion devuelta del episodio tipico,arco_insignia.csv
+ARCO_alt,arco,convencion alterna (base = ultimo cierre antes del encendido): mediana del maximo / cierre / >= 10 pts / fraccion devuelta,varios,-,-,64.6 / 36.9 / 36 de 49 / 0.474,,arco_insignia.csv
+CRUCE_v1,precios,eventos con cruce usando el panel v1 (CRSP 2020-2024 + Yahoo 2025-2026),eventos,2675,2791,2675,coinciden con eventos_con_precios.csv: 2675 de 2675,panel_precios_2020_2026_v1_yahoo25.csv
+CRUCE_v2,precios,eventos con cruce usando el panel con CRSP 2025 (crsp_v2) + Yahoo,eventos,2687,2791,2687,nuevos respecto del oficial: 12,panel_precios_2020_2026.csv
+CRUCE_dif_ret_encendido_pico,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_encendido_pico (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 20.6397,"n 458; con diferencia > 0.05: 5 (CVNA, GOLD, HCTI, OTLY, RIME); correlacion 0.7628",eventos_con_precios_crsp_v2.csv
+CRUCE_dif_vol_ratio_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de vol_ratio_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 56.86,"n 458; con diferencia > 0.5: 13 (ARBE, BYND, CVNA, FUBO, GCTK, GDC, NFLX, OTLY, RIME, SCWO, SXTP, TLRY, UPC); correlacion 0.9874",eventos_con_precios_crsp_v2.csv
+CRUCE_dif_ret_max_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_max_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 91.1764,"n 458; con diferencia > 0.05: 12 (CNSP, CVNA, DVLT, GOLD, HCTI, NCNA, NVNI, OTLY, RIME, SUNE, YAAS); correlacion 0.2307",eventos_con_precios_crsp_v2.csv
+GME_encendido,gme,menciones de GME el 13-ene-2021 (dia del encendido) y el dia anterior,menciones,10102,1095,10102,z de encendido 11.6,matriz_global_2020_2026.csv
+GME_pico,gme,maximo diario de GME (28-ene-2021) y maximo diario de cualquier ticker en toda la matriz,menciones,141957,141957,141957,fecha 2021-01-28,matriz_global_2020_2026.csv
+GME_max_previo,gme,maximo diario de cualquier ticker antes del 13-ene-2021,menciones,11306,-,11306,PLTR el 2020-11-27,matriz_global_2020_2026.csv
