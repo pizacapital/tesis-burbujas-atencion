@@ -24,7 +24,7 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | 8.1 | Estado de las hipótesis | - | - | compilada (veredictos de los capítulos 5 y 6) |
 | C.1 | Registro de correcciones sustantivas | - | bitácora del proyecto (documento de trabajo del autor, bajo solicitud) | compilada |
 | B.1 | Anclas del detector | `03_matrices_y_detector/anclas_detector.py` | `anclas_detector.csv`, `anclas_detector_eventos.csv`, `anclas_detector_series.csv` | repo (las series de las anclas están en el CSV; recalcularlas desde cero requiere la matriz global) |
-| E.1 | Estadística por ticker, top 20 | - (las series son columnas extraídas de la matriz maestra de submissions; los estadísticos se calcularon en sesión) | `03_matrices_y_detector/series/series_hist_submissions.csv` | sin script para los estadísticos (el CSV está en el repo) |
+| E.1 | Estadística por ticker, top 20 | - (las series son columnas extraídas de la matriz maestra de submissions, los 20 con más menciones desde la versión 051; los estadísticos se calcularon en sesión) | `03_matrices_y_detector/series/series_hist_submissions.csv` | sin script para los estadísticos (el CSV está en el repo) |
 | E.2 | Cox estáticos A y B | celda S4 de `supervivencia_eventos.ipynb` (05) | `cox_modelo_A_predictivo.csv`, `cox_modelo_B_descriptivo.csv` | repo |
 | E.3 | Robustez de la definición de evento (κ) | `07_robustez/celda_K3.py` (con `celda_K1.py` y `celda_K2.py`) | `07_robustez/robustez_kappa_integrado.csv` | local (re-detecta sobre la matriz global) |
 | E.4 | Fichas de las especificaciones | `fichas_especificaciones.py` (05) | `fichas_especificaciones.csv` (lee las salidas de las demás especificaciones) | repo |
@@ -59,7 +59,7 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | 5.6 | Asimetría optimista en seis plataformas | `10_figuras_manuscrito/figuras_manuscrito.py` | cocientes compra/venta de la sección 5.5, literales en el script; escribe `figuras/figura_5_6.png` | compilada (el script dibuja las cifras del texto) |
 | 6.1 | HR del desacuerdo bajo tres definiciones de evento | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `07_robustez/robustez_kappa_integrado.csv`; escribe `figuras/figura_6_1.png` | repo |
 | E.1 | Histogramas, muestra alfabética | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/series_hist_submissions.csv` (primeras 20 columnas); escribe `figuras/figura_E1.png` | repo |
-| E.2 | Histogramas, top 20 | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem (columnas 21 a 40); escribe `figuras/figura_E2.png` | repo |
+| E.2 | Histogramas, top 20 | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem (los 20 tickers de mayor suma de la serie, que son los 20 con más menciones en la matriz maestra de submissions; AAPL está también en la muestra alfabética, versión 051); escribe `figuras/figura_E2.png` | repo |
 | E.3 | Arcos de las 50 insignia (dos paneles) | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem 4.3; escribe `figuras/figura_E3_a.png` y `figura_E3_b.png` | local |
 | I.1 | Algoritmo del detector | - | - | diagrama |
 

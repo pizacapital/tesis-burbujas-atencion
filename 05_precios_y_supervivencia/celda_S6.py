@@ -12,7 +12,9 @@
 #      PREDICCION de duraciones por perfil de evento. Covariables estaticas del
 #      modelo B + sentimiento temprano (B y D promedio de los dias 0-2, es
 #      decir, informacion disponible al tercer dia del evento).
-# Salidas: supervivencia/cox_ph_interacciones.csv y weibull_aft.csv
+# Salidas: supervivencia/cox_ph_interacciones.csv, weibull_aft.csv y weibull_aft_escenarios.csv
+#   (escenarios: medianas predichas por perfil; los dos escenarios aislados, desacuerdo alto solo y
+#   optimismo bajo solo, separan el efecto de cada variable dentro del debate temprano, seccion 5.4)
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -116,17 +118,23 @@ escenarios = {
  'mediano en todo': {},
  'coro unanime temprano (D bajo=0.15, B alto=2.0)': {'d_temprano': 0.15, 'b_temprano': 2.0},
  'debate temprano (D alto=0.8, B bajo=0.5)': {'d_temprano': 0.8, 'b_temprano': 0.5},
+ 'desacuerdo temprano alto solo (D=0.8, B en su mediana)': {'d_temprano': 0.8},
+ 'optimismo temprano bajo solo (B=0.5, D en su mediana)': {'b_temprano': 0.5},
  'mediano pero desacoplado del precio': {'desacoplado': 1},
  'mediano y sincronico con el precio': {'desacoplado': 0},
 }
 print('\nduracion mediana PREDICHA por perfil (Weibull; el resto en su mediana):')
+filas_esc = []
 for nombre, cambios in escenarios.items():
     x = perfil_base.copy()
     for k, v in cambios.items():
         x[k] = v
     pred = float(wf.predict_median(x).iloc[0])
     print(f'  {nombre}: {pred:.1f} dias')
-print('\nguardado: supervivencia/cox_ph_interacciones.csv y weibull_aft.csv')
+    filas_esc.append({'escenario': nombre, 'd_temprano': float(x.d_temprano.iloc[0]),
+                      'b_temprano': float(x.b_temprano.iloc[0]), 'mediana_dias': pred})
+pd.DataFrame(filas_esc).to_csv(SUP / 'weibull_aft_escenarios.csv', index=False)
+print('\nguardado: supervivencia/cox_ph_interacciones.csv, weibull_aft.csv y weibull_aft_escenarios.csv')
 print('nota honesta: b/d tempranos usan los dias 0-2, asi que la prediccion es '
       'valida a partir del dia 3 del evento; y la comparacion de perfiles es '
       'condicional, no causal.')

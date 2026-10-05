@@ -11,7 +11,9 @@
 # Insumos:
 #   datos_derivados/eventos_atencion_v2_principal_final.csv         catalogo (2.1, 4.2, 4.3, 5.1, E.3)
 #   03_matrices_y_detector/acciones_principales_top50.csv            los 50 tickers principales (2.1, 4.3, E.3)
-#   03_matrices_y_detector/series/series_hist_submissions.csv        20 tickers alfabeticos + 20 mas mencionados (3.2, E.1, E.2)
+#   03_matrices_y_detector/series/series_hist_submissions.csv        20 tickers alfabeticos + los 20 con mas menciones en la
+#        matriz maestra de submissions (3.2, E.1, E.2); AAPL esta en las dos muestras y aparece una sola vez como columna,
+#        por eso E.2 toma los 20 de mayor suma de la serie (version 051) y no las columnas 21 a 40
 #   03_matrices_y_detector/series/serie_gme_submissions.csv, serie_gme_comments.csv   (4.2)
 #   07_robustez/robustez_kappa_integrado.csv                         (6.1)
 #   $TESIS_BASE/Desarrollo/Metodologia/Matrix/eventos/panel_precios_2020_2026.csv   panel local con CRSP 2020-2025 (4.3, E.3)
@@ -215,7 +217,9 @@ def _hist_20(cols, salida, figura):
     fig.supxlabel('Menciones diarias (escala logarítmica, 1 + menciones)'); fig.supylabel('Días (escala logarítmica)')
     fig.tight_layout(); fig.savefig(FIG / salida); plt.close(fig)
 def fig_E_1(): _hist_20(list(series_hist().columns[:20]), 'figura_E1.png', 'E.1')
-def fig_E_2(): _hist_20(list(series_hist().columns[20:40]), 'figura_E2.png', 'E.2')
+def fig_E_2():
+    s = series_hist(); top = list(s.sum().sort_values(ascending=False).index[:20])   # los 20 con mas menciones, AAPL incluido
+    _hist_20(top, 'figura_E2.png', 'E.2')
 
 FIGURAS = {'2.1': fig_2_1, '3.2': fig_3_2, '4.2': fig_4_2, '4.3': fig_4_3, '5.1': fig_5_1, '5.6': fig_5_6, '6.1': fig_6_1, 'E.1': fig_E_1, 'E.2': fig_E_2, 'E.3': fig_E_3}
 if __name__ == '__main__':
