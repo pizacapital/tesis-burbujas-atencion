@@ -250,8 +250,12 @@ m = c1.merge(c2, on='k', suffixes=('_v1', '_v2')); m25 = m[m.anio_v1 >= 2025]
 for col in ['ret_encendido_pico', 'vol_ratio_evento', 'ret_max_evento']:
     d = (m25[col + '_v1'] - m25[col + '_v2']).abs()
     umbral = 0.05 if col.startswith('ret') else 0.5; afect = m25[d > umbral]
+    # cuenta eventos y tickers por separado (un ticker puede tener mas de un evento, por ejemplo GOLD en ret_max_evento)
+    cnt = afect.k.str.split('_').str[0].value_counts(); palabra = {2: 'dos', 3: 'tres', 4: 'cuatro'}
+    lista = ', '.join(t + (f' con {palabra.get(cnt[t], cnt[t])} eventos' if cnt[t] > 1 else '') for t in sorted(cnt.index))
+    cuenta = f'{len(afect)}' if len(afect) == len(cnt) else f'{len(afect)} eventos de {len(cnt)} tickers'
     fila(f'CRUCE_dif_{col}', 'precios', f'eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de {col} (v1 contra crsp_v2)', 'unidades de la covariable', '-', '-',
-         f'{round(d.median(), 4)} / {round(d.max(), 4)}', f'n {len(m25)}; con diferencia > {umbral}: {len(afect)} ({", ".join(sorted(set(afect.k.str.split("_").str[0])))}); correlacion {round(m25[col + "_v1"].corr(m25[col + "_v2"]), 4)}', 'eventos_con_precios_crsp_v2.csv')
+         f'{round(d.median(), 4)} / {round(d.max(), 4)}', f'n {len(m25)}; con diferencia > {umbral}: {cuenta} ({lista}); correlacion {round(m25[col + "_v1"].corr(m25[col + "_v2"]), 4)}', 'eventos_con_precios_crsp_v2.csv')
 
 # --- 11. umbral de GME en enero de 2021 -------------------------------------------------------------------------------
 print('== 11. GME')
