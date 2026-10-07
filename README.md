@@ -10,7 +10,7 @@ El orden de las carpetas sigue el orden del pipeline (capítulos 3 a 7 de la tes
 
 | Carpeta | Contenido | Capítulo |
 |---|---|---|
-| `01_padron_maestro/` | Padrón de vigencias ticker-permno 2020-2026 desde CRSP, enriquecimiento (Nasdaq, SEC/EDGAR, Yahoo) y reconciliación con CRSP 2025 | 3.1, 4 |
+| `01_padron_maestro/` | Padrón de vigencias ticker-permno 2020-2026 desde CRSP, enriquecimiento (Nasdaq, SEC/EDGAR, CRSP y Compustat) y reconciliación con CRSP 2025 | 3.1, 4 |
 | `02_ingestion/` | Ingestión por plataforma: Reddit (dumps), X, TikTok (video y transcripción), Instagram, YouTube, StockTwits, Google Trends y noticias (GDELT/BigQuery, earnings vía WRDS) | 3 |
 | `03_matrices_y_detector/` | Matrices globales de menciones (buscador con 10 pasadas de auditoría) y el detector de eventos: encendido por z-score con triple candado y extinción por doble línea | 3.8, 4.2 |
 | `04_clasificador/` | Clasificador de sentimiento: panel de anotación con 4 LLMs, fine-tuning (v1, v2a, v2b, v2c), duelos contra el patrón oro humano y clasificación masiva | 4.4-4.5 |

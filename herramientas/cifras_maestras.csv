@@ -36,14 +36,14 @@ TT_gme_corr,tiktok,correlacion de log(1+videos) con log(1+mensajes de Reddit),co
 X_dias_con_tweets,x,dias-ventana con tweets (filas de bt_x_ventanas),dias,2374,-,2374,"846,799 tweets con B/D",bt_x_ventanas.csv
 X_dias_ventana,x,dias-ventana de la serie multiplataforma (50 insignia),dias,2412,-,2412,"846,799 tweets",serie_multiplataforma.csv
 PX_crsp,precios,filas ticker-dia del panel con fuente crsp,filas,935089,-,935089,2020-01-02 a 2024-12-31; 987 tickers,panel_precios_2020_2026.csv
-PX_crsp_v2,precios,filas ticker-dia del panel con fuente crsp_v2,filas,163777,-,163777,2025-01-02 a 2025-12-31; 667 tickers,panel_precios_2020_2026.csv
-PX_yahoo,precios,filas ticker-dia del panel con fuente yahoo,filas,33744,-,33744,2025-01-02 a 2026-06-30; 244 tickers,panel_precios_2020_2026.csv
+PX_crsp_m,precios,filas ticker-dia del panel con fuente crsp_m,filas,29445,-,29445,2026-01-02 a 2026-06-30; 242 tickers,panel_precios_2020_2026.csv
+PX_crsp_v2,precios,filas ticker-dia del panel con fuente crsp_v2,filas,167703,-,167703,2025-01-02 a 2025-12-31; 688 tickers,panel_precios_2020_2026.csv
 FL_catalogo,flujo,eventos del catalogo principal,eventos,2791,-,2791,,eventos_atencion_v2_principal_final.csv
-FL_con_precios,flujo,eventos con cruce de precios,eventos,2687,2791,2687,cruce: >= 5 sesiones en los 30 dias previos y >= 2 dentro del evento,eventos_con_precios.csv
-FL_covariables,flujo,eventos con covariables completas (modelo integrado),eventos,2648,2687,2648,39 sin retorno encendido-pico (pico sin cierre asignable),eventos_con_precios.csv
-FL_sin_precio_simbolo_con_menos_de,flujo,"eventos sin cruce de precios: simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas",eventos,96,104,96,,eventos_sin_precio_causas.csv
-FL_sin_precio_episodio_sin_dos_ses,flujo,eventos sin cruce de precios: episodio sin dos sesiones bursatiles (fin de semana o feriado),eventos,5,104,5,,eventos_sin_precio_causas.csv
-FL_sin_precio_hueco_de_precios_en_,flujo,eventos sin cruce de precios: hueco de precios en los 30 dias previos,eventos,3,104,3,,eventos_sin_precio_causas.csv
+FL_con_precios,flujo,eventos con cruce de precios,eventos,2685,2791,2685,cruce: >= 5 sesiones en los 30 dias previos y >= 2 dentro del evento,eventos_con_precios.csv
+FL_covariables,flujo,eventos con covariables completas (modelo integrado),eventos,2646,2685,2646,39 sin retorno encendido-pico (pico sin cierre asignable),eventos_con_precios.csv
+FL_sin_precio_simbolo_con_menos_de,flujo,"eventos sin cruce de precios: simbolo con menos de 30 dias de cotizacion al encender (OPI, SPAC o renombre): sin 5 sesiones previas",eventos,98,106,98,,eventos_sin_precio_causas.csv
+FL_sin_precio_episodio_sin_dos_ses,flujo,eventos sin cruce de precios: episodio sin dos sesiones bursatiles (fin de semana o feriado),eventos,5,106,5,,eventos_sin_precio_causas.csv
+FL_sin_precio_hueco_de_precios_en_,flujo,eventos sin cruce de precios: hueco de precios en los 30 dias previos,eventos,3,106,3,,eventos_sin_precio_causas.csv
 INS_cat_11,instrumentos,eventos del catalogo por instrumento: accion comun (shrcd 11),eventos,2303,2791,2303,,catalogo_instrumentos.csv
 INS_cat_12,instrumentos,eventos del catalogo por instrumento: accion comun de emisora incorporada fuera de EE.UU. (12),eventos,291,2791,291,,catalogo_instrumentos.csv
 INS_cat_31,instrumentos,eventos del catalogo por instrumento: ADR (31),eventos,130,2791,130,,catalogo_instrumentos.csv
@@ -69,11 +69,11 @@ ARCO_10pts,arco,episodios que cierran al menos 10 puntos porcentuales bajo su ma
 ARCO_fraccion_devuelta,arco,mediana por episodio de (maximo - cierre) / maximo,fraccion,-,-,0.538,"p25 0.199, p75 0.89, n con maximo > 0: 44",arco_insignia.csv
 ARCO_dos_medianas,arco,"(mediana del maximo - mediana del cierre) / mediana del maximo, la operacion de versiones anteriores",fraccion,-,-,0.675,no es la fraccion devuelta del episodio tipico,arco_insignia.csv
 ARCO_alt,arco,convencion alterna (base = ultimo cierre antes del encendido): mediana del maximo / cierre / >= 10 pts / fraccion devuelta,varios,-,-,62.6 / 35.2 / 36 de 50 / 0.453,,arco_insignia.csv
-CRUCE_v1,precios,eventos con cruce usando el panel v1 (CRSP 2020-2024 + Yahoo 2025-2026),eventos,2675,2791,2675,coinciden con eventos_con_precios.csv: 2675 de 2687,panel_precios_2020_2026_v1_yahoo25.csv
-CRUCE_v2,precios,eventos con cruce usando el panel con CRSP 2025 (crsp_v2) + Yahoo,eventos,2687,2791,2687,nuevos respecto del oficial: 0,panel_precios_2020_2026.csv
-CRUCE_dif_ret_encendido_pico,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_encendido_pico (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 20.6397,"n 458; con diferencia > 0.05: 5 (CVNA, GOLD, HCTI, OTLY, RIME); correlacion 0.7628",eventos_con_precios_crsp_v2.csv
-CRUCE_dif_vol_ratio_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de vol_ratio_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 56.86,"n 458; con diferencia > 0.5: 13 (ARBE, BYND, CVNA, FUBO, GCTK, GDC, NFLX, OTLY, RIME, SCWO, SXTP, TLRY, UPC); correlacion 0.9874",eventos_con_precios_crsp_v2.csv
-CRUCE_dif_ret_max_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_max_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 91.1764,"n 458; con diferencia > 0.05: 12 eventos de 11 tickers (CNSP, CVNA, DVLT, GOLD con dos eventos, HCTI, NCNA, NVNI, OTLY, RIME, SUNE, YAAS); correlacion 0.2307",eventos_con_precios_crsp_v2.csv
+CRUCE_v1,precios,eventos con cruce usando el panel v1 (CRSP 2020-2024 + Yahoo 2025-2026),eventos,2675,2791,2675,coinciden con eventos_con_precios.csv: 2673 de 2685,panel_precios_2020_2026_v1_yahoo25.csv
+CRUCE_v2,precios,eventos con cruce usando el panel solo con CRSP (anual 2020-2025 y mensual 2026),eventos,2685,2791,2685,nuevos respecto del oficial: 0,panel_precios_2020_2026.csv
+CRUCE_dif_ret_encendido_pico,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_encendido_pico (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 27.26,"n 456; con diferencia > 0.05: 6 (CVNA, GOLD, HCTI, NWTG, OTLY, RIME); correlacion 0.4968",eventos_con_precios_crsp_v2.csv
+CRUCE_dif_vol_ratio_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de vol_ratio_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 56.86,"n 456; con diferencia > 0.5: 14 (ARBE, BYND, CVNA, FUBO, GCTK, GDC, NFLX, NWTG, OTLY, RIME, SCWO, SXTP, TLRY, UPC); correlacion 0.9863",eventos_con_precios_crsp_v2.csv
+CRUCE_dif_ret_max_evento,precios,eventos de 2025-2026 comunes a ambos cruces: diferencia absoluta mediana / maxima de ret_max_evento (v1 contra crsp_v2),unidades de la covariable,-,-,0.0 / 91.1764,"n 456; con diferencia > 0.05: 14 eventos de 13 tickers (CNSP, CVNA, DVLT, GOLD con dos eventos, HCTI, HUBC, NCNA, NVNI, NWTG, OTLY, RIME, SUNE, YAAS); correlacion 0.2316",eventos_con_precios_crsp_v2.csv
 GME_encendido,gme,menciones de GME el 13-ene-2021 (dia del encendido) y el dia anterior,menciones,10102,1095,10102,z de encendido 11.6,matriz_global_2020_2026.csv
 GME_pico,gme,maximo diario de GME (28-ene-2021) y maximo diario de cualquier ticker en toda la matriz,menciones,141957,141957,141957,fecha 2021-01-28,matriz_global_2020_2026.csv
 GME_max_previo,gme,maximo diario de cualquier ticker antes del 13-ene-2021,menciones,11306,-,11306,PLTR el 2020-11-27,matriz_global_2020_2026.csv

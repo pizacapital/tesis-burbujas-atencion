@@ -16,7 +16,7 @@ BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
 MX = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix'; EV = MX / 'eventos'; MAE = MX / 'maestras'
 CLAS = BASE / 'Desarrollo' / 'Metodologia' / 'Clasificador'; CODE = BASE / 'Code'
 IG = BASE / 'Desarrollo' / 'Plataformas' / '03 Instagram'
-PADRON = BASE / 'Desarrollo' / 'Metodologia' / 'Lista Maestra de Tickers' / 'Lista maestra V2' / 'padron_vigencias_2020_2026_ver03_4.csv'
+PADRON = BASE / 'Desarrollo' / 'Metodologia' / 'Lista Maestra de Tickers' / 'Lista maestra V2' / 'padron_vigencias_2020_2026_ver03_5.csv'
 FIG = BASE / 'Figuras'
 t0 = time.time()
 F = []
@@ -225,7 +225,7 @@ alt = arco.dropna(subset=['alt_max_pts'])
 fila('ARCO_alt', 'arco', 'convencion alterna (base = ultimo cierre antes del encendido): mediana del maximo / cierre / >= 10 pts / fraccion devuelta', 'varios', '-', '-',
      f'{round(alt.alt_max_pts.median(),1)} / {round(alt.alt_cierre_pts.median(),1)} / {int((alt.alt_caida_pts >= 10).sum())} de {len(alt)} / {round(alt.alt_fraccion_devuelta.median(),3)}', '', 'arco_insignia.csv')
 
-# --- 10b. cruce de precios: panel vigente (CRSP 2020-2024 + Yahoo) contra panel con CRSP 2025 ----------------------------
+# --- 10b. cruce de precios: panel v1 (CRSP 2020-2024 + Yahoo 2025-2026) contra el panel oficial, solo CRSP (anual 2020-2025 y mensual 2026)
 print('== 10b. cruce con el panel crsp_v2 (2025) contra el cruce oficial')
 def cruce(pp_):
     por = {tk: g.set_index('date').sort_index() for tk, g in pp_.groupby('ticker')}; out = []
@@ -244,7 +244,7 @@ pv2 = pd.read_csv(EV / 'panel_precios_2020_2026.csv', usecols=['ticker', 'date',
 c1, c2 = cruce(pv1), cruce(pv2); c2.to_csv(EV / 'eventos_con_precios_crsp_v2.csv', index=False)
 fila('CRUCE_v1', 'precios', 'eventos con cruce usando el panel v1 (CRSP 2020-2024 + Yahoo 2025-2026)', 'eventos', len(c1), len(cat), len(c1),
      f'coinciden con eventos_con_precios.csv: {len(set(c1.k) & set(cp.k))} de {len(cp)}', 'panel_precios_2020_2026_v1_yahoo25.csv')
-fila('CRUCE_v2', 'precios', 'eventos con cruce usando el panel con CRSP 2025 (crsp_v2) + Yahoo', 'eventos', len(c2), len(cat), len(c2),
+fila('CRUCE_v2', 'precios', 'eventos con cruce usando el panel solo con CRSP (anual 2020-2025 y mensual 2026)', 'eventos', len(c2), len(cat), len(c2),
      f'nuevos respecto del oficial: {len(set(c2.k) - set(cp.k))}', 'panel_precios_2020_2026.csv')
 m = c1.merge(c2, on='k', suffixes=('_v1', '_v2')); m25 = m[m.anio_v1 >= 2025]
 for col in ['ret_encendido_pico', 'vol_ratio_evento', 'ret_max_evento']:
