@@ -7,6 +7,9 @@ from pathlib import Path
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+fuente_figuras()
 V1, V2, FILL, GRIS, ROJO = '#00684A', '#1A5742', '#F1F7F4', '#4D4D4D', '#B0332A'
 fig, ax = plt.subplots(figsize=(11, 5)); ax.set_xlim(0, 110); ax.set_ylim(0, 50); ax.axis('off')
 cajas = [(50, 43, 52, 7.5, 'Patrón de referencia: 946 mensajes', 'consenso de 4 LLMs (823) + adjudicación del autor (123)'),

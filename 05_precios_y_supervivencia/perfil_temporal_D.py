@@ -22,6 +22,9 @@ from lifelines import CoxTimeVaryingFitter
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+fuente_figuras()
 
 import os
 BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))

@@ -8,7 +8,9 @@ import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 V2, AZUL, ROJO, GRIS, FONDO = '#1A5742', '#2F5F8F', '#B0332A', '#555555', '#F3F4F3'
-plt.rcParams['font.family'] = 'DejaVu Sans'
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+CURSIVA = fuente_figuras()
 fig, ax = plt.subplots(figsize=(9.4, 5.6)); ax.set_xlim(0, 190); ax.set_ylim(0, 112); ax.axis('off')
 def caja(x, y, w, h, t1, t2=None, borde=V2, fondo='white', lw=1.8, f1=8.7, f2=7.7):
     ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle='round,pad=0,rounding_size=1.2', facecolor=fondo, edgecolor=borde, linewidth=lw))
@@ -23,7 +25,7 @@ def flecha(puntos, color=GRIS):
 fuentes = ['Reddit\n(dumps + API)', 'X', 'TikTok', 'Instagram', 'YouTube', 'StockTwits']
 for i, f in enumerate(fuentes):
     caja(1 + i * 21.2, 96, 20, 12, f, borde='#5A5A5A', fondo=FONDO, lw=1.4, f1=7.4 if i == 0 else 8.6)
-ax.text(1 + 21.2, 92.6, 'validación multiplataforma de la señal (sección 5.5)', ha='left', va='center', fontsize=8.3, style='italic', color=GRIS)
+ax.text(1 + 21.2, 92.6, 'validación multiplataforma de la señal (sección 5.5)', ha='left', va='center', fontsize=8.3, style=CURSIVA, color=GRIS)
 caja(132, 96, 55, 12, 'Precios y volumen', 'CRSP / WRDS', borde=AZUL, f1=9.4, f2=8.2)
 # fila 1: padron, matrices, detector, catalogo
 X = [1, 49, 97, 145]; W = 42

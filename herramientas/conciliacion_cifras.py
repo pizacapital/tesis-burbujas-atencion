@@ -257,6 +257,9 @@ fila('GME_max_previo', 'gme', 'maximo diario de cualquier ticker antes del 13-en
 pd.DataFrame(F).to_csv(EV / 'cifras_maestras.csv', index=False)
 print('== 12. figura 5.6 regenerada desde careo_plataformas_kappa.csv')
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+fuente_figuras()
 k = pd.read_csv(EV / 'careo_plataformas_kappa.csv')
 fig, ax = plt.subplots(figsize=(9, 5), dpi=200)
 for nombre, careo, color, marca in [('TikTok', 'TikTok-Reddit por evento', '#C0392B', 'o'), ('Instagram', 'Instagram-Reddit por evento', '#2E6DA4', 's'), ('YouTube', 'YouTube-Reddit por evento', '#00684A', '^')]:

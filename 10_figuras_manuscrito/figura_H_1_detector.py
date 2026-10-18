@@ -9,26 +9,28 @@ import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Polygon, FancyArrowPatch
 V1, V2, ROJO, AZUL, GRIS, TXT = '#00684A', '#1A5742', '#B0332A', '#2F5F8F', '#4D4D4D', '#222222'
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'mathtext.fontset': 'dejavusans'})
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+CURSIVA = fuente_figuras()
 fig, ax = plt.subplots(figsize=(9.0, 12.6)); ax.set_xlim(0, 100); ax.set_ylim(0, 140); ax.axis('off')
 FS = 9.4
-def caja(x, y, w, h, txt, borde=V2, fondo='white', lw=1.6, fs=FS, color=TXT, ls='-', rs=1.4):
+def caja(x, y, w, h, txt, borde=V2, fondo='white', lw=1.6, fs=FS, color=TXT, ls='-', rs=1.4, interlinea=1.55):
     ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle=f'round,pad=0,rounding_size={rs}', facecolor=fondo, edgecolor=borde, linewidth=lw, linestyle=ls))
-    ax.text(x + w / 2, y + h / 2, txt, ha='center', va='center', fontsize=fs, color=color, linespacing=1.55)
+    ax.text(x + w / 2, y + h / 2, txt, ha='center', va='center', fontsize=fs, color=color, linespacing=interlinea)
 def rombo(cx, cy, w, h, txt):
     ax.add_patch(Polygon([(cx, cy + h / 2), (cx + w / 2, cy), (cx, cy - h / 2), (cx - w / 2, cy)], closed=True, facecolor='#FBF4F3', edgecolor=ROJO, linewidth=1.8))
     ax.text(cx, cy, txt, ha='center', va='center', fontsize=FS, color=TXT, linespacing=1.55)
 def flecha(puntos):
     for a, b in zip(puntos[:-2], puntos[1:-1]): ax.plot([a[0], b[0]], [a[1], b[1]], color=GRIS, lw=1.4)
     ax.add_patch(FancyArrowPatch(puntos[-2], puntos[-1], arrowstyle='-|>', mutation_scale=11, color=GRIS, lw=1.4, shrinkA=0, shrinkB=0))
-def etiqueta(x, y, t): ax.text(x, y, t, fontsize=9.5, style='italic', color=GRIS, ha='left', va='center')
+def etiqueta(x, y, t): ax.text(x, y, t, fontsize=9.5, style=CURSIVA, color=GRIS, ha='left', va='center')
 def seccion(y, t):
     ax.text(2, y, t, fontsize=13, fontweight='bold', color=V1, ha='left', va='bottom'); ax.plot([2, 98], [y - 1.0, y - 1.0], color=V1, lw=1.6)
 # --- variables de entrada y parametros
 seccion(134.5, 'Variables de entrada y parámetros')
-caja(2, 116, 46, 15, r'$\bf{Entrada}$' + '\n' + r'Serie diaria de menciones $m_t$ por ticker,' + '\nde la matriz maestra de Reddit\n(submissions y comments, 2020-2026)', fs=9.6)
-caja(52, 116, 46, 15, r'$\bf{Parámetros\ del\ detector}$' + '\n' + 'Base móvil: 30 días previos (mínimo 15,\nexcluye el día evaluado);  ' + r'$z^{*} = 4$,  $m_t \geq 30$' + '\n'
-     + r'$\kappa = 0.25$;  extinción: 5 días bajo $U$' + '\n' + r'catálogo: $\geq 3$ días y $\geq 300$ menciones', fs=9.3)
+caja(2, 115, 46, 16.5, r'$\bf{Entrada}$' + '\n' + r'Serie diaria de menciones $m_t$ por ticker,' + '\nde la matriz maestra de Reddit\n(submissions y comments, 2020-2026)', fs=9.6, interlinea=1.4)
+caja(52, 115, 46, 16.5, r'$\bf{Parámetros\ del\ detector}$' + '\n' + 'Base móvil: 30 días previos (mínimo 15,\nexcluye el día evaluado);  ' + r'$z^{*} = 4$,  $m_t \geq 30$' + '\n'
+     + r'$\kappa = 0.25$;  extinción: 5 días bajo $U$' + '\n' + r'catálogo: $\geq 3$ días y $\geq 300$ menciones', fs=9.3, interlinea=1.3)
 # --- algoritmo
 seccion(110, 'Algoritmo: encendido y extinción de un evento de atención')
 caja(33, 100, 34, 6, r'Siguiente día $t$ del ticker', borde='#5A5A5A', fondo='#F2F2F2', rs=2.5)

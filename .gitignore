@@ -19,3 +19,8 @@ __pycache__/
 # Sistema
 .DS_Store
 ._*
+
+# Fuentes con licencia de terceros (Segoe UI): se leen de una carpeta local, nunca se versionan
+*.ttf
+*.otf
+Segoe-fonts-Microsoft/

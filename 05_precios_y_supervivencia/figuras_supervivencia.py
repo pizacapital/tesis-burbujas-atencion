@@ -14,7 +14,10 @@ from lifelines import KaplanMeierFitter
 import os
 BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')); SUP = BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos' / 'supervivencia'; FIG = BASE / 'Figuras'
 VERDE, AZUL, ROJO, GRIS = '#00684A', '#2C6A9E', '#B3402A', '#6E6E6E'
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'axes.spines.top': False, 'axes.spines.right': False})
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+fuente_figuras()
+plt.rcParams.update({'axes.spines.top': False, 'axes.spines.right': False})
 
 # --- Figura 5.3: Kaplan-Meier por acoplamiento, bandas de Greenwood y numero en riesgo ---------------------------------------
 sup = pd.read_csv(SUP / 'tabla_supervivencia.csv', keep_default_na=False, na_values=[''])

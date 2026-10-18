@@ -9,7 +9,9 @@ import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, FancyArrowPatch
 V1, V2, GRIS, SOMBRA, TXT = '#00684A', '#1A5742', '#555555', '#E4EFEA', '#222222'
-plt.rcParams['font.family'] = 'DejaVu Sans'
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+CURSIVA = fuente_figuras()
 cols = ['GME', 'AMC', 'TSLA', 'BBBY', 'NVDA', 'PLTR', '···', 'ZM']
 filas = [('1-ene-2020', ['12', '3', '208', '0', '5', '9', '', '1']), ('2-ene-2020', ['15', '4', '233', '1', '7', '12', '', '0']),
          ('3-ene-2020', ['9', '2', '187', '0', '4', '8', '', '2']), ('⋮', [''] * 8),
@@ -31,7 +33,7 @@ for i, (fecha, vals) in enumerate(filas):
     ax.text(x0 - 0.2, y + h / 2, fecha, ha='right', va='center', fontsize=10 if fecha != '⋮' else 13, fontweight='bold', color=GRIS)
 # rotulo del pico de GME: a la izquierda de su fecha, sin tapar los puntos suspensivos
 yp = ytop - h * 5 + h / 2
-ax.text(-3.75, yp, 'pico de GME', ha='right', va='center', fontsize=9.5, style='italic', fontweight='bold', color=V2)
+ax.text(-3.75, yp, 'pico de GME', ha='right', va='center', fontsize=9.5, style=CURSIVA, fontweight='bold', color=V2)
 # definicion de la celda: la flecha baja entre los encabezados a la celda vacia de la columna de puntos suspensivos
 y1 = ytop - h / 2
 ax.text(10.2, ytop + 1.75, r'$x_{i,t}$ = menciones del ticker $i$ el día $t$' + '\n(máximo una por mensaje; fechado por created_utc)', ha='left', va='center', fontsize=10.5, fontweight='bold', color=TXT)
@@ -43,6 +45,6 @@ ax.text(xr + 1.0, (ytop + yb) / 2 + 1.3, 'Filas: 2,373 días calendario\n(1-ene-
 ax.text(xr + 1.0, yb + 1.25, 'Dos maestras gemelas:\nsubmissions y comments\n(27,808,858 menciones\nconservadas); la global es\nla suma de las 16 matrices\npor subreddit', ha='left', va='center', fontsize=9.5, fontweight='bold', color=GRIS)
 ax.add_patch(FancyArrowPatch((x0, yb - 0.5), (xr, yb - 0.5), arrowstyle='<|-|>', mutation_scale=12, color=V1, lw=1.6))
 ax.text(xr / 2, yb - 1.0, 'Columnas: tickers vigentes del padrón maestro (vidas fechadas)', ha='center', va='center', fontsize=11, fontweight='bold', color=V1)
-ax.text(xr / 2, yb - 1.75, 'Valores ilustrativos, salvo el pico de GME (141,957 menciones el 28-ene-2021, dato real del catálogo).', ha='center', va='center', fontsize=9, style='italic', fontweight='bold', color=GRIS)
+ax.text(xr / 2, yb - 1.75, 'Valores ilustrativos, salvo el pico de GME (141,957 menciones el 28-ene-2021, dato real del catálogo).', ha='center', va='center', fontsize=9, style=CURSIVA, fontweight='bold', color=GRIS)
 FIG = Path(__file__).resolve().parent / 'figuras'; FIG.mkdir(exist_ok=True)
 fig.savefig(FIG / 'figura_3_1.png', dpi=250, bbox_inches='tight', facecolor='white'); print('ok')

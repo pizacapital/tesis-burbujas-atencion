@@ -38,7 +38,10 @@ TESIS_BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thes
 PANEL = TESIS_BASE / 'Desarrollo' / 'Metodologia' / 'Matrix' / 'eventos' / 'panel_precios_2020_2026.csv'
 
 VERDE, VERDE2, VERDE_CLARO, ROJO, GRIS = '#00684A', '#1A5742', '#A9C8BB', '#B03A2E', '#6E6E6E'
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'axes.spines.top': False, 'axes.spines.right': False, 'savefig.dpi': 300})
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herramientas'))
+from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
+CURSIVA = fuente_figuras()
+plt.rcParams.update({'axes.spines.top': False, 'axes.spines.right': False, 'savefig.dpi': 300})
 CIFRAS = []
 # Formato comun (18-oct-2026, version 064): coma de miles en los ejes y fechas en espanol (mes abreviado y ano a dos cifras).
 MESES_ES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
