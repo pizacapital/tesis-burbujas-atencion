@@ -265,7 +265,8 @@ for nombre, careo, color, marca in [('TikTok', 'TikTok-Reddit por evento', '#C03
     ax.plot([0, 1, 2], 100 * s.acuerdo_observado, color=color, marker=marca, lw=2, ms=8, label=f'{nombre}, observado (n = {ns})')
     ax.plot([0, 1, 2], 100 * s.acuerdo_esperado, color=color, ls='--', lw=1.5, alpha=.8, label=f'{nombre}, esperado por prevalencias')
 ax.set_xticks([0, 1, 2]); ax.set_xticklabels(['≥ 3 direccionales', '≥ 5', '≥ 10']); ax.set_ylim(60, 101); ax.set_ylabel('Acuerdo de signo con Reddit (%)')
-ax.grid(alpha=.3); ax.spines[['top', 'right']].set_visible(False); ax.legend(fontsize=8, loc='lower right', ncol=1, frameon=False)
+ax.grid(alpha=.3); ax.spines[['top', 'right']].set_visible(False)
+ax.legend(fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=3, frameon=False)   # fuera del area de datos (version 064)
 FIG.mkdir(exist_ok=True); fig.tight_layout(); fig.savefig(FIG / 'figura_5_5_acuerdo_plataformas_v2.png'); plt.close(fig)
 print(f'\nguardado: eventos/cifras_maestras.csv ({len(F)} filas), eventos_sin_precio_causas.csv, catalogo_instrumentos.csv, arco_insignia.csv, '
       f'conciliacion_ponderada.csv, eventos_con_precios_crsp_v2.csv; Figuras/figura_5_5_acuerdo_plataformas_v2.png ({time.time() - t0:.0f} s)')

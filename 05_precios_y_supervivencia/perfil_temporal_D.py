@@ -130,6 +130,7 @@ rr = riesgo[riesgo.t <= T_MAX]
 ax2.bar(rr.t, rr.muertes, color=ROJO, alpha=0.8, width=0.8, label='muertes en el día')
 ax2.set_ylabel('muertes'); ax2.set_xlabel('Edad del evento (días; 1 = día del encendido)')
 ax3 = ax2.twinx(); ax3.plot(rr.t, rr.en_riesgo, color=VERDE, lw=1.6, label='eventos en riesgo'); ax3.set_ylabel('en riesgo', color=VERDE)
+ax3.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, p: f'{v:,.0f}'))   # coma de miles (version 064)
 ax2.axvspan(0.5, primer_dia_con_muertes - 0.5, color=GRIS, alpha=0.18, lw=0)
 h1, l1 = ax2.get_legend_handles_labels(); h2, l2 = ax3.get_legend_handles_labels(); ax2.legend(h1 + h2, l1 + l2, loc='upper right', fontsize=8.5, frameon=False)
 ax2.grid(alpha=0.25); ax2.spines[['top']].set_visible(False); ax3.spines[['top']].set_visible(False)

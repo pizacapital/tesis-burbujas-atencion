@@ -12,7 +12,7 @@ fig, ax = plt.subplots(figsize=(11, 5)); ax.set_xlim(0, 110); ax.set_ylim(0, 50)
 cajas = [(50, 43, 52, 7.5, 'Patrón de referencia: 946 mensajes', 'consenso de 4 LLMs (823) + adjudicación del autor (123)'),
          (50, 32, 58, 7.5, 'Muestra grande: 11,941 mensajes', 'panel de 3 LLMs, mayoría 2/3 (~USD 13)'),
          (50, 21, 66, 7.5, 'Modelo local v2b: fine-tune DistilRoBERTa', 'congelado en disco, reproducible'),
-         (50, 10, 78, 7.5, 'Corpus de eventos: 7.86 millones', 'clasificación local, costo marginal cero')]
+         (50, 10, 78, 7.5, 'Corpus de eventos: 7.86 millones de pares mensaje-ticker', 'clasificación local, costo marginal cero')]
 for cx, cy, w, h, t1, t2 in cajas:
     ax.add_patch(FancyBboxPatch((cx-w/2, cy-h/2), w, h, boxstyle='round,pad=0.001,rounding_size=0.6',
                  facecolor=FILL, edgecolor=V2, linewidth=1.6))
@@ -28,7 +28,7 @@ ax.add_patch(FancyBboxPatch((nx0, ny0), nx1-nx0, ny1-ny0, boxstyle='round,pad=0.
 ncx = (nx0+nx1)/2
 ax.text(ncx, 37.4, 'Destilación', ha='center', va='center', fontsize=10, fontweight='bold', color=ROJO)
 ax.text(ncx, 34.2, '~USD 13', ha='center', va='center', fontsize=13, fontweight='bold', color=ROJO)
-ax.text(ncx, 29.3, 'contra ~USD 8,000 de la\nclasificación directa\ncon el LLM caro', ha='center', va='center', fontsize=8.8, color='#333333', linespacing=1.3)
+ax.text(ncx, 29.3, 'contra ~USD 8,000 de la\nclasificación directa con\nel LLM que mejor clasificó', ha='center', va='center', fontsize=8.8, color='#333333', linespacing=1.3)
 ax.plot([79.3, nx0-0.2], [32, 32], color=ROJO, lw=1.0, ls=(0, (2, 2)))
 FIG = Path(__file__).resolve().parent / 'figuras'; FIG.mkdir(exist_ok=True)
 fig.savefig(FIG / 'figura_4_4.png', dpi=200, bbox_inches='tight', facecolor='white'); print('ok')

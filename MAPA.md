@@ -45,10 +45,10 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | Figura | Contenido | Script | Archivo(s) | Estado |
 |---|---|---|---|---|
 | 2.1 | Línea de tiempo de los 50 eventos insignia | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `datos_derivados/eventos_atencion_v2_principal_final.csv` y `03_matrices_y_detector/acciones_principales_top50.csv`; escribe `10_figuras_manuscrito/figuras/figura_2_1.png` | repo |
-| 3.1 | Estructura de la matriz de menciones | - | - | diagrama |
+| 3.1 | Estructura de la matriz de menciones | `10_figuras_manuscrito/figura_3_1_matriz.py` | diagrama sin insumos (valores ilustrativos salvo el pico de GME y las dimensiones); escribe `figuras/figura_3_1.png` | repo (diagrama con script) |
 | 3.2 | Las menciones diarias no son normales | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/series_hist_submissions.csv`; escribe `figuras/figura_3_2.png` | repo |
 | 3.3 | Histogramas, top 20 | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/series_hist_submissions.csv` (los 20 tickers de mayor suma de la serie, que son los 20 con más menciones en la matriz maestra de submissions; AAPL está también en la muestra alfabética, versión 051); escribe `figuras/figura_E2.png` | repo |
-| 4.1 | Arquitectura del pipeline | - | - | diagrama |
+| 4.1 | Arquitectura del pipeline | `10_figuras_manuscrito/figura_4_1_pipeline.py` | diagrama sin insumos (cifras de la sección 4.1); escribe `figuras/figura_4_1.png` | repo (diagrama con script) |
 | 4.2 | Anatomía de un evento: GameStop 2021 | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/serie_gme_submissions.csv`, `serie_gme_comments.csv` y el catálogo; escribe `figuras/figura_4_2.png` | repo |
 | 4.3 | Trayectorias de precio de las 50 insignia | `10_figuras_manuscrito/figuras_manuscrito.py` | lee el panel local `Matrix/eventos/panel_precios_2020_2026.csv` (columna ret acumulada, base 100 al cierre del encendido) y el catálogo; escribe `figuras/figura_4_3.png` | local |
 | 4.4 | Etapas de la destilación del clasificador | `10_figuras_manuscrito/figura_4_4_destilacion.py` | cifras de las secciones 4.4 y 4.5 y del apéndice E; escribe `figuras/figura_4_4.png` | repo (diagrama con script) |
@@ -61,6 +61,6 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | 5.7 | Asimetría optimista en seis plataformas | `10_figuras_manuscrito/figuras_manuscrito.py` | cocientes compra/venta de la sección 5.5, literales en el script; escribe `figuras/figura_5_6.png` | compilada (el script dibuja las cifras del texto) |
 | 6.1 | HR del desacuerdo bajo tres definiciones de evento | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `07_robustez/robustez_kappa_integrado.csv`; escribe `figuras/figura_6_1.png` | repo |
 | D.1 | Histogramas, muestra alfabética | `10_figuras_manuscrito/figuras_manuscrito.py` | lee `03_matrices_y_detector/series/series_hist_submissions.csv` (primeras 20 columnas); escribe `figuras/figura_E1.png` | repo |
-| H.1 | Algoritmo del detector | - | - | diagrama |
+| H.1 | Algoritmo del detector | `10_figuras_manuscrito/figura_H_1_detector.py` | diagrama sin insumos (reglas y parámetros de la sección 4.2); escribe `figuras/figura_H_1.png` | repo (diagrama con script) |
 
-Balance: de las 31 tablas, 16 se reproducen desde el clon, 8 requieren artefactos locales, 6 son compiladas y 1 (D.1) tiene sus datos en el repositorio pero no el script de sus estadísticos; de las 18 figuras, 15 tienen script en el repositorio (once las regeneran `10_figuras_manuscrito/figuras_manuscrito.py` y `figura_4_4_destilacion.py`, dos de ellas desde el panel de precios local) y 3 son diagramas de elaboración propia.
+Balance: de las 31 tablas, 16 se reproducen desde el clon, 8 requieren artefactos locales, 6 son compiladas y 1 (D.1) tiene sus datos en el repositorio pero no el script de sus estadísticos; las 18 figuras tienen script en el repositorio (catorce las regeneran `10_figuras_manuscrito/figuras_manuscrito.py`, `figura_4_4_destilacion.py` y los tres scripts de diagramas `figura_3_1_matriz.py`, `figura_4_1_pipeline.py` y `figura_H_1_detector.py`; dos de ellas desde el panel de precios local).
