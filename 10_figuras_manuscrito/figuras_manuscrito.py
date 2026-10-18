@@ -194,7 +194,9 @@ def fig_5_1():
 # ---------------------------------------------------------------- 5.6: asimetria optimista por plataforma
 # Cocientes compra/venta agregados de cada corpus clasificado, tal como los reporta la seccion 5.5 del manuscrito (la
 # figura los toma del texto; los corpus con texto de X, TikTok, YouTube, StockTwits e Instagram son locales, MANIFIESTO.md).
-COCIENTES_5_5 = {'Reddit': 4.2, 'TikTok': 5.9, 'YouTube': 6.0, 'StockTwits': 6.9, 'X': 8.8, 'Instagram': 14.6}
+# Version 065 (18-oct-2026): TikTok se restringe a la ventana de estudio (1-ene-2020 a 30-jun-2026), como las demas plataformas:
+# Code/tiktok/data/menciones_corpus_top50.csv da 1,550 compra / 250 venta = 6.2 (con todo el corpus, ago-2019 a ago-2026, 1,605 / 275 = 5.8).
+COCIENTES_5_5 = {'Reddit': 4.2, 'YouTube': 6.0, 'TikTok': 6.2, 'StockTwits': 6.9, 'X': 8.8, 'Instagram': 14.6}
 def fig_5_6():
     plats = list(COCIENTES_5_5); vals = [COCIENTES_5_5[p] for p in plats]
     fig, ax = plt.subplots(figsize=(6.1, 3.2))
