@@ -1,4 +1,4 @@
-# Manifiesto de los artefactos publicados en el repositorio (comentario 25; apendice H).
+# Manifiesto de los artefactos publicados en el repositorio (comentario 25; apendice G).
 #
 # Recorre los archivos versionados que no son codigo ni documentacion (csv, csv.gz, txt, json,
 # png, xlsx, parquet) y escribe MANIFIESTO_ARTEFACTOS.csv en la raiz con ruta, bytes y sha256.

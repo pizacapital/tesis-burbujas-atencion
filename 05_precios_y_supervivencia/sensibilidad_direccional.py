@@ -1,11 +1,11 @@
 # Sensibilidad direccional del Cox integrado al error de clasificacion y desagregacion de la remocion por comunidad.
-# Responde al comentario externo 13. La Tabla 6.3 corrige el error de v2b con matrices de confusion uniformes (E1 a E4);
+# Responde al comentario externo 13. La Tabla 6.4 corrige el error de v2b con matrices de confusion uniformes (E1 a E4);
 # el revisor observa que un error diferencial (peor deteccion de venta en dias de euforia, o peor deteccion de compra en
 # dias de panico) no tiene por que atenuar hacia 1 y puede mover el HR de D en cualquier direccion. Este script:
 #   1. Reconstruye la tabla start-stop del I2 a partir de panel_bt_eventos.csv (misma maquinaria que
 #      sensibilidad_error_clasificador.py) y reproduce el HR base de D (referencia 1.713).
 #   2. Escenarios direccionales: toma las etiquetas de v2b como verdad y les aplica error con una matriz de confusion que
-#      cambia por estrato del dia (la misma perturbacion multinomial del E4 de la Tabla 6.3, pero no uniforme). Tres
+#      cambia por estrato del dia (la misma perturbacion multinomial del E4 de la Tabla 6.4, pero no uniforme). Tres
 #      estratificaciones, cada una en las dos direcciones y en los dos estratos:
 #        volumen: terciles de mensajes del dia            fase: dias 0 a 5 del episodio contra el resto
 #        postura: mayoria medida del dia (alcista si compra >= venta, bajista si no)
@@ -152,7 +152,7 @@ replicas, resumen = [], []
 def correr(nombre, estratificacion, M_por_fila, descripcion):
     p = pan.copy(); p['estrato'] = estratos[estratificacion][0] if estratificacion else 'todo'
     hrs = []
-    rng = np.random.default_rng(SEMILLA)   # cada escenario arranca del mismo estado: E4 uniforme reproduce las 20 replicas de la Tabla 6.3
+    rng = np.random.default_rng(SEMILLA)   # cada escenario arranca del mismo estado: E4 uniforme reproduce las 20 replicas de la Tabla 6.4
     for k in range(REPLICAS):
         m = ajustar(tabla_startstop(perturbar(p, M_por_fila, rng)))
         d, b, s = hr(m, 'd_duro_lag'), hr(m, 'b_duro_lag'), hr(m, 'sin_direccion_lag')
@@ -181,7 +181,7 @@ for est, (_, niveles, desc) in estratos.items():
 res = pd.DataFrame(resumen); res.to_csv(SUP / 'sensibilidad_direccional.csv', index=False)
 pd.DataFrame(replicas).to_csv(SUP / 'sensibilidad_direccional_replicas.csv', index=False)
 dirs = res[res.estratificacion != 'ninguna']; e4 = res.iloc[0].HR_D_media
-print(f'\nE4 uniforme reproducido: media {e4:.3f} [{res.iloc[0].HR_D_min:.3f}, {res.iloc[0].HR_D_max:.3f}] (Tabla 6.3: media 1.03 sobre 20 replicas, semilla 2026)')
+print(f'\nE4 uniforme reproducido: media {e4:.3f} [{res.iloc[0].HR_D_min:.3f}, {res.iloc[0].HR_D_max:.3f}] (Tabla 6.4: media 1.03 sobre 20 replicas, semilla 2026)')
 print(f'rango del HR medio de D en los {len(dirs)} escenarios direccionales: {dirs.HR_D_media.min():.3f} a {dirs.HR_D_media.max():.3f} '
       f'(base sin ruido {hr_base[0]:.3f}); contra el E4 uniforme, escenarios con media por encima: {(dirs.HR_D_media > e4).sum()}, por debajo: {(dirs.HR_D_media < e4).sum()}; '
       f'cociente respecto del E4 de {dirs.cociente_vs_E4.min():.2f} a {dirs.cociente_vs_E4.max():.2f}')

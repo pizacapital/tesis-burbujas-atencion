@@ -10,7 +10,7 @@
 #      solo sentimiento (F11), I1, I2, I3 e I2-tv. Intervalos percentiles del 95% para B, D, silencio, volumen, z y base
 #      previa, y el error estandar bootstrap contra el convencional.
 #   3. Bootstrap por bloques de calendario: lo mismo remuestreando trimestres de encendido (anio-trimestre) con reemplazo.
-#   4. Para los Cox estaticos de la Tabla 5.1 (modelos A y B, una fila por episodio) compara los errores estandar
+#   4. Para los Cox estaticos de la Tabla D.2 (modelos A y B, una fila por episodio) compara los errores estandar
 #      convencionales con el sandwich agrupado por ticker de lifelines (CoxPHFitter con cluster_col).
 #   5. Intenta el sandwich del modelo start-stop y registra el error exacto de lifelines.
 #   6. Ficha por especificacion: manejo de empates, estimador de varianza, unidad de agrupacion, replicas y semilla.
@@ -203,8 +203,8 @@ print('\n== I2-tv, HR de D por edad: delta | bootstrap por ticker | por calendar
 for _, r in tv[tv.covariable == 'd_duro_lag'].iterrows():
     print(f'  dia {r.dia:2.0f}: {r.HR:.2f} [{r.lo_delta:.2f}, {r.hi_delta:.2f}] | [{r.lo_boot_ticker:.2f}, {r.hi_boot_ticker:.2f}] | [{r.lo_boot_calendario:.2f}, {r.hi_boot_calendario:.2f}]')
 
-# --- 7. Cox estaticos (Tabla 5.1): convencional contra sandwich agrupado por ticker --------------------------------------------
-print('\n== Cox estaticos de la Tabla 5.1 (CoxPHFitter): se convencional | se sandwich agrupado por ticker (razon)')
+# --- 7. Cox estaticos (Tabla D.2): convencional contra sandwich agrupado por ticker --------------------------------------------
+print('\n== Cox estaticos de la Tabla D.2 (CoxPHFitter): se convencional | se sandwich agrupado por ticker (razon)')
 sup['tk'] = pd.factorize(sup.ticker)[0]
 filas_e = []
 for nombre, covs in [('Modelo A (conocido al encendido)', ENC), ('Modelo B (+ realizadas)', ENC + REAL)]:

@@ -1,4 +1,4 @@
-# Versiones capturadas del entorno real de ejecucion (apendice G de la tesis):
+# Versiones capturadas del entorno real de ejecucion (apendice F de la tesis):
 #   MacBook Air M3, Python 3.13.9: herramientas/entorno_m3_2026-09-16.txt (+ entorno_m3_conda_2026-09-16.txt)
 #   Mac Studio, Python 3.12.5: herramientas/entorno_studio_2026-09-17.txt
 # Este modulo corrio en las dos maquinas; cuando las versiones difieren, el marcador

@@ -3,7 +3,7 @@
 # genera copias sin texto, con el identificador de Reddit del mensaje (id), el ticker, la fecha y una huella sha256 del
 # texto (para que quien tenga los dumps pueda verificar que reconstruyo el mismo mensaje), mas todas las etiquetas: las
 # de cada proveedor de LLM, el consenso, la etiqueta final con su procedencia y las predicciones de los modelos afinados.
-# Con ellas se reproduce cada cifra del apendice F (leaderboard, composicion del patron de referencia, careos v1/v2b/v2c,
+# Con ellas se reproduce cada cifra del apendice E (leaderboard, composicion del patron de referencia, careos v1/v2b/v2c,
 # auditoria a ciegas) sin acceso al texto. El piloto (piloto_etiquetado_final.csv y los duelos) no guardaba el id: se
 # recupera uniendo por texto, ticker y metadatos con muestra_piloto_1000.csv, y el script comprueba que la union es 1 a 1.
 # Corre en la M3 (segundos):

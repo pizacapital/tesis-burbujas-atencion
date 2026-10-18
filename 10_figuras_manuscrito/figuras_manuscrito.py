@@ -1,5 +1,7 @@
 # Figuras del manuscrito que se generaron en sesiones de trabajo sin conservar el script (MAPA.md, version 023):
-# 2.1, 3.2, 4.2, 4.3, 5.1, 5.6, 6.1, E.1, E.2 y E.3. Este script las regenera desde los datos versionados del
+# 2.1, 3.2, 4.2, 4.3, 5.1, 5.6, 6.1, E.1, E.2 y E.3 en la numeracion de esa version, que en la tesis vigente (Ver063)
+# son las figuras 2.1, 3.2, 4.2, 4.3, 5.1, 5.7, 6.1, D.1, 3.3 y 5.2. Las claves de FIGURAS, los argumentos de linea de
+# comandos y los nombres de los PNG conservan la numeracion de la version 023 para no cambiar los archivos versionados. Este script las regenera desde los datos versionados del
 # repositorio y, para 4.3 y E.3, desde el panel de precios local (no redistribuible; MANIFIESTO.md, seccion 3).
 #
 # Uso (desde cualquier carpeta):

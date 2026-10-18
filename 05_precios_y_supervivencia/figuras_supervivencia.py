@@ -1,4 +1,4 @@
-# figuras_supervivencia.py - Figuras 5.2 (Kaplan-Meier por acoplamiento) y 5.3 (forest plot del Cox integrado) desde los CSV
+# figuras_supervivencia.py - Figuras 5.3 (Kaplan-Meier por acoplamiento) y 5.4 (forest plot del Cox integrado) desde los CSV
 # versionados, para que cada figura del capitulo 5 tenga su script (comentario externo 25).
 # Insumos: supervivencia/tabla_supervivencia.csv (duracion, censura y grupo de acoplamiento por evento) y
 #   supervivencia/cox_integrado.csv (HR e IC de I1, I2 e I3, celda_S5.py).
@@ -16,7 +16,7 @@ BASE = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'));
 VERDE, AZUL, ROJO, GRIS = '#00684A', '#2C6A9E', '#B3402A', '#6E6E6E'
 plt.rcParams.update({'font.family': 'DejaVu Sans', 'axes.spines.top': False, 'axes.spines.right': False})
 
-# --- Figura 5.2: Kaplan-Meier por acoplamiento, bandas de Greenwood y numero en riesgo ---------------------------------------
+# --- Figura 5.3: Kaplan-Meier por acoplamiento, bandas de Greenwood y numero en riesgo ---------------------------------------
 sup = pd.read_csv(SUP / 'tabla_supervivencia.csv', keep_default_na=False, na_values=[''])
 GRUPOS = [('atencion anticipa', 'Atención anticipa', VERDE), ('sincronico', 'Sincrónico', AZUL), ('reactivo', 'Reactivo', ROJO)]
 fig = plt.figure(figsize=(6.9, 4.7)); gs = fig.add_gridspec(2, 1, height_ratios=[4.6, 1.15], hspace=0.05)
@@ -39,7 +39,7 @@ for fila, (g, etiqueta, color) in enumerate(GRUPOS):
 fig.savefig(FIG / 'figura_km_acoplamiento_v2.png', dpi=300, bbox_inches='tight'); plt.close(fig)
 medianas = {g: kms[g][0].median_survival_time_ for g, _, _ in GRUPOS}; print('KM medianas:', medianas)
 
-# --- Figura 5.3: forest plot del Cox integrado (I1, I2, I3) --------------------------------------------------------------------
+# --- Figura 5.4: forest plot del Cox integrado (I1, I2, I3) --------------------------------------------------------------------
 cx = pd.read_csv(SUP / 'cox_integrado.csv'); cx['mod'] = cx.modelo.str[:2]
 NOMBRE = [('d_duro_lag', 'D: desacuerdo (t-1)'), ('b_duro_lag', 'B: optimismo neto (t-1)'), ('sin_direccion_lag', 'Sin dirección (t-1)'), ('log1p_n_lag', 'log(1+mensajes) (t-1)'),
           ('log_z_inicio', 'log z del encendido'), ('log_base_previa', 'log base previa'), ('log_amplitud', 'log amplitud de menciones'), ('log_vol_ratio', 'log razón de volumen'),

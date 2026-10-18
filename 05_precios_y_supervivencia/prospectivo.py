@@ -1,5 +1,5 @@
 # Modelo dinamico PROSPECTIVO (especificacion I1): evaluacion con informacion disponible al emitir el pronostico.
-# Responde al comentario externo 6: I2/I3 y la Tabla 5.3 usan caracteristicas realizadas durante el episodio
+# Responde al comentario externo 6: I2/I3 y la Tabla 5.5 usan caracteristicas realizadas durante el episodio
 # (amplitud, ratio de volumen, retorno al pico, desacoplamiento) que solo se conocen al final. Aqui todo lo
 # que entra al modelo era observable el dia del pronostico: z del encendido y base previa (fijas desde el dia 0)
 # y las covariables de conversacion del dia anterior (volumen, silencio, optimismo B, desacuerdo D).
@@ -173,4 +173,4 @@ pd.DataFrame([{'pieza': 'I1 dinamico prospectivo, betas congeladas 2020-2023', '
 print('\nguardado: supervivencia/prospectivo_anidado.csv, prospectivo_bootstrap.csv, prospectivo_fuera_muestra.csv')
 print('lectura: si B y D mejoran el ajuste y la concordancia de P0 con intervalo que excluye el cero, y la version congelada '
       'sostiene su concordancia y su mejora de verosimilitud en 2024-2026 lejos de los placebos, el modelo dinamico prospectivo '
-      '(I1) queda evaluado con informacion disponible al pronosticar; I2 y la Tabla 5.3 se presentan como analisis retrospectivos.')
+      '(I1) queda evaluado con informacion disponible al pronosticar; I2 y la Tabla 5.5 se presentan como analisis retrospectivos.')

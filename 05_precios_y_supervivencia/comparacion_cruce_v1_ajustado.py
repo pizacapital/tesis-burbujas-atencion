@@ -1,4 +1,4 @@
-# comparacion_cruce_v1_ajustado.py - El Cox integrado antes y despues de corregir las covariables de precio (seccion 6.6, Tabla E.13).
+# comparacion_cruce_v1_ajustado.py - El Cox integrado antes y despues de corregir las covariables de precio (comparacion de la version 022; la tesis vigente ya no la reporta).
 # Compara la tabla de supervivencia del cruce oficial anterior (panel v1, cierre y volumen crudos; respaldo
 # supervivencia_v1_crudo/tabla_supervivencia.csv) con la del cruce corregido (panel con CRSP 2025, series ajustadas por
 # cambios de escala; supervivencia/tabla_supervivencia.csv), y reestima I1, I2 e I3 (especificacion de celda_S5.py) sobre

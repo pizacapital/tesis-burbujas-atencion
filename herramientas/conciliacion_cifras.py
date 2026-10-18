@@ -1,4 +1,4 @@
-# conciliacion_cifras.py - Tabla maestra de cifras del manuscrito (comentario externo 20) y figura 5.5 regenerada.
+# conciliacion_cifras.py - Tabla maestra de cifras del manuscrito (comentario externo 20) y figura 5.6 regenerada.
 # Reconstruye desde los archivos del proyecto cada cifra discutida (dias y tickers de las matrices, filas mensaje-ticker
 # contra mensajes unicos, censos de YouTube e Instagram, pico de TikTok en GME, panel de precios por fuente, flujo
 # 2,791 -> 2,675 -> 2,636 y causas de los 116 sin cruce, instrumentos del catalogo y de los 572 sin etiqueta de
@@ -253,9 +253,9 @@ fila('GME_encendido', 'gme', 'menciones de GME el 13-ene-2021 (dia del encendido
 fila('GME_pico', 'gme', 'maximo diario de GME (28-ene-2021) y maximo diario de cualquier ticker en toda la matriz', 'menciones', int(mg['GME'].max()), int(mg.max().max()), int(mg['GME'].max()), f"fecha {mg['GME'].idxmax()}", 'matriz_global_2020_2026.csv')
 fila('GME_max_previo', 'gme', 'maximo diario de cualquier ticker antes del 13-ene-2021', 'menciones', int(mxp.max()), '-', int(mxp.max()), f'{mxp.idxmax()} el {pre[mxp.idxmax()].idxmax()}', 'matriz_global_2020_2026.csv')
 
-# --- guardar y figura 5.5 -----------------------------------------------------------------------------------------------
+# --- guardar y figura 5.6 -----------------------------------------------------------------------------------------------
 pd.DataFrame(F).to_csv(EV / 'cifras_maestras.csv', index=False)
-print('== 12. figura 5.5 regenerada desde careo_plataformas_kappa.csv')
+print('== 12. figura 5.6 regenerada desde careo_plataformas_kappa.csv')
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 k = pd.read_csv(EV / 'careo_plataformas_kappa.csv')
 fig, ax = plt.subplots(figsize=(9, 5), dpi=200)

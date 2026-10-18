@@ -8,4 +8,4 @@
 - `celda_R6.py` - validación fuera de muestra 2024-2026 con placebos.
 - `celda_TCL.py` / `celda_TCL2.py` - el método alterno de bandas mu+k·sigma del director de tesis: réplica, contraste de catálogos y Cox sobre sus secuencias.
 
-Salidas versionadas: `robustez_kappa_integrado.csv` (el Cox integrado bajo las tres cotas de κ; Tabla E.3 y Figura 6.1 de la tesis, producido por `celda_K3.py`).
+Salidas versionadas: `robustez_kappa_integrado.csv` (el Cox integrado bajo las tres cotas de κ; Tabla 6.2 y Figura 6.1 de la tesis, producido por `celda_K3.py`).

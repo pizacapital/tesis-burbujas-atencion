@@ -1,7 +1,7 @@
 # Figura 4.4: etapas de la destilacion del clasificador, del patron de referencia al corpus completo.
-# Diagrama sin datos de entrada (las cifras son las de las secciones 4.4 y 4.5 y del apendice F).
+# Diagrama sin datos de entrada (las cifras son las de las secciones 4.4 y 4.5 y del apendice E).
 # Version 058 (11-oct-2026): la nota de costo pasa a un recuadro lateral con el estilo de las cajas.
-# Costo de la clasificacion directa: 12.1 USD / 11,941 mensajes (Claude, Tabla F.1) x 7,856,262 pares = ~7,960 USD, se reporta ~8,000.
+# Costo de la clasificacion directa: 12.1 USD / 11,941 mensajes (Claude, Tabla E.1) x 7,856,262 pares = ~7,960 USD, se reporta ~8,000.
 # Uso: python3 10_figuras_manuscrito/figura_4_4_destilacion.py  ->  10_figuras_manuscrito/figuras/figura_4_4.png
 from pathlib import Path
 import matplotlib; matplotlib.use('Agg')

@@ -22,7 +22,7 @@
 #          entrenamiento (finetune_lib.py), la evaluacion contra el patron de
 #          referencia (celda_F7.py), el archivo (clasificar_insignia.py) y el
 #          corpus propio (bt_stocktwits.py).
-#   3. Reporta para cada configuracion la contabilidad completa (Tabla 6.2 del
+#   3. Reporta para cada configuracion la contabilidad completa (Tabla 6.3 del
 #      manuscrito): con referencia, neutrales, direccionales, acuerdo
 #      condicionado, clase mayoritaria, exactitud con neutral como fallo,
 #      exactitud balanceada, kappa, sensibilidad/precision/F1 por clase,
@@ -152,4 +152,4 @@ pd.DataFrame(filas).to_csv(CODE / 'data' / 'careo_stockemotions_metricas.csv', i
 pob.to_csv(CODE / 'data' / 'careo_stockemotions_v2b_v2.csv', index=False)
 print('\nguardado: data/careo_stockemotions_v2b_v2.csv, careo_stockemotions_flujo.csv, careo_stockemotions_metricas.csv')
 print('la configuracion B (con prefijo, 256 tokens) es la oficial del proyecto; si sus cifras difieren de las de A, '
-      'las de B sustituyen a las publicadas y la diferencia se declara en 6.4 y en el apendice F.')
+      'las de B sustituyen a las publicadas y la diferencia se declara en 6.4 y en el apendice E.')
