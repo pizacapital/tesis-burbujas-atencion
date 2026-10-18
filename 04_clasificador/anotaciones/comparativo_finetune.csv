@@ -1,0 +1,5 @@
+nombre,base,epocas,lr,suavizado,dropout,minutos,f1_va,acc_va,acc_oro,f1_oro,acc_dificiles_oro
+v1,StephanAkkerman/FinTwitBERT,3,2e-05,0.0,,119.1,0.7161,0.7697,72.0,0.708,41.5
+v2a,StephanAkkerman/FinTwitBERT,4,1e-05,0.1,0.2,144.6,0.6899,0.7361,68.0,0.6743,41.5
+v2b,distilroberta-base,3,2e-05,0.0,,42.4,0.7325,0.7697,70.2,0.6905,43.9
+v2c,distilroberta-base,3,2e-05,0.0,,54.1,0.7068,0.7451,69.8,0.6845,44.7

@@ -1,0 +1,39 @@
+# =============================================================================
+# Dependencies - Reddit pipeline (tesis ITAM)
+# Pin a versiones mínimas conocidas estables a mayo 2026.
+# Reevaluar con `pip-compile` cuando se inicialice un repo formal.
+# =============================================================================
+
+# --- API y autenticación ---
+praw>=7.7.1              # Cliente oficial de Reddit (OAuth 2.0)
+python-dotenv>=1.0.1     # Carga de variables desde .env
+
+# --- Procesamiento de dumps Arctic Shift (.zst JSONL) ---
+zstandard>=0.22.0        # Descompresión streaming de .zst
+orjson>=3.10.0           # JSON parser rápido (5-10x stdlib)
+
+# --- Análisis y almacenamiento tabular ---
+pandas>=2.2.0
+numpy>=1.26.0
+pyarrow>=15.0.0          # Parquet I/O
+duckdb>=0.10.0           # SQL sobre Parquet sin servidor
+sqlalchemy>=2.0.0        # Para índice SQLite ligero
+
+# --- NLP (sentimiento, extracción de tickers) ---
+# Se agregan en una fase posterior cuando se construya la capa de scoring.
+# Placeholder para no olvidarlo:
+# transformers>=4.40.0
+# torch>=2.2.0
+# accelerate>=0.30.0
+
+# --- Exploración y notebooks ---
+jupyterlab>=4.1.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.20.0
+
+# --- Calidad de código ---
+black>=24.3.0
+ruff>=0.4.0
+mypy>=1.9.0
+pytest>=8.0.0

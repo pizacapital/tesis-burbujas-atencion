@@ -1,0 +1,21 @@
+# Credenciales: solo las plantillas .env.example se versionan
+.env
+*.env
+!.env.example
+
+# Datos y salidas locales
+data/
+logs/
+*.log
+*.csv.gz
+checkpoints/
+
+# Modelos y caches
+*.bin
+*.safetensors
+__pycache__/
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+._*

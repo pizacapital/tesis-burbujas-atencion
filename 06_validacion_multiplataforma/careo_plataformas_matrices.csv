@@ -1,0 +1,24 @@
+careo,umbral,rd+_p+,rd+_p0,rd+_p-,rd0_p+,rd0_p0,rd0_p-,rd-_p+,rd-_p0,rd-_p-
+X-Reddit diario (50 ventanas insignia),1,2229,1,7,44,0,1,81,1,4
+X-Reddit diario (50 ventanas insignia),5,2167,0,5,32,0,0,69,1,3
+X-Reddit diario (50 ventanas insignia),10,2027,0,3,23,0,0,60,0,2
+TikTok-Reddit por evento,1,177,9,26,0,0,0,3,0,2
+TikTok-Reddit por evento,3,44,1,9,0,0,0,0,0,1
+TikTok-Reddit por evento,5,17,1,1,0,0,0,0,0,1
+TikTok-Reddit por evento,10,4,0,0,0,0,0,0,0,1
+Instagram-Reddit por evento,1,198,8,8,0,0,0,6,1,1
+Instagram-Reddit por evento,3,76,0,3,0,0,0,3,0,0
+Instagram-Reddit por evento,5,40,0,1,0,0,0,2,0,0
+Instagram-Reddit por evento,10,7,0,0,0,0,0,1,0,0
+YouTube-Reddit por evento,1,299,11,30,0,0,1,5,2,3
+YouTube-Reddit por evento,3,178,3,11,0,0,1,3,2,1
+YouTube-Reddit por evento,5,110,2,3,0,0,0,3,1,1
+YouTube-Reddit por evento,10,46,0,1,0,0,0,3,0,0
+StockTwits nativo-Reddit por evento,1,1370,5,58,73,6,9,25,2,53
+StockTwits nativo-Reddit por evento,3,1339,2,49,42,0,4,25,1,52
+StockTwits nativo-Reddit por evento,5,1313,0,47,29,0,4,25,1,52
+StockTwits nativo-Reddit por evento,10,1269,0,45,12,0,2,22,1,52
+StockTwits nativo-Reddit por evento,100,1144,0,42,1,0,1,17,0,46
+StockTwits v2b-Reddit (355 insignia),1,341,0,0,0,0,0,14,0,0
+StockTwits nativo-Reddit (355 insignia),1,325,0,16,0,0,0,8,0,6
+YouTube titulo-transcripcion por evento (signo de B),1,244,0,3,25,0,1,20,0,2

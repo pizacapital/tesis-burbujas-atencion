@@ -1,0 +1,14 @@
+submuestra: 150 eventos (semilla 42); eventos en el archivo de R5: 141; coinciden: 141
+mensajes dentro del evento ya clasificados por R5: 218,025
+mensajes del dia previo al encendido: 4,651 en 131 eventos (los demas eventos no tienen mensajes ese dia)
+cotejo del dia previo contra el panel oficial: n_mensajes identico en 100.0% de los 150 eventos (suma propia 4,651 vs oficial 4,651)
+acuerdo mensaje a mensaje v1 vs v2b (todos los mensajes usados): 78.3%
+filas oficiales 2,702 | reconstruidas 2,702 | en ambas 2,702 | solo oficial 0 | solo reconstruida 0
+n_mensajes rezagado identico: 100.0% de las filas | muertes iguales: 100.0% | B identico (v2b): 69.2% | D identico: 72.1% | corr B 0.991, corr D 0.967
+filas del dia 0 (rezago del dia previo): 150 | n identico 100.0%
+correlacion diaria entre brazos: B 0.878, D 0.732 (n = 2,702 evento-dias)
+
+===== Cox de sentimiento en la submuestra, tres brazos sobre filas identicas =====
+oficial v2b (F11)                     : 150 eventos, 2,702 filas, 150 muertes | D 3.548 [1.24, 10.17] p 0.0185 | B 1.243 | silencio 1.191
+reconstruido v2b (alineado a F11)     : 150 eventos, 2,702 filas, 150 muertes | D 3.844 [1.35, 10.99] p 0.0120 | B 1.264 | silencio 1.194
+reconstruido v1 (alineado a F11)      : 150 eventos, 2,702 filas, 150 muertes | D 3.341 [1.05, 10.61] p 0.0408 | B 1.404 | silencio 1.562

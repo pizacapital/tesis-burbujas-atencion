@@ -1,0 +1,23 @@
+# =============================================================================
+# Dependencies - Modulo X (Twitter) via TwitterAPI.io (tesis ITAM)
+# Nota: NO se usa tweepy/twarc (eran para la API oficial de X, cerrada a
+# nuevos usuarios en 2026). TwitterAPI.io es REST simple con requests.
+# =============================================================================
+
+# --- HTTP y autenticacion ---
+requests>=2.31.0
+python-dotenv>=1.0.1
+
+# --- Analisis y almacenamiento tabular (mismo stack que Code/reddit) ---
+pandas>=2.2.0
+numpy>=1.26.0
+pyarrow>=15.0.0
+duckdb>=0.10.0
+
+# --- Exploracion y notebooks ---
+jupyterlab>=4.1.0
+matplotlib>=3.8.0
+
+# --- Calidad de codigo ---
+black>=24.3.0
+ruff>=0.4.0

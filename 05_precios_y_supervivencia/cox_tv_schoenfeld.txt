@@ -1,0 +1,4 @@
+lifelines 0.30.3; CoxTimeVaryingFitter.compute_residuals(kind="scaled_schoenfeld") sobre el modelo I2:
+FALLA: AttributeError: 'CoxTimeVaryingFitter' object has no attribute 'entry_col'
+AttributeError: 'CoxTimeVaryingFitter' object has no attribute 'entry_col'
+proportional_hazard_test de lifelines.statistics documenta: "Currently only the CoxPHFitter is supported".

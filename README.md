@@ -1,0 +1,45 @@
+# Predicción de la duración de burbujas bursátiles impulsadas por la atención en redes sociales
+
+Código de la tesis de Maestría en Finanzas (ITAM, 2026) de **Pedro Juan Pizá Mejía**, dirigida por el Mtro. Carlos Castro Correa.
+
+La tesis construye un pipeline reproducible que va de la conversación cruda de seis plataformas sociales (Reddit, X, TikTok, Instagram, YouTube y StockTwits) a un catálogo de 2,791 eventos de atención sobre acciones de EE.UU. (2020-2026), y modela su duración con análisis de supervivencia (Kaplan-Meier, Cox estático y dinámico, Weibull). El hallazgo central: el desacuerdo interno de la conversación, medido con el índice D(t) de Antweiler y Frank, es el mejor predictor de la extinción de una burbuja de atención; el optimismo la protege y el silencio la mata.
+
+## Estructura del repositorio
+
+El orden de las carpetas sigue el orden del pipeline (capítulos 3 a 7 de la tesis):
+
+| Carpeta | Contenido | Capítulo |
+|---|---|---|
+| `01_padron_maestro/` | Padrón de vigencias ticker-permno 2020-2026 desde CRSP, enriquecimiento (Nasdaq, SEC/EDGAR, CRSP y Compustat) y reconciliación con CRSP 2025 | 3.1, 4 |
+| `02_ingestion/` | Ingestión por plataforma: Reddit (dumps), X, TikTok (video y transcripción), Instagram, YouTube, StockTwits, Google Trends y noticias (GDELT/BigQuery, earnings vía WRDS) | 3 |
+| `03_matrices_y_detector/` | Matrices globales de menciones (buscador con 10 pasadas de auditoría) y el detector de eventos: encendido por z-score con triple candado y extinción por doble línea | 3.8, 4.2 |
+| `04_clasificador/` | Clasificador de sentimiento: panel de anotación con 4 LLMs, fine-tuning (v1, v2a, v2b, v2c), duelos contra el patrón oro humano y clasificación masiva | 4.4-4.5 |
+| `05_precios_y_supervivencia/` | Cruce con precios CRSP, covariables de mercado y los modelos de duración (KM, Cox integrado, Weibull, Cox por poblaciones) | 4.3, 4.6, 5 |
+| `06_validacion_multiplataforma/` | Series empatadas X vs Reddit y análisis de adelanto-rezago | 5.5 |
+| `07_robustez/` | Batería del capítulo 6: cotas de la definición de extinción (κ), serie título+cuerpo, censura endógena, par GOOG/GOOGL, validación fuera de muestra con placebos y el método alterno de bandas | 6 |
+| `08_caso_trump/` | El finfluencer presidencial: archivo de Truth Social, detección y filtrado de menciones y event study contra tasa base | 7 |
+| `09_exploraciones_historicas/` | Cuadernos del arranque del proyecto, conservados como historial | - |
+| `10_figuras_manuscrito/` | Script que regenera las diez figuras del manuscrito que se habían producido sin script (2.1, 3.2, 4.2, 4.3, 5.1, 5.6, 6.1, E.1, E.2, E.3) y sus PNG | 2 a 6, E |
+| `datos_derivados/` | Catálogo de eventos, panel diario B(t)/D(t), tabla start-stop y tabla de supervivencia con covariables: los agregados con los que se reproducen los capítulos 5 y 6 sin datos crudos | 5, 6 |
+| `herramientas/` | Inventario de dumps, conciliación de cifras del manuscrito, inventarios de los entornos de ejecución, bitácoras de costos y generador del manifiesto de artefactos | - |
+
+Cada carpeta incluye un README breve con el papel de cada archivo. Dos documentos de la raíz atan el repositorio al manuscrito: `MAPA.md` (para cada tabla y figura de la tesis, el script y el archivo que la producen, y qué hace falta para reproducirla) y `MANIFIESTO.md` (todos los artefactos del proyecto con su huella sha256 y su nivel de acceso: repositorio, Hugging Face o local bajo solicitud; las huellas de los archivos versionados están en `MANIFIESTO_ARTEFACTOS.csv`).
+
+## Qué no contiene este repositorio
+
+- **Datos crudos.** Los dumps de Reddit, los archivos de plataforma y los datos de CRSP/Compustat (WRDS) se obtienen de sus fuentes originales, documentadas en el capítulo 3 de la tesis; los términos de uso de varias fuentes no permiten redistribuirlos.
+- **Credenciales.** Las claves de API viven exclusivamente en archivos `.env` locales excluidos del control de versiones; los módulos que las requieren incluyen una plantilla `.env.example`.
+- **Pesos del modelo.** El clasificador v2b (DistilRoBERTa afinado, 328 MB) se distribuye en Hugging Face Hub como `pizacapital/tesis-burbujas-atencion-v2b`; `04_clasificador/modelo_v2b/` conserva su configuración, tokenizador, argumentos de entrenamiento y el manifiesto con la huella sha256 de cada archivo, y `04_clasificador/anotaciones/` las etiquetas (sin texto) con las que se afinó y evaluó.
+- **Texto de los mensajes.** Las anotaciones se publican con el id de Reddit y una huella del texto, no con el texto; quien tenga los dumps puede reconstruirlo y verificarlo.
+
+## Notas de ejecución
+
+Cada script documenta en su encabezado dónde corre (máquina local, JupyterHub de WRDS o consola de BigQuery), sus insumos, sus salidas y su tiempo estimado; los procesos largos son reanudables y dejan bitácora. Las rutas se configuran con dos variables de entorno: `TESIS_BASE`, la raíz de la carpeta del proyecto (por omisión la de la máquina del autor, `/Users/ppizam/Claude/Master Thesis`, de modo que sin definirla todo corre igual en esa máquina), y `REDDIT_DATA`, la carpeta con los dumps crudos de Reddit (por omisión la copia del autor en Google Drive); cada script las lee al inicio (`os.environ.get`) y cuelga de ellas sus rutas, y `herramientas/rutas_reescritas_ver023.csv` registra cada ruta sustituida. Los scripts esperan la estructura de carpetas del proyecto bajo `TESIS_BASE` (`Desarrollo/Metodologia/Matrix`, `.../Clasificador`, `Code/<plataforma>`, `Figuras`), que es donde leen sus insumos y escriben sus salidas; los archivos versionados aquí son copias de esas salidas. Con `datos_derivados/` y los CSV versionados de cada carpeta, los modelos de los capítulos 5 y 6 se reproducen desde un entorno limpio sin acceso a Reddit ni a WRDS; la ingestión, las matrices de menciones y el cruce de precios sí requieren las fuentes originales. El entorno de cómputo con versiones exactas está en el apéndice G de la tesis y en los inventarios de `herramientas/`; las dependencias por módulo van en su `requirements.txt`, fijadas con esos inventarios (los módulos que corrieron en la MacBook Air y en el Mac Studio llevan marcadores `python_version` para instalar el juego de versiones de cada máquina). Los costos de los datos de pago están en `herramientas/costos/`.
+
+## Cómo citar
+
+Pizá Mejía, P. J. (2026). *Predicción de la duración de burbujas bursátiles impulsadas por la atención en redes sociales* [Tesis de maestría, Instituto Tecnológico Autónomo de México].
+
+## Licencia
+
+Código bajo licencia MIT (ver `LICENSE`). El texto de la tesis y sus figuras se citan por separado.
