@@ -6,6 +6,8 @@
 # Corre en iTerm (M3, segundos):
 #   cd "$TESIS_BASE/Desarrollo/Metodologia/Matrix"
 #   python3 figuras_supervivencia.py
+# Version 067 (18-oct-2026): redibujada para el formato de 17 x 22.5 cm (ancho de texto 12 cm): Figura 5.3 de 6.9 x 4.7 a 5.0 x 4.1 pulgadas
+#   (tabla de numero en riesgo un poco mas alta); Figura 5.4 de 7.2 x 4.5 a 4.0 x 4.4 pulgadas, rotulos de direccion en dos lineas.
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -23,7 +25,7 @@ plt.rcParams.update({'axes.spines.top': False, 'axes.spines.right': False})
 sup = pd.read_csv(SUP / 'tabla_supervivencia.csv', keep_default_na=False, na_values=[''])
 GRUPOS = [('atencion anticipa', 'Anticipador', VERDE),   # nombres de la seccion 5.2 (version 064)
           ('sincronico', 'Sincrónico', AZUL), ('reactivo', 'Reactivo', ROJO)]
-fig = plt.figure(figsize=(6.9, 4.7)); gs = fig.add_gridspec(2, 1, height_ratios=[4.6, 1.15], hspace=0.05)
+fig = plt.figure(figsize=(5.0, 4.1)); gs = fig.add_gridspec(2, 1, height_ratios=[4.6, 1.3], hspace=0.05)   # 6.9 x 4.7 hasta la version 066
 ax = fig.add_subplot(gs[0]); axr = fig.add_subplot(gs[1], sharex=ax)
 kms, ticks = {}, np.arange(0, 61, 10)
 for g, etiqueta, color in GRUPOS:
@@ -49,7 +51,7 @@ NOMBRE = [('d_duro_lag', 'D: desacuerdo (t-1)'), ('b_duro_lag', 'B: optimismo ne
           ('log_z_inicio', 'log z del encendido'), ('log_base_previa', 'log base previa'), ('log_amplitud', 'log amplitud de menciones'), ('log_vol_ratio', 'log razón de volumen'),
           ('ret_encendido_pico', 'Retorno encendido-pico'), ('desacoplado', 'Con desfase')]   # nombre de la Tabla 5.2 (version 064)
 MOD = [('I1', 'I1 predictivo', VERDE, 'o', 0.22), ('I2', 'I2 completo', AZUL, 's', 0.0), ('I3', 'I3 estratificado por año', ROJO, '^', -0.22)]
-fig, ax = plt.subplots(figsize=(7.2, 4.5))
+fig, ax = plt.subplots(figsize=(4.0, 4.4))   # 7.2 x 4.5 hasta la version 066
 for i, (cov, nombre) in enumerate(NOMBRE):
     y0 = len(NOMBRE) - 1 - i
     for m, etiqueta, color, marca, dy in MOD:
@@ -61,7 +63,7 @@ ax.axvline(1, color='#333333', linestyle='--', linewidth=1); ax.set_xscale('log'
 ax.set_xticks([0.5, 0.7, 1.0, 1.5, 2.0, 3.0]); ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter('%.1f')); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter()); ax.set_xlim(0.5, 3.0)
 ax.set_yticks(range(len(NOMBRE))); ax.set_yticklabels([n for _, n in NOMBRE][::-1], fontsize=9.5); ax.grid(axis='y', color='#E6E6E6', linewidth=0.6)
 ax.set_xlabel('Hazard ratio (escala log, IC 95%)', fontsize=10)
-ax.text(0.72, len(NOMBRE) - 0.25, '← retrasa la extinción', color=VERDE, fontsize=9, ha='center'); ax.text(1.75, len(NOMBRE) - 0.25, 'acelera la extinción →', color=ROJO, fontsize=9, ha='center')
-ax.set_ylim(-0.6, len(NOMBRE) + 0.1); ax.legend(frameon=False, fontsize=9, loc='lower right')
+ax.text(0.72, len(NOMBRE) + 0.02, '← retrasa\nla extinción', color=VERDE, fontsize=9, ha='center', va='center'); ax.text(1.75, len(NOMBRE) + 0.02, 'acelera\nla extinción →', color=ROJO, fontsize=9, ha='center', va='center')
+ax.set_ylim(-0.6, len(NOMBRE) + 0.55); ax.legend(frameon=False, fontsize=9, loc='lower right')
 fig.savefig(FIG / 'figura_forest_cox_v2.png', dpi=300, bbox_inches='tight'); plt.close(fig)
 print('guardado: Figuras/figura_km_acoplamiento_v2.png y figura_forest_cox_v2.png')

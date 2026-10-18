@@ -20,6 +20,10 @@
 #   07_robustez/robustez_kappa_integrado.csv                         (6.1)
 #   $TESIS_BASE/Desarrollo/Metodologia/Matrix/eventos/panel_precios_2020_2026.csv   panel local con CRSP 2020-2025 (4.3, E.3)
 #   Figura 5.6: cocientes compra/venta por plataforma tal como los reporta la seccion 5.5 (literales documentados abajo).
+#
+# Version 067 (18-oct-2026): redibujada para el formato de 17 x 22.5 cm (ancho de texto 12 cm). Todas las figuras se dibujan
+# a 4.72 pulgadas de ancho (12 cm a escala 1:1, de modo que la letra impresa mide lo que dicen los puntos del script); los
+# tamanos de letra, datos, textos y colores no cambian. Cambios de disposicion: ver los comentarios 'version 067' de cada figura.
 import os, sys, csv
 from pathlib import Path
 import numpy as np
@@ -63,13 +67,14 @@ def series_hist():
 # ---------------------------------------------------------------- 2.1: linea de tiempo de los 50 eventos insignia
 def fig_2_1():
     ins = insignia(); emblema = ['TSLA', 'BBBY', 'DJT', 'GME', 'SMCI', 'MSTR', 'AMC', 'NVDA']
-    fig, ax = plt.subplots(figsize=(5.9, 3.2))
+    fig, ax = plt.subplots(figsize=(4.72, 2.9))   # antes (5.9, 3.2); version 067
     n_carriles = 4
     for k, r in ins.iterrows():
         carril = k % n_carriles                              # en orden cronologico, del carril inferior al superior
         y = carril; es = r.ticker in emblema
         ax.plot([r.fecha_inicio, r.fecha_fin], [y, y], lw=4.5 if es else 3, solid_capstyle='round', color=VERDE if es else VERDE_CLARO, zorder=3 if es else 2)
-        if es: ax.text(r.fecha_inicio + (r.fecha_fin - r.fecha_inicio) / 2, y + 0.3, r.ticker, ha='center', va='bottom', fontsize=8, fontweight='bold', color=VERDE2)
+        if es: ax.text(r.fecha_inicio + (r.fecha_fin - r.fecha_inicio) / 2, y + 0.3, r.ticker, ha='center', va='bottom', fontsize=8, fontweight='bold', color=VERDE2,
+                     bbox=dict(boxstyle='square,pad=0.1', fc='white', ec='none'), zorder=4)   # fondo blanco: la linea de la SEC cruzaba MSTR (version 067)
     # Lineas regulatorias (18-oct-2026, version 064): la recomendacion del comite asesor de inversionistas de la SEC se aprobo
     # el 10-dic-2024 (bibliografia de la tesis); los rotulos van a la izquierda de su linea para que esta no los cruce.
     for fecha, txt in [(pd.Timestamp('2021-11-08'), 'reporte de estabilidad\nde la Fed (nov-21)'), (pd.Timestamp('2024-12-10'), 'comité asesor\nde la SEC (dic-24)')]:
@@ -83,19 +88,19 @@ def fig_2_1():
 # ---------------------------------------------------------------- 3.2: no normalidad (AAL y GME)
 def fig_3_2():
     s = series_hist()
-    fig, axs = plt.subplots(2, 2, figsize=(8.9, 6.5))
-    for j, (tk, titulo) in enumerate([('AAL', 'AAL (ticker típico del padrón)'), ('GME', 'GME (ticker denso de la era meme)')]):
+    fig, axs = plt.subplots(2, 2, figsize=(4.72, 4.9))   # antes (8.9, 6.5); version 067: titulos, rotulo x y leyenda QQ en dos lineas, 3 marcas en x, leyendas con trazo corto
+    for j, (tk, titulo) in enumerate([('AAL', 'AAL (ticker típico\ndel padrón)'), ('GME', 'GME (ticker denso\nde la era meme)')]):
         x = s[tk].values.astype(float); mu, sd = x.mean(), x.std(ddof=1); asim = stats.skew(x)
         ax = axs[0, j]; n, bins, _ = ax.hist(x, bins=50, color='#3E8E75', edgecolor='white', lw=0.4)
         xx = np.linspace(x.min(), x.max(), 400); yy = stats.norm.pdf(xx, mu, sd) * len(x) * (bins[1] - bins[0]); ax.plot(xx[yy >= 0.6], yy[yy >= 0.6], color=ROJO, lw=2, label='normal ajustada')
         ax.set_yscale('log'); ax.set_ylim(0.6, n.max() * 6); ax.set_title(titulo, color=VERDE2, fontweight='bold', fontsize=11)
-        ax.xaxis.set_major_locator(MaxNLocator(5)); ax.xaxis.set_major_formatter(MILES)
-        ax.set_xlabel('menciones diarias'); ax.set_ylabel('días (escala log)'); ax.legend(frameon=False, loc='upper right')
+        ax.xaxis.set_major_locator(MaxNLocator(3)); ax.xaxis.set_major_formatter(MILES)
+        ax.set_xlabel('menciones diarias'); ax.set_ylabel('días (escala log)'); ax.legend(frameon=False, loc='upper right', handlelength=1.0, borderaxespad=0.2)
         ax.text(0.97, 0.72, f'media {mu:,.1f}\nmáximo {int(x.max()):,}\nasimetría {asim:.1f}', transform=ax.transAxes, ha='right', va='top', color=GRIS, fontsize=9)
         ax = axs[1, j]; (osm, osr), (slope, intercept, _) = stats.probplot(x, dist='norm')
-        ax.plot(osm, osr, '.', color=VERDE2, ms=4); ax.plot(osm, slope * osm + intercept, color=ROJO, lw=1.5, label='recta normal teórica')
+        ax.plot(osm, osr, '.', color=VERDE2, ms=4); ax.plot(osm, slope * osm + intercept, color=ROJO, lw=1.5, label='recta normal\nteórica')
         ax.yaxis.set_major_formatter(MILES)
-        ax.set_title(f'QQ contra la normal: {tk}', color=VERDE2, fontsize=11); ax.set_xlabel('cuantiles teóricos de la normal'); ax.set_ylabel('cuantiles observados'); ax.legend(frameon=False, loc='upper left')
+        ax.set_title(f'QQ contra la normal: {tk}', color=VERDE2, fontsize=11); ax.set_xlabel('cuantiles teóricos\nde la normal'); ax.set_ylabel('cuantiles observados'); ax.legend(frameon=False, loc='upper left', handlelength=1.0)
         cifra('3.2', f'{tk} media / maximo / asimetria', f'{mu:.1f} / {int(x.max())} / {asim:.1f}')
     fig.tight_layout(); fig.savefig(FIG / 'figura_3_2.png'); plt.close(fig)
 
@@ -106,16 +111,16 @@ def fig_4_2():
     tot = (sub + com).loc['2020-11-15':'2021-04-15']
     c = catalogo(); ev = c[(c.ticker == 'GME') & (c.fecha_inicio == '2021-01-13')].iloc[0]
     ini, pico, fin, base = ev.fecha_inicio, ev.fecha_pico, ev.fecha_fin, ev.base_previa_mu
-    fig, ax = plt.subplots(figsize=(6.1, 3.0))
+    fig, ax = plt.subplots(figsize=(4.72, 2.9))   # antes (6.1, 3.0); version 067: rotulo y en dos lineas
     ax.plot(tot.index, tot.values, color=VERDE2, lw=1.6); ax.set_yscale('log')
     ax.axvspan(ini, fin, color=VERDE, alpha=0.10); ax.axvline(ini, color=VERDE, ls='--', lw=1.2); ax.axvline(pico, color=ROJO, ls='--', lw=1.2); ax.axvline(fin, color='#444444', ls='--', lw=1.2)
     ax.axhline(base, color='#2F5F8F', ls=':', lw=1.2)
     # Posiciones de las etiquetas ajustadas el 11-oct-2026 (version 058) para que se lean completas; los datos no cambian.
     ax.text(ini, 50000, f'encendido ({ini.day}-ene)', rotation=90, ha='right', va='center', fontsize=7.5, color=VERDE)
-    ax.text(fin + pd.Timedelta(hours=12), 1400, f'extinción ({fin.day}-feb)', rotation=90, ha='left', va='center', fontsize=7.5, color='#444444')
+    ax.text(fin - pd.Timedelta(hours=12), 1400, f'extinción ({fin.day}-feb)', rotation=90, ha='right', va='center', fontsize=7.5, color='#444444')   # a la izquierda de su linea (version 067)
     ax.text(fin + pd.Timedelta(days=2), tot.max(), f'{int(tot.max()):,} menciones', va='center', fontsize=8, color=ROJO)
-    ax.text(pd.Timestamp('2021-02-20'), base / 1.12, f'base previa (μ = {base:,.0f})', va='top', fontsize=7.5, color='#2F5F8F')   # junto a su linea (version 064)
-    ax.set_ylabel('Menciones diarias en Reddit (escala log)', fontsize=9); ax.grid(color='#E8E8E8', lw=0.6); ax.set_axisbelow(True)
+    ax.text(pd.Timestamp('2021-02-08'), base / 1.12, f'base previa (μ = {base:,.0f})', va='top', fontsize=7.5, color='#2F5F8F')   # junto a su linea (version 064; desde el 8-feb en la version 067)
+    ax.set_ylabel('Menciones diarias en Reddit\n(escala log)', fontsize=9); ax.grid(color='#E8E8E8', lw=0.6); ax.set_axisbelow(True)
     ax.xaxis.set_major_locator(mdates.MonthLocator()); ax.xaxis.set_major_formatter(FuncFormatter(lambda v, p: mes_anio(mdates.num2date(v))))
     fig.tight_layout(); fig.savefig(FIG / 'figura_4_2.png'); plt.close(fig)
     cifra('4.2', 'pico (fecha, menciones)', f'{tot.idxmax().date()}, {int(tot.max()):,}'); cifra('4.2', 'duracion / menciones acumuladas (catalogo)', f'{ev.duracion_dias} / {int(ev.menciones_evento):,}')
@@ -139,20 +144,20 @@ def trayectorias():
 
 def fig_4_3():
     ins, t = trayectorias()
-    fig, ax = plt.subplots(figsize=(8.9, 5.5))
+    fig, ax = plt.subplots(figsize=(4.72, 4.6))   # antes (8.9, 5.5); version 067: leyenda bajo el grafico, rotulo y y textos en mas lineas
     med = t.groupby('dia').indice.median(); n_act = t.groupby('dia').size()
     for tk, g in t.groupby('ticker'): ax.plot(g.dia, g.indice, color=VERDE_CLARO, lw=0.8, alpha=0.8, zorder=1)
     ax.plot(med.index[n_act >= 10], med[n_act >= 10], color=VERDE, lw=3, label='mediana de los eventos activos', zorder=4)
     # MSFT en azul (11-oct-2026, version 058) para distinguirla de la mediana verde; los datos no cambian.
-    for tk, etiqueta, color in [('GME', 'GME (ene-21)', ROJO), ('MSFT', 'MSFT (precio plano, 93 días naturales)', '#2F5F8F'), ('BA', 'BA (mar-20, cayendo)', '#8A6D0B')]:
+    for tk, etiqueta, color in [('GME', 'GME (ene-21)', ROJO), ('MSFT', 'MSFT (precio plano,\n93 días naturales)', '#2F5F8F'), ('BA', 'BA (mar-20, cayendo)', '#8A6D0B')]:
         g = t[t.ticker == tk]; ax.plot(g.dia, g.indice, color=color, lw=2.2, label=etiqueta, zorder=3)
     ax.axhline(100, color='#333333', ls=':', lw=1); ax.set_yscale('log'); ax.set_xlim(0, 90)   # el evento de RDDT (247 sesiones) se corta a los 90 dias
     ax.set_yticks([50, 100, 200, 400, 800, 1600]); ax.set_yticklabels(['50', '100', '200', '400', '800', '1,600']); ax.minorticks_off()
-    ax.set_xlabel('días de trading desde el encendido del evento'); ax.set_ylabel('índice de retorno acumulado (base 100 al encendido, escala log)')
-    ax.legend(frameon=False, loc='upper right')
+    ax.set_xlabel('días de trading desde el encendido del evento'); ax.set_ylabel('índice de retorno acumulado\n(base 100 al encendido, escala log)')
+    ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.16), ncol=2, handlelength=1.5, columnspacing=1.2)
     cierre = t.groupby('ticker').indice.last() - 100; maximo = t.groupby('ticker').indice.max() - 100; caida = (maximo - cierre >= 10).sum()
-    ax.text(0.99, 0.03, f'cierre mediano {cierre.median():+.0f} puntos | máximo intra-evento mediano {maximo.median():+.0f} puntos\n{caida} de {len(cierre)} eventos cierran al menos 10 puntos bajo su máximo',
-            transform=ax.transAxes, ha='right', va='bottom', fontsize=9, color=GRIS)
+    ax.text(0.99, 0.99, f'cierre mediano {cierre.median():+.0f} puntos\nmáximo intra-evento mediano {maximo.median():+.0f} puntos\n{caida} de {len(cierre)} eventos cierran al menos\n10 puntos bajo su máximo',
+            transform=ax.transAxes, ha='right', va='top', fontsize=9, color=GRIS)   # arriba a la derecha, zona sin trayectorias (version 067)
     fig.tight_layout(); fig.savefig(FIG / 'figura_4_3.png'); plt.close(fig)
     cifra('4.3', 'eventos con trayectoria', len(cierre)); cifra('4.3', 'cierre mediano (puntos)', round(cierre.median(), 1)); cifra('4.3', 'maximo intra-evento mediano (puntos)', round(maximo.median(), 1))
     cifra('4.3', 'cierran >= 10 puntos bajo su maximo', f'{caida} de {len(cierre)}')
@@ -161,7 +166,7 @@ def fig_E_3():
     ins, t = trayectorias(); orden = [tk for tk in ins.ticker if tk in set(t.ticker)]
     MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
     for panel, (a, b) in enumerate([(0, 25), (25, 50)], start=1):
-        fig, axs = plt.subplots(5, 5, figsize=(9.4, 7.1)); axs = axs.ravel()
+        fig, axs = plt.subplots(5, 5, figsize=(4.72, 6.0)); axs = axs.ravel()   # antes (9.4, 7.1); version 067: titulo en dos lineas, 3 marcas por eje
         for ax, tk in zip(axs, orden[a:b]):
             g = t[t.ticker == tk]; ini = g.fecha_inicio.iloc[0]
             ax.plot(g.dia, g.indice, color=VERDE, lw=1.6); ax.axhline(100, color='#555555', ls=':', lw=0.7)
@@ -169,8 +174,8 @@ def fig_E_3():
             ax.fill_between(g.dia, 100, g.indice, where=g.indice < 100, color=ROJO, alpha=0.12, interpolate=True)
             v = g.indice.values; k = len(v) - 1 - v[::-1].argmax()   # ultima sesion con el maximo si hay empate (version 064)
             ax.plot(g.dia.iloc[k], g.indice.iloc[k], 'o', color=ROJO, ms=4)
-            ax.set_title(f'{tk} ({MESES[ini.month - 1]}-{str(ini.year)[2:]})', color=VERDE2, fontweight='bold', fontsize=9); ax.tick_params(labelsize=7)
-            ax.xaxis.set_major_locator(MaxNLocator(nbins=4, integer=True)); ax.yaxis.set_major_formatter(MILES)
+            ax.set_title(f'{tk}\n({MESES[ini.month - 1]}-{str(ini.year)[2:]})', color=VERDE2, fontweight='bold', fontsize=9); ax.tick_params(labelsize=7)
+            ax.xaxis.set_major_locator(MaxNLocator(nbins=3, integer=True)); ax.yaxis.set_major_locator(MaxNLocator(nbins=3)); ax.yaxis.set_major_formatter(MILES)
         for ax in axs[len(orden[a:b]):]: ax.axis('off')
         fig.tight_layout(); fig.savefig(FIG / f'figura_E3_{"ab"[panel - 1]}.png'); plt.close(fig)
     cifra('E.3', 'eventos graficados', len(orden))
@@ -179,7 +184,7 @@ def fig_E_3():
 def fig_5_1():
     c = catalogo(); m = c.groupby([c.fecha_inicio.dt.year, c.fecha_inicio.dt.month]).size().unstack(fill_value=0)
     m = m.reindex(columns=range(1, 13), fill_value=0); M = m.values.astype(float); M[m.index == 2026, 6:] = np.nan
-    fig, ax = plt.subplots(figsize=(6.0, 3.0))
+    fig, ax = plt.subplots(figsize=(4.72, 2.9))   # antes (6.0, 3.0); version 067
     im = ax.imshow(M, cmap='YlOrRd', aspect='auto', vmin=0, vmax=np.nanmax(M))
     ax.set_xticks(range(12)); ax.set_xticklabels(['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']); ax.set_yticks(range(len(m.index))); ax.set_yticklabels(m.index)
     ax.set_xticks(np.arange(-0.5, 12, 1), minor=True); ax.set_yticks(np.arange(-0.5, len(m.index), 1), minor=True); ax.grid(which='minor', color='white', lw=2); ax.tick_params(which='both', length=0)
@@ -199,9 +204,9 @@ def fig_5_1():
 COCIENTES_5_5 = {'Reddit': 4.2, 'YouTube': 6.0, 'TikTok': 6.2, 'StockTwits': 6.9, 'X': 8.8, 'Instagram': 14.6}
 def fig_5_6():
     plats = list(COCIENTES_5_5); vals = [COCIENTES_5_5[p] for p in plats]
-    fig, ax = plt.subplots(figsize=(6.1, 3.2))
+    fig, ax = plt.subplots(figsize=(4.72, 2.9))   # antes (6.1, 3.2); version 067
     ax.scatter(vals, range(len(plats)), s=140, color=VERDE2, zorder=3)
-    for i, v in enumerate(vals): ax.text(v + 0.3, i, f'{v:.1f}', va='center', fontsize=9)
+    for i, v in enumerate(vals): ax.text(v + 0.55, i, f'{v:.1f}', va='center', fontsize=9)   # separacion 0.55 (antes 0.3) para no tocar el punto (version 067)
     ax.axvline(1, color='#333333', ls=':', lw=1); ax.text(1, len(plats) - 0.55, 'paridad', ha='center', va='bottom', fontsize=7, color=GRIS)
     ax.set_yticks(range(len(plats))); ax.set_yticklabels(plats, color=GRIS); ax.set_xlim(0, 16.5); ax.grid(color='#E8E8E8', lw=0.8); ax.set_axisbelow(True)
     ax.set_xlabel('Mensajes de compra por cada mensaje de venta')
@@ -212,7 +217,7 @@ def fig_5_6():
 def fig_6_1():
     k = pd.read_csv(REPO / '07_robustez' / 'robustez_kappa_integrado.csv'); d = k[k.covariate == 'd_duro_lag'].sort_values('kappa')
     assert list(d.kappa) == [0.10, 0.25, 0.50], list(d.kappa)
-    fig, ax = plt.subplots(figsize=(5.9, 2.7))
+    fig, ax = plt.subplots(figsize=(4.72, 2.4))   # antes (5.9, 2.7); version 067
     for i, r in enumerate(d.itertuples()):
         hr, lo, hi = r._4, r._8, r._9
         ax.plot([lo, hi], [i, i], color=VERDE2, lw=2.2); ax.plot(hr, i, 'o', color=ROJO, ms=9)
@@ -225,16 +230,19 @@ def fig_6_1():
 # ---------------------------------------------------------------- E.1 y E.2: histogramas log-log de 20 tickers
 def _hist_20(cols, salida, figura):
     s = series_hist()
-    fig, axs = plt.subplots(4, 5, figsize=(10.1, 7.8)); axs = axs.ravel()
+    fig, axs = plt.subplots(5, 4, figsize=(4.72, 5.0)); axs = axs.ravel()   # antes 4 x 5, (10.1, 7.8); version 067: 5 filas x 4 columnas, ticker y asimetria sobre el panel
     for ax, tk in zip(axs, cols):
         x = s[tk].values.astype(float); asim = stats.skew(x); lx = np.log10(1 + x)
         bins = np.linspace(0, max(lx.max(), 0.31), 26)
         ax.hist(lx, bins=bins, color=VERDE2, edgecolor='white', lw=0.3); ax.set_yscale('log'); ax.set_ylim(0.7, None)
-        ax.set_title(tk, color=VERDE2, fontweight='bold', fontsize=10); ax.text(0.97, 0.9, f'asim. {asim:.0f}', transform=ax.transAxes, ha='right', va='top', color=GRIS, fontsize=8.5)
+        # Version 067: ticker (a la izquierda, sobre las marcas del eje y) y asimetria (a la derecha) en una linea sobre el panel, no sobre las barras
+        ax.annotate(tk, xy=(0, 1), xycoords='axes fraction', xytext=(-20, 4), textcoords='offset points', ha='left', va='bottom', color=VERDE2, fontweight='bold', fontsize=10)
+        ax.annotate(f'asim. {asim:.0f}', xy=(1, 1), xycoords='axes fraction', xytext=(0, 4), textcoords='offset points', ha='right', va='bottom', color=GRIS, fontsize=8.5)
         # Marcas del eje segun el rango, para que no se encimen ni queden barras sin referencia (version 064)
-        tope = 10 ** bins[-1] - 1; cand = [0, 100, 10000] if tope >= 10000 else [0, 10, 100, 1000] if tope >= 1000 else ([0, 1, 10, 100] if tope >= 10 else [0, 1, 2, 5])
-        ticks = [v for v in cand if np.log10(1 + v) <= bins[-1] + 1e-9]; ax.set_xticks([np.log10(1 + v) for v in ticks]); ax.set_xticklabels([f'{v:,}' for v in ticks], fontsize=7.5)
-        ax.set_yticks([1, 10, 100, 1000]); ax.set_yticklabels(['1', '10', '10²', '10³'], fontsize=8); ax.grid(axis='y', color='#EEEEEE', lw=0.6); ax.set_axisbelow(True)
+        # Version 067: menos marcas (sin el 1 cuando el rango pasa de 100, sin el 100 cuando pasa de 1,000) y potencias de 10 como en el eje y
+        tope = 10 ** bins[-1] - 1; cand = [0, 100, 10000] if tope >= 10000 else [0, 10, 1000] if tope >= 1000 else [0, 10, 100] if tope >= 100 else ([0, 1, 10] if tope >= 10 else [0, 1, 2, 5])
+        ticks = [v for v in cand if np.log10(1 + v) <= bins[-1] + 1e-9]; ax.set_xticks([np.log10(1 + v) for v in ticks]); ax.set_xticklabels([{100: '10²', 1000: '10³', 10000: '10⁴'}.get(v, f'{v:,}') for v in ticks], fontsize=7.5)
+        ax.set_yticks([1, 10, 100, 1000]); ax.set_yticklabels(['1', '10', '10²', '10³'], fontsize=8); ax.minorticks_off(); ax.grid(axis='y', color='#EEEEEE', lw=0.6); ax.set_axisbelow(True)
         cifra(figura, f'{tk} asimetria', round(asim, 1))
     fig.supxlabel('Menciones diarias (escala logarítmica, 1 + menciones)'); fig.supylabel('Días (escala logarítmica)')
     fig.tight_layout(); fig.savefig(FIG / salida); plt.close(fig)

@@ -8,6 +8,9 @@
 # Salidas (Matrix/eventos/): cifras_maestras.csv, eventos_sin_precio_causas.csv, catalogo_instrumentos.csv,
 #   arco_insignia.csv, conciliacion_ponderada.csv, eventos_con_precios_crsp_v2.csv (contraste, no sustituye al oficial); Figuras/figura_5_5_acuerdo_plataformas_v2.png.
 # Tiempo estimado en la M3: 5 a 6 minutos (lo que tarda es leer los 78 archivos de mensajes_eventos).
+# Version 067 (18-oct-2026): figura 5.6 redibujada para el formato de 17 x 22.5 cm (ancho de texto 12 cm): de 9 x 5 a 4.75 x 3.8 pulgadas;
+#   leyenda en dos columnas (observado / esperado) en lugar de tres.
+# Version 067: el PNG se guarda a 300 dpi (antes 200) para la impresion a 12 cm.
 import glob, json, time, collections, os
 import numpy as np, pandas as pd
 from pathlib import Path
@@ -261,7 +264,7 @@ import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herram
 from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
 fuente_figuras()
 k = pd.read_csv(EV / 'careo_plataformas_kappa.csv')
-fig, ax = plt.subplots(figsize=(9, 5), dpi=200)
+fig, ax = plt.subplots(figsize=(4.75, 3.8), dpi=300)   # 9 x 5 y dpi 200 hasta la version 066
 for nombre, careo, color, marca in [('TikTok', 'TikTok-Reddit por evento', '#C0392B', 'o'), ('Instagram', 'Instagram-Reddit por evento', '#2E6DA4', 's'), ('YouTube', 'YouTube-Reddit por evento', '#00684A', '^')]:
     s = k[(k.careo == careo) & (k.umbral_direccionales.isin([3, 5, 10]))].sort_values('umbral_direccionales')
     ns = '/'.join(str(int(x)) for x in s.unidades_ambos_no_cero)
@@ -269,7 +272,9 @@ for nombre, careo, color, marca in [('TikTok', 'TikTok-Reddit por evento', '#C03
     ax.plot([0, 1, 2], 100 * s.acuerdo_esperado, color=color, ls='--', lw=1.5, alpha=.8, label=f'{nombre}, esperado por prevalencias')
 ax.set_xticks([0, 1, 2]); ax.set_xticklabels(['≥ 3 direccionales', '≥ 5', '≥ 10']); ax.set_ylim(60, 101); ax.set_ylabel('Acuerdo de signo con Reddit (%)')
 ax.grid(alpha=.3); ax.spines[['top', 'right']].set_visible(False)
-ax.legend(fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=3, frameon=False)   # fuera del area de datos (version 064)
+h, l = ax.get_legend_handles_labels(); orden = [0, 2, 4, 1, 3, 5]   # columna 1: observado; columna 2: esperado (version 067)
+ax.legend([h[i] for i in orden], [l[i] for i in orden], fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=2, frameon=False,
+          columnspacing=1.0, handlelength=1.8, handletextpad=0.5)   # fuera del area de datos (version 064)
 FIG.mkdir(exist_ok=True); fig.tight_layout(); fig.savefig(FIG / 'figura_5_5_acuerdo_plataformas_v2.png'); plt.close(fig)
 print(f'\nguardado: eventos/cifras_maestras.csv ({len(F)} filas), eventos_sin_precio_causas.csv, catalogo_instrumentos.csv, arco_insignia.csv, '
       f'conciliacion_ponderada.csv, eventos_con_precios_crsp_v2.csv; Figuras/figura_5_5_acuerdo_plataformas_v2.png ({time.time() - t0:.0f} s)')
