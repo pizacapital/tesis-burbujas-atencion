@@ -10,7 +10,7 @@
 #      ajustado (volume * c_t), ambos en una sola escala a lo largo de la serie, sin tocar los retornos.
 #   3. Recalcula las mismas covariables del cruce anterior, con las mismas formulas, ventanas y filtros (>= 5 sesiones en los 30 dias
 #      previos, >= 2 en el evento, >= 2 en la ventana de +-5 dias), sobre el panel oficial (panel_precios_2020_2026.csv,
-#      solo CRSP, que arma construir_panel_precios.py), como la seccion 6.6 dejo programado.
+#      solo CRSP, que arma construir_panel_precios.py; seccion 4.3).
 #   4. Compara evento por evento contra el cruce anterior (eventos_con_precios_v1_crudo.csv, respaldo que hace
 #      rehacer_supervivencia.py) y deja el detalle en cruce_ajustado_diferencias.csv.
 # Corre en iTerm (M3, menos de un minuto):
