@@ -3,9 +3,10 @@
 # busca en $TESIS_FUENTES o en $TESIS_BASE/Segoe-fonts-Microsoft (segoeui.ttf, segoeuib.ttf, seguisb.ttf) y, si no estan,
 # deja DejaVu Sans, la letra que trae matplotlib. Asi cualquier persona regenera las figuras con los mismos datos y trazos;
 # solo cambia la letra.
-# Con Segoe UI: la carpeta local no trae cursivas, por lo que los rotulos que eran cursivos quedan rectos (CURSIVA = 'normal');
-# las variables de las formulas (mathtext) van en DejaVu Sans oblicua y el texto recto de las formulas en Segoe UI. Los
-# caracteres que Segoe UI no tiene (por ejemplo, el punto suspensivo vertical de la Figura 3.1) se toman de DejaVu Sans.
+# Con Segoe UI: la carpeta local no trae cursivas, por lo que los rotulos que eran cursivos quedan rectos (CURSIVA = 'normal').
+# Los caracteres que Segoe UI no tiene (por ejemplo, el punto suspensivo vertical de la Figura 3.1) se toman de DejaVu Sans.
+# Formulas (mathtext): Computer Modern, que trae matplotlib, el mismo diseno que Latin Modern Math de las ecuaciones del
+# documento (version 066, 18-oct-2026; antes las variables iban en DejaVu Sans oblicua).
 # Uso en cada script de figuras:
 #   sys.path.insert(0, str(<raiz del repositorio> / 'herramientas')); from fuente_figuras import fuente_figuras
 #   CURSIVA = fuente_figuras()   # 'normal' con Segoe UI, 'italic' con DejaVu Sans
@@ -29,13 +30,11 @@ def fuente_figuras(verbose=True):
         for a in ARCHIVOS:
             if (d / a).exists():
                 font_manager.fontManager.addfont(str(d / a))
-        matplotlib.rcParams.update({'font.family': ['Segoe UI', 'DejaVu Sans'], 'mathtext.fontset': 'custom',
-                                    'mathtext.rm': 'Segoe UI', 'mathtext.sf': 'Segoe UI', 'mathtext.bf': 'Segoe UI:bold',
-                                    'mathtext.it': 'DejaVu Sans:italic', 'mathtext.cal': 'DejaVu Sans:italic', 'mathtext.fallback': 'stixsans'})
+        matplotlib.rcParams.update({'font.family': ['Segoe UI', 'DejaVu Sans'], 'mathtext.fontset': 'cm'})
         if verbose:
             print(f'fuente: Segoe UI ({d})')
         return 'normal'
-    matplotlib.rcParams.update({'font.family': 'DejaVu Sans', 'mathtext.fontset': 'dejavusans'})
+    matplotlib.rcParams.update({'font.family': 'DejaVu Sans', 'mathtext.fontset': 'cm'})
     if verbose:
         print('fuente: DejaVu Sans (no se encontro Segoe UI; ver herramientas/fuente_figuras.py)')
     return 'italic'
