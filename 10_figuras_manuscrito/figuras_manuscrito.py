@@ -7,7 +7,7 @@
 # Uso (desde cualquier carpeta):
 #   python3 10_figuras_manuscrito/figuras_manuscrito.py            # todas las que se puedan con los datos disponibles
 #   python3 10_figuras_manuscrito/figuras_manuscrito.py 2.1 5.1    # solo las indicadas
-# Salidas: 10_figuras_manuscrito/figuras/figura_<id>.png (y figura_E3_a.png / figura_E3_b.png para los dos paneles de E.3)
+# Salidas: 10_figuras_manuscrito/figuras/figura_<id>.png (y figura_E3_a.png, figura_E3_b.png y figura_E3_c.png para las tres partes de E.3, version 069)
 # y 10_figuras_manuscrito/figuras/cifras_figuras.csv con las cifras que cada figura imprime (para cotejarlas con el texto).
 #
 # Insumos:
@@ -165,8 +165,12 @@ def fig_4_3():
 def fig_E_3():
     ins, t = trayectorias(); orden = [tk for tk in ins.ticker if tk in set(t.ticker)]
     MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
-    for panel, (a, b) in enumerate([(0, 25), (25, 50)], start=1):
-        fig, axs = plt.subplots(5, 5, figsize=(4.72, 6.0)); axs = axs.ravel()   # antes (9.4, 7.1); version 067: titulo en dos lineas, 3 marcas por eje
+    # version 069 (19-oct-2026): 4 columnas en lugar de 5 para que cada grafica sea mas ancha; tres imagenes de 20, 20 y 10
+    # eventos (5, 5 y 3 filas) con el mismo alto de fila que antes, y titulo del ticker y su fecha en una linea a 8 pt (antes
+    # dos lineas a 9 pt)
+    for panel, (a, b) in enumerate([(0, 20), (20, 40), (40, 50)], start=1):
+        filas = -(-(b - a) // 4)
+        fig, axs = plt.subplots(filas, 4, figsize=(4.72, 1.2 * filas)); axs = axs.ravel()   # antes 5 x 5 en (4.72, 6.0), version 067
         for ax, tk in zip(axs, orden[a:b]):
             g = t[t.ticker == tk]; ini = g.fecha_inicio.iloc[0]
             ax.plot(g.dia, g.indice, color=VERDE, lw=1.6); ax.axhline(100, color='#555555', ls=':', lw=0.7)
@@ -174,10 +178,10 @@ def fig_E_3():
             ax.fill_between(g.dia, 100, g.indice, where=g.indice < 100, color=ROJO, alpha=0.12, interpolate=True)
             v = g.indice.values; k = len(v) - 1 - v[::-1].argmax()   # ultima sesion con el maximo si hay empate (version 064)
             ax.plot(g.dia.iloc[k], g.indice.iloc[k], 'o', color=ROJO, ms=4)
-            ax.set_title(f'{tk}\n({MESES[ini.month - 1]}-{str(ini.year)[2:]})', color=VERDE2, fontweight='bold', fontsize=9); ax.tick_params(labelsize=7)
+            ax.set_title(f'{tk} ({MESES[ini.month - 1]}-{str(ini.year)[2:]})', color=VERDE2, fontweight='bold', fontsize=8); ax.tick_params(labelsize=7)
             ax.xaxis.set_major_locator(MaxNLocator(nbins=3, integer=True)); ax.yaxis.set_major_locator(MaxNLocator(nbins=3)); ax.yaxis.set_major_formatter(MILES)
         for ax in axs[len(orden[a:b]):]: ax.axis('off')
-        fig.tight_layout(); fig.savefig(FIG / f'figura_E3_{"ab"[panel - 1]}.png'); plt.close(fig)
+        fig.tight_layout(); fig.savefig(FIG / f'figura_E3_{"abc"[panel - 1]}.png'); plt.close(fig)
     cifra('E.3', 'eventos graficados', len(orden))
 
 # ---------------------------------------------------------------- 5.1: encendidos por mes

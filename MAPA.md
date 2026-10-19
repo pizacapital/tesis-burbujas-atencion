@@ -53,7 +53,7 @@ Estados: **repo** = se reproduce desde un clon limpio; **local** = requiere un a
 | 4.3 | Trayectorias de precio de las 50 insignia | `10_figuras_manuscrito/figuras_manuscrito.py` | lee el panel local `Matrix/eventos/panel_precios_2020_2026.csv` (columna ret acumulada, base 100 al cierre del encendido) y el catálogo; escribe `figuras/figura_4_3.png` | local |
 | 4.4 | Etapas de la destilación del clasificador | `10_figuras_manuscrito/figura_4_4_destilacion.py` | cifras de las secciones 4.4 y 4.5 y del apéndice E; escribe `figuras/figura_4_4.png` | repo (diagrama con script) |
 | 5.1 | Estacionalidad: encendidos por mes | `10_figuras_manuscrito/figuras_manuscrito.py` | lee el catálogo; escribe `figuras/figura_5_1.png` | repo |
-| 5.2 | Trayectorias de precio de las 50 insignia (dos paneles) | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem 4.3; escribe `figuras/figura_E3_a.png` y `figura_E3_b.png` | local |
+| 5.2 | Trayectorias de precio de las 50 insignia (tres partes de 20, 20 y 10 eventos, cuatro columnas) | `10_figuras_manuscrito/figuras_manuscrito.py` | ídem 4.3; escribe `figuras/figura_E3_a.png`, `figura_E3_b.png` y `figura_E3_c.png` | local |
 | 5.3 | Kaplan-Meier por grupo de desfase atención-precio | `05_precios_y_supervivencia/figuras_supervivencia.py` | lee `tabla_supervivencia.csv`; escribe `05_precios_y_supervivencia/figuras/figura_km_acoplamiento_v2.png` | repo |
 | 5.4 | Forest del Cox integrado | ídem | lee `cox_integrado.csv`; escribe `figuras/figura_forest_cox_v2.png` | repo |
 | 5.5 | Perfil temporal del HR de D | `05_precios_y_supervivencia/perfil_temporal_D.py` | escribe `figuras/figura_perfil_hr_desacuerdo_v2.png` y `perfil_temporal_D.csv` | repo |
