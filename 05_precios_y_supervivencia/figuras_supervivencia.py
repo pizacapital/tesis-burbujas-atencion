@@ -60,7 +60,7 @@ for i, (cov, nombre) in enumerate(NOMBRE):
         r = cx[(cx['mod'] == m) & (cx.covariate == cov)]
         if len(r) == 0: continue
         r = r.iloc[0]; ax.plot([r['exp(coef) lower 95%'], r['exp(coef) upper 95%']], [y0 + dy] * 2, color=color, linewidth=1.4)
-        ax.plot(r['exp(coef)'], y0 + dy, marker=marca, color=color, markersize=6, linestyle='none', label=etiqueta if i == 0 else None)
+        ax.plot(r['exp(coef)'], y0 + dy, marker=marca, color=color, markersize=4.8, linestyle='none', label=etiqueta if i == 0 else None)   # markersize 6 hasta la version 069: marcas algo mas chicas, a pedido del autor
 ax.axvline(1, color='#333333', linestyle='--', linewidth=1); ax.set_xscale('log')
 ax.set_xticks([0.5, 0.7, 1.0, 1.5, 2.0, 3.0]); ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter('%.1f')); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter()); ax.set_xlim(0.5, 3.0)
 ax.set_yticks(range(len(NOMBRE))); ax.set_yticklabels([n for _, n in NOMBRE][::-1], fontsize=8.5); ax.grid(axis='y', color='#E6E6E6', linewidth=0.6)
