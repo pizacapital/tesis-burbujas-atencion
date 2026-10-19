@@ -212,7 +212,7 @@ COCIENTES_5_5 = {'Reddit': 4.2, 'YouTube': 6.0, 'TikTok': 6.2, 'StockTwits': 6.9
 def fig_5_6():
     plats = list(COCIENTES_5_5); vals = [COCIENTES_5_5[p] for p in plats]
     fig, ax = plt.subplots(figsize=(4.72, 2.9))   # antes (6.1, 3.2); version 067
-    ax.scatter(vals, range(len(plats)), s=110, color=VERDE2, zorder=3)
+    ax.scatter(vals, range(len(plats)), s=70, color=VERDE2, zorder=3)   # s=110 hasta la version 069: puntos mas chicos, a pedido del autor
     for i, v in enumerate(vals): ax.text(v + 0.55, i, f'{v:.1f}', va='center', fontsize=8.5)   # separacion 0.55 (antes 0.3) para no tocar el punto (version 067)
     ax.axvline(1, color='#333333', ls=':', lw=1); ax.text(1, len(plats) - 0.55, 'paridad', ha='center', va='bottom', fontsize=7, color=GRIS)
     ax.set_yticks(range(len(plats))); ax.set_yticklabels(plats, color=GRIS); ax.set_xlim(0, 16.5); ax.grid(color='#E8E8E8', lw=0.8); ax.set_axisbelow(True)
