@@ -270,7 +270,7 @@ fig, ax = plt.subplots(figsize=(4.75, 3.8), dpi=300)   # 9 x 5 y dpi 200 hasta l
 for nombre, careo, color, marca in [('TikTok', 'TikTok-Reddit por evento', '#C0392B', 'o'), ('Instagram', 'Instagram-Reddit por evento', '#2E6DA4', 's'), ('YouTube', 'YouTube-Reddit por evento', '#00684A', '^')]:
     s = k[(k.careo == careo) & (k.umbral_direccionales.isin([3, 5, 10]))].sort_values('umbral_direccionales')
     ns = '/'.join(str(int(x)) for x in s.unidades_ambos_no_cero)
-    ax.plot([0, 1, 2], 100 * s.acuerdo_observado, color=color, marker=marca, lw=1.6, ms=6.5, label=f'{nombre}, observado (n = {ns})')
+    ax.plot([0, 1, 2], 100 * s.acuerdo_observado, color=color, marker=marca, lw=1.6, ms=5, label=f'{nombre}, observado (n = {ns})')   # ms 6.5 hasta la version 069: marcas algo mas chicas, a pedido del autor
     ax.plot([0, 1, 2], 100 * s.acuerdo_esperado, color=color, ls='--', lw=1.2, alpha=.8, label=f'{nombre}, esperado por prevalencias')
 ax.set_xticks([0, 1, 2]); ax.set_xticklabels(['≥ 3 direccionales', '≥ 5', '≥ 10']); ax.set_ylim(60, 101); ax.set_ylabel('Acuerdo de signo con Reddit (%)')
 ax.grid(alpha=.3); ax.spines[['top', 'right']].set_visible(False)
