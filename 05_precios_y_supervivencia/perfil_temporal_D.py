@@ -114,23 +114,25 @@ print('\ncomparacion de modelos (misma tabla):'); print(modelos.round(2).to_stri
 
 # --- 5. figura de dos paneles ------------------------------------------------------------------------------------
 ROJO, VERDE, GRIS = '#A63A2E', '#00684A', '#9A9A9A'
+# Version 069 (19-oct-2026): letra de ejes y leyendas mas chica y lineas mas delgadas, a pedido del autor.
+plt.rcParams.update({'xtick.labelsize': 8.5, 'ytick.labelsize': 8.5, 'axes.labelsize': 8.5})
 fig, (ax, ax2) = plt.subplots(2, 1, figsize=(4.9, 4.1), sharex=True, gridspec_kw={'height_ratios': [3, 1.3], 'hspace': 0.08})
 c = curva[curva.t <= T_MAX]
 ax.axvspan(0.5, primer_dia_con_muertes - 0.5, color=GRIS, alpha=0.18, lw=0)
 ax.annotate(f'días 1 a {primer_dia_con_muertes - 1}: sin muertes observadas,\nla curva es extrapolación', xy=(primer_dia_con_muertes - 0.6, 7.5), xytext=(primer_dia_con_muertes + 5.5, 8.3),
-            ha='left', va='center', fontsize=8.5, color='#555555', arrowprops={'arrowstyle': '->', 'color': '#777777', 'lw': 1})
+            ha='left', va='center', fontsize=8, color='#555555', arrowprops={'arrowstyle': '->', 'color': '#777777', 'lw': 1})
 ax.fill_between(c.t, c.lo95, c.hi95, color=ROJO, alpha=0.15, lw=0, label='banda 95% (método delta)')
-ax.plot(c.t, c.HR, color=ROJO, lw=2.2, label='HR(t) = exp(β + γ·log t), interacción con log(t)')
+ax.plot(c.t, c.HR, color=ROJO, lw=1.8, label='HR(t) = exp(β + γ·log t), interacción con log(t)')
 for _, r in tramos.iterrows():
     a, b = r.desde, min(r.hasta, T_MAX); x = (a + b) / 2
-    ax.errorbar(x, r.HR, yerr=[[r.HR - r.lo95], [r.hi95 - r.HR]], fmt='o', color=VERDE, ecolor=VERDE, elinewidth=1.6, capsize=4, ms=7, zorder=5)
+    ax.errorbar(x, r.HR, yerr=[[r.HR - r.lo95], [r.hi95 - r.HR]], fmt='o', color=VERDE, ecolor=VERDE, elinewidth=1.4, capsize=3.5, ms=6, zorder=5)
     ax.hlines(r.HR, a - 0.4, b + 0.4, color=VERDE, lw=1.2, alpha=0.7)
-    ax.text(x, r.hi95 * 1.06, f'{r.HR:.2f}', ha='center', va='bottom', fontsize=9, color=VERDE)
+    ax.text(x, r.hi95 * 1.06, f'{r.HR:.2f}', ha='center', va='bottom', fontsize=8, color=VERDE)
 ax.errorbar([], [], yerr=[], fmt='o', color=VERDE, label='HR de D por tramos de edad, con IC 95% (sin forma impuesta)')
 ax.axhline(1, color='#333333', ls='--', lw=1)
 ax.set_yscale('log'); ax.set_yticks([0.5, 1, 2, 3, 5, 10]); ax.set_yticklabels(['0.5', '1', '2', '3', '5', '10'])
 ax.set_ylim(0.45, 11); ax.set_xlim(0.5, T_MAX + 0.5)
-ax.set_ylabel('HR del desacuerdo D (escala log)'); ax.legend(loc='lower left', bbox_to_anchor=(-0.02, 1.0), borderaxespad=0.2, fontsize=8.5, frameon=False)   # arriba del panel (version 067)
+ax.set_ylabel('HR del desacuerdo D (escala log)'); ax.legend(loc='lower left', bbox_to_anchor=(-0.02, 1.0), borderaxespad=0.2, fontsize=8, frameon=False)   # arriba del panel (version 067)
 ax.grid(alpha=0.25); ax.spines[['top', 'right']].set_visible(False)
 rr = riesgo[riesgo.t <= T_MAX]
 ax2.bar(rr.t, rr.muertes, color=ROJO, alpha=0.8, width=0.8, label='muertes en el día')
@@ -138,7 +140,7 @@ ax2.set_ylabel('muertes'); ax2.set_xlabel('Edad del evento (días; 1 = día del 
 ax3 = ax2.twinx(); ax3.plot(rr.t, rr.en_riesgo, color=VERDE, lw=1.6, label='eventos en riesgo'); ax3.set_ylabel('en riesgo', color=VERDE)
 ax3.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, p: f'{v:,.0f}'))   # coma de miles (version 064)
 ax2.axvspan(0.5, primer_dia_con_muertes - 0.5, color=GRIS, alpha=0.18, lw=0)
-h1, l1 = ax2.get_legend_handles_labels(); h2, l2 = ax3.get_legend_handles_labels(); ax2.legend(h1 + h2, l1 + l2, loc='upper right', fontsize=8.5, frameon=False)
+h1, l1 = ax2.get_legend_handles_labels(); h2, l2 = ax3.get_legend_handles_labels(); ax2.legend(h1 + h2, l1 + l2, loc='upper right', fontsize=8, frameon=False)
 ax2.grid(alpha=0.25); ax2.spines[['top']].set_visible(False); ax3.spines[['top']].set_visible(False)
 FIG.mkdir(exist_ok=True)
 fig.savefig(FIG / 'figura_perfil_hr_desacuerdo_v2.png', dpi=300, bbox_inches='tight'); plt.close(fig)

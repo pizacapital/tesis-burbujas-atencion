@@ -20,6 +20,8 @@ import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herram
 from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
 fuente_figuras()
 plt.rcParams.update({'axes.spines.top': False, 'axes.spines.right': False})
+# Version 069 (19-oct-2026): letra de ejes y leyendas mas chica y lineas mas delgadas, a pedido del autor.
+plt.rcParams.update({'xtick.labelsize': 8.5, 'ytick.labelsize': 8.5, 'axes.labelsize': 8.5})
 
 # --- Figura 5.3: Kaplan-Meier por acoplamiento, bandas de Greenwood y numero en riesgo ---------------------------------------
 sup = pd.read_csv(SUP / 'tabla_supervivencia.csv', keep_default_na=False, na_values=[''])
@@ -30,18 +32,18 @@ ax = fig.add_subplot(gs[0]); axr = fig.add_subplot(gs[1], sharex=ax)
 kms, ticks = {}, np.arange(0, 61, 10)
 for g, etiqueta, color in GRUPOS:
     d = sup[sup.acoplamiento == g]; km = KaplanMeierFitter().fit(d.duracion_dias, d.evento_observado, label=f'{etiqueta} (n={len(d):,})')
-    km.plot_survival_function(ax=ax, color=color, ci_show=True, ci_alpha=0.12, linewidth=2.0); kms[g] = (km, d, color, etiqueta)
-ax.axhline(0.5, color=GRIS, linestyle=':', linewidth=0.9); ax.text(59.5, 0.515, 'mediana', color=GRIS, fontsize=8, ha='right')
-ax.set_xlim(0, 60); ax.set_ylim(0, 1.0); ax.set_ylabel('Probabilidad de seguir vivo  S(t)', fontsize=10); ax.set_xlabel('')
-ax.grid(axis='both', color='#E6E6E6', linewidth=0.6); ax.legend(frameon=False, fontsize=9.5, loc='upper right'); plt.setp(ax.get_xticklabels(), visible=False)
-axr.set_ylim(-0.6, 3.4); axr.set_yticks([]); axr.set_xticks(ticks); axr.set_xlabel('Días desde el encendido', fontsize=10)
+    km.plot_survival_function(ax=ax, color=color, ci_show=True, ci_alpha=0.12, linewidth=1.6); kms[g] = (km, d, color, etiqueta)
+ax.axhline(0.5, color=GRIS, linestyle=':', linewidth=0.9); ax.text(59.5, 0.515, 'mediana', color=GRIS, fontsize=7.5, ha='right')
+ax.set_xlim(0, 60); ax.set_ylim(0, 1.0); ax.set_ylabel('Probabilidad de seguir vivo  S(t)', fontsize=8.5); ax.set_xlabel('')
+ax.grid(axis='both', color='#E6E6E6', linewidth=0.6); ax.legend(frameon=False, fontsize=8.5, loc='upper right'); plt.setp(ax.get_xticklabels(), visible=False)
+axr.set_ylim(-0.6, 3.4); axr.set_yticks([]); axr.set_xticks(ticks); axr.set_xlabel('Días desde el encendido', fontsize=8.5)
 for s_ in ['left', 'top', 'right', 'bottom']: axr.spines[s_].set_visible(False)
-axr.text(0, 3.0, 'Número en riesgo', color=GRIS, fontsize=8, va='center', ha='left')
+axr.text(0, 3.0, 'Número en riesgo', color=GRIS, fontsize=7.5, va='center', ha='left')
 for fila, (g, etiqueta, color) in enumerate(GRUPOS):
     km, d, color, etiqueta = kms[g]; y = 2 - fila
-    axr.text(-2.5, y, etiqueta, color=color, fontsize=8.5, ha='right', va='center', clip_on=False)
+    axr.text(-2.5, y, etiqueta, color=color, fontsize=8, ha='right', va='center', clip_on=False)
     for t in ticks:
-        en_riesgo = int((d.duracion_dias >= t).sum()) if t > 0 else len(d); axr.text(t, y, f'{en_riesgo:,}', color=color, fontsize=8.5, ha='center' if t > 0 else 'left', va='center', clip_on=False)
+        en_riesgo = int((d.duracion_dias >= t).sum()) if t > 0 else len(d); axr.text(t, y, f'{en_riesgo:,}', color=color, fontsize=8, ha='center' if t > 0 else 'left', va='center', clip_on=False)
 fig.savefig(FIG / 'figura_km_acoplamiento_v2.png', dpi=300, bbox_inches='tight'); plt.close(fig)
 medianas = {g: kms[g][0].median_survival_time_ for g, _, _ in GRUPOS}; print('KM medianas:', medianas)
 
@@ -61,9 +63,9 @@ for i, (cov, nombre) in enumerate(NOMBRE):
         ax.plot(r['exp(coef)'], y0 + dy, marker=marca, color=color, markersize=6, linestyle='none', label=etiqueta if i == 0 else None)
 ax.axvline(1, color='#333333', linestyle='--', linewidth=1); ax.set_xscale('log')
 ax.set_xticks([0.5, 0.7, 1.0, 1.5, 2.0, 3.0]); ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter('%.1f')); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter()); ax.set_xlim(0.5, 3.0)
-ax.set_yticks(range(len(NOMBRE))); ax.set_yticklabels([n for _, n in NOMBRE][::-1], fontsize=9.5); ax.grid(axis='y', color='#E6E6E6', linewidth=0.6)
-ax.set_xlabel('Hazard ratio (escala log, IC 95%)', fontsize=10)
-ax.text(0.72, len(NOMBRE) + 0.02, '← retrasa\nla extinción', color=VERDE, fontsize=9, ha='center', va='center'); ax.text(1.75, len(NOMBRE) + 0.02, 'acelera\nla extinción →', color=ROJO, fontsize=9, ha='center', va='center')
-ax.set_ylim(-0.6, len(NOMBRE) + 0.55); ax.legend(frameon=False, fontsize=9, loc='lower right')
+ax.set_yticks(range(len(NOMBRE))); ax.set_yticklabels([n for _, n in NOMBRE][::-1], fontsize=8.5); ax.grid(axis='y', color='#E6E6E6', linewidth=0.6)
+ax.set_xlabel('Hazard ratio (escala log, IC 95%)', fontsize=8.5)
+ax.text(0.72, len(NOMBRE) + 0.02, '← retrasa\nla extinción', color=VERDE, fontsize=8, ha='center', va='center'); ax.text(1.75, len(NOMBRE) + 0.02, 'acelera\nla extinción →', color=ROJO, fontsize=8, ha='center', va='center')
+ax.set_ylim(-0.6, len(NOMBRE) + 0.55); ax.legend(frameon=False, fontsize=8, loc='lower right')
 fig.savefig(FIG / 'figura_forest_cox_v2.png', dpi=300, bbox_inches='tight'); plt.close(fig)
 print('guardado: Figuras/figura_km_acoplamiento_v2.png y figura_forest_cox_v2.png')

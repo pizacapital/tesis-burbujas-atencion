@@ -264,12 +264,14 @@ import sys; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'herram
 from fuente_figuras import fuente_figuras  # Segoe UI si esta en la carpeta local, si no DejaVu Sans (version 064)
 fuente_figuras()
 k = pd.read_csv(EV / 'careo_plataformas_kappa.csv')
+# Version 069 (19-oct-2026): letra de ejes y leyendas mas chica y lineas mas delgadas, a pedido del autor.
+plt.rcParams.update({'xtick.labelsize': 8.5, 'ytick.labelsize': 8.5, 'axes.labelsize': 8.5})
 fig, ax = plt.subplots(figsize=(4.75, 3.8), dpi=300)   # 9 x 5 y dpi 200 hasta la version 066
 for nombre, careo, color, marca in [('TikTok', 'TikTok-Reddit por evento', '#C0392B', 'o'), ('Instagram', 'Instagram-Reddit por evento', '#2E6DA4', 's'), ('YouTube', 'YouTube-Reddit por evento', '#00684A', '^')]:
     s = k[(k.careo == careo) & (k.umbral_direccionales.isin([3, 5, 10]))].sort_values('umbral_direccionales')
     ns = '/'.join(str(int(x)) for x in s.unidades_ambos_no_cero)
-    ax.plot([0, 1, 2], 100 * s.acuerdo_observado, color=color, marker=marca, lw=2, ms=8, label=f'{nombre}, observado (n = {ns})')
-    ax.plot([0, 1, 2], 100 * s.acuerdo_esperado, color=color, ls='--', lw=1.5, alpha=.8, label=f'{nombre}, esperado por prevalencias')
+    ax.plot([0, 1, 2], 100 * s.acuerdo_observado, color=color, marker=marca, lw=1.6, ms=6.5, label=f'{nombre}, observado (n = {ns})')
+    ax.plot([0, 1, 2], 100 * s.acuerdo_esperado, color=color, ls='--', lw=1.2, alpha=.8, label=f'{nombre}, esperado por prevalencias')
 ax.set_xticks([0, 1, 2]); ax.set_xticklabels(['≥ 3 direccionales', '≥ 5', '≥ 10']); ax.set_ylim(60, 101); ax.set_ylabel('Acuerdo de signo con Reddit (%)')
 ax.grid(alpha=.3); ax.spines[['top', 'right']].set_visible(False)
 h, l = ax.get_legend_handles_labels(); orden = [0, 2, 4, 1, 3, 5]   # columna 1: observado; columna 2: esperado (version 067)

@@ -1,6 +1,6 @@
 # fuente_figuras.py - tipografia comun de las figuras de la tesis (version 064, 18-oct-2026).
 # El documento usa Segoe UI. Sus archivos tienen licencia de Microsoft (Segoe_EULA.txt) y no se versionan: este modulo los
-# busca en $TESIS_FUENTES o en $TESIS_BASE/Segoe-fonts-Microsoft (segoeui.ttf, segoeuib.ttf, seguisb.ttf) y, si no estan,
+# busca en $TESIS_FUENTES, en $TESIS_BASE/Segoe-fonts-Microsoft o en $TESIS_BASE/Fonts/Segoe-fonts-Microsoft (segoeui.ttf, segoeuib.ttf, seguisb.ttf) y, si no estan,
 # deja DejaVu Sans, la letra que trae matplotlib. Asi cualquier persona regenera las figuras con los mismos datos y trazos;
 # solo cambia la letra.
 # Con Segoe UI: la carpeta local no trae cursivas, por lo que los rotulos que eran cursivos quedan rectos (CURSIVA = 'normal').
@@ -21,7 +21,11 @@ ARCHIVOS = ('segoeui.ttf', 'segoeuib.ttf', 'seguisb.ttf')
 def carpeta_segoe():
     if os.environ.get('TESIS_FUENTES'):
         return Path(os.environ['TESIS_FUENTES'])
-    return Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis')) / 'Segoe-fonts-Microsoft'
+    base = Path(os.environ.get('TESIS_BASE', '/Users/ppizam/Claude/Master Thesis'))
+    for d in (base / 'Segoe-fonts-Microsoft', base / 'Fonts' / 'Segoe-fonts-Microsoft'):   # Fonts/ desde el 19-oct-2026 (version 069)
+        if (d / 'segoeui.ttf').exists():
+            return d
+    return base / 'Segoe-fonts-Microsoft'
 
 
 def fuente_figuras(verbose=True):
