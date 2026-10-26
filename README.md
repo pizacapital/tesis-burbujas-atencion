@@ -1,4 +1,4 @@
-# Predicción de la duración de burbujas bursátiles impulsadas por la atención en redes sociales
+# Duración de las burbujas de atención bursátil en redes sociales: análisis de supervivencia con sentimiento multiplataforma
 
 Código de la tesis de Maestría en Finanzas (ITAM, 2026) de **Pedro Juan Pizá Mejía**, dirigida por el Mtro. Carlos Castro Correa.
 
@@ -38,7 +38,7 @@ Cada script documenta en su encabezado dónde corre (máquina local, JupyterHub 
 
 ## Cómo citar
 
-Pizá Mejía, P. J. (2026). *Predicción de la duración de burbujas bursátiles impulsadas por la atención en redes sociales* [Tesis de maestría, Instituto Tecnológico Autónomo de México].
+Pizá Mejía, P. J. (2026). *Duración de las burbujas de atención bursátil en redes sociales: análisis de supervivencia con sentimiento multiplataforma* [Tesis de maestría, Instituto Tecnológico Autónomo de México].
 
 ## Licencia
 
