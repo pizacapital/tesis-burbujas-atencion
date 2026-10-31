@@ -3,7 +3,7 @@
 Un módulo por plataforma. Cada script documenta en su encabezado dónde corre, insumos, salidas y reanudación; los que usan APIs cargan sus credenciales de un `.env` local (plantilla en `.env.example`).
 
 - `reddit/` - filtrado en streaming de los dumps mensuales (.zst) a los 16 subreddits del panel, censo de suscriptores y reconstrucción histórica de suscriptores vía Wayback Machine.
-- `x/` - cliente de TwitterAPI.io, calibración de presupuesto y descarga de las 50 ventanas insignia; clasificación B(t) de los tweets.
+- `x/` - cliente de [TwitterAPI.io](https://twitterapi.io), calibración de presupuesto y descarga de las 50 ventanas insignia; clasificación B(t) de los tweets.
 - `tiktok/` - corpus de video: descarga con yt-dlp, transcripción con faster-whisper (secuencial y paralela), cosecha de subtítulos oficiales, control de calidad y B(t).
 - `instagram/` - piloto OCR+Whisper y B(t) del censo de captions.
 - `youtube/` - resolución de canales, censo censal por canal, benchmark editorial de la era meme, subtítulos (etapa confirmatoria) y B(t) por títulos.
